@@ -1,4 +1,7 @@
 const text = document.querySelector(".text")
+const slips = document.querySelectorAll(".slip")
+const showRegexButton = document.querySelector(".showRegexButton")
+
 let isComment = false
 
 function setupShortcuts() {
@@ -29,6 +32,15 @@ function toggleComment() {
     const parens = para.querySelectorAll(".comment-before, .comment-after")
     parens.forEach(paren => paren.remove())
   }
+
+  slips.forEach(slip => {
+    const current = slip.querySelector(".current")
+    if (showRegexButton.checked) {
+      slip.style.width = "auto"
+    } else {
+      slip.style.width = `${current.offsetWidth}px`
+    }
+  })
 }
 
 export { setupShortcuts }
