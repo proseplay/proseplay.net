@@ -2,6 +2,8 @@ const slips = document.querySelectorAll(".slip")
 const showRegexButton = document.querySelector(".showRegexButton")
 const generateButton = document.querySelector(".generateButton")
 
+const transitionTime = 15
+
 let isMouseDown = false
 let mouse = {"x": 0, "y": 0}
 let draggedList = null
@@ -149,6 +151,10 @@ function generate() {
 
     const slipType = slip.classList.contains("slip-words") ? "words" : "lines"
     const list = slip.querySelector(".list")
+    list.style.transition = "top 0.15s ease-in-out, left 0.15s ease-in-out";
+    setTimeout(() => {
+      list.style.transition = "";
+    }, transitionTime);
     if (slipType === "words") {
       list.style.top = `-${chosenOption.offsetTop}px`
     } else {
