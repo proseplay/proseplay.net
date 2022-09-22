@@ -10,8 +10,20 @@ body {
   font-family: "Hoefler Text", serif;
 }
 
+.controls {
+  margin: 200px 200px 50px;
+}
+
+input[type="checkbox"] {
+  user-select: none;
+}
+
+label {
+  user-select: none;
+}
+
 .text {
-  margin: 200px;
+  margin: 100px 200px;
   font-size: 24px;
 }
 
@@ -24,6 +36,25 @@ body {
   color: #999;
 }
 
+.regex {
+  transition: opacity 0.15s ease-in-out;
+}
+
+.view-visual .regex {
+  /* display: none; */
+  /* visibility: hidden; */
+  opacity: 0;
+}
+
+.view-regex .regex {
+  /* display: inline-block; */
+  opacity: 1;
+}
+
+.view-regex .hover .regex {
+  opacity: 0;
+}
+
 .slip {
   display: inline-block;
   box-shadow: inset 1px 1px 5px rgba(0,0,0,0.15);
@@ -32,6 +63,7 @@ body {
   position: relative;
   height: 1em;
   margin-bottom: -0.5em;
+  transition: width 0.15s ease-in-out;
 }
 
 .list {
@@ -55,6 +87,7 @@ body {
   transition: opacity 0.15s ease-in-out;
   /* margin: 0.5em 0 0.5em 0; */
   padding: 5px 0;
+  width: max-content;
 }
 
 .slip.hover .option {
@@ -65,6 +98,14 @@ body {
   opacity: 1;
   color: #000;
   cursor: ns-resize;
+}
+
+.view-regex .current {
+  opacity: 0;
+}
+
+.view-regex .hover .current {
+  opacity: 1;
 }
 
 .comment .current {

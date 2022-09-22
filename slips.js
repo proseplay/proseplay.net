@@ -1,4 +1,5 @@
 const slips = document.querySelectorAll(".slip")
+const showRegexButton = document.querySelector(".showRegexButton")
 
 let isMouseDown = false
 let mouse = {"x": 0, "y": 0}
@@ -9,9 +10,6 @@ function setupSlips() {
   document.addEventListener("mouseup", handleMouseUp)
 
   slips.forEach(slip => {
-    const options = slip.querySelectorAll(".option")
-    slip.style.width = `${options[0].offsetWidth}px` // ??
-  
     const currentOption = slip.querySelector(".current")
     currentOption.addEventListener("mouseover", handleMouseOver)
     currentOption.addEventListener("mouseout", handleMouseOut)
@@ -53,6 +51,7 @@ function handleMouseMove(e) {
   const targetOption = getNearestOption(listOptions, draggedListTop)
   listOptions.forEach(option => option.classList.toggle("current", false))
   targetOption.classList.toggle("current", true)
+  targetOption.parentElement.parentElement.style.width = `${targetOption.offsetWidth}px`
 }
 
 function handleMouseUp(e) {
@@ -81,6 +80,12 @@ function handleMouseUp(e) {
   targetOption.addEventListener("mouseover", handleMouseOver)
   targetOption.addEventListener("mouseout", handleMouseOut)
   targetOption.addEventListener("mousedown", handleMouseDown)
+
+  // account for regex
+  if (showRegexButton.checked) {
+    targetOption.parentElement.parentElement.style.width = "auto"
+    console.log(targetOption.parentElement.parentElement)
+  }
 }
 
 function getNearestOption(listOptions, draggedListTop) {

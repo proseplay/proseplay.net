@@ -1,17 +1,37 @@
 import { setupSlips } from "./slips.js"
 import { setupShortcuts } from "./shortcuts.js"
 
-const viewButtons = document.querySelectorAll(".viewButton")
+const text = document.querySelector(".text")
+const showRegexButton = document.querySelector(".showRegexButton")
 
-let view = "visual"
+const transitionTime = 15
+
+let isShowingRegex = false
 
 setupSlips()
 setupShortcuts()
 
-viewButtons.forEach(button => {
-  button.addEventListener("input", handleViewChange)
-})
+showRegexButton.addEventListener("input", handleViewChange)
+handleViewChange()
 
 function handleViewChange(e) {
-  view = e.currentTarget.value
+  isShowingRegex = showRegexButton.checked
+  text.classList.toggle("view-regex", isShowingRegex)
+  text.classList.toggle("view-visual", !isShowingRegex)
+  setTimeout(() => {
+    const regexes = text.querySelectorAll(".regex")
+    regexes.forEach(regex => {
+      regex.style.display = isShowingRegex ? "inline-block" : "none"
+    })
+
+    const slips = text.querySelectorAll(".slip")
+    slips.forEach(slip => {
+      const current = slip.querySelector(".current")
+      if (isShowingRegex) {
+        slip.style.width = "auto"
+      } else {
+        slip.style.width = `${current.offsetWidth}px`
+      }
+    })
+  }, transitionTime);
 }

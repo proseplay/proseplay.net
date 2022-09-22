@@ -7,19 +7,24 @@
 </head>
 <body>
   <div class="controls">
-    <div>
+    <!-- <div>
       <input type="radio" class="viewButton" name="view" value="visual" id="visual" checked>
       <label for="visual">visual</label>
     </div>
     <div>
       <input type="radio" class="viewButton" name="view" value="regex" id="regex">
       <label for="regex">regex</label>
+    </div> -->
+    <div>
+      <input type="checkbox" class="showRegexButton" name="showRegex" id="showRegex">
+      <label for="showRegex">show regex</label>
     </div>
   </div>
-  <div class="text" contenteditable="">
+  <div class="text view-regex" contenteditable="">
     <div class="p">
       in the
-      <div class="slip folded">
+      <div class="slip">
+        <span class="regex">w?ri(ght|te)s</span>
         <div class="list" data-regex="w?ri(ght|te)s">
           <span class="option current">rites</span>
           <span class="option">rights</span>
@@ -28,21 +33,24 @@
         </div>
       </div>
       of
-      <div class="slip folded">
+      <div class="slip">
+        <span class="regex">mou?rning</span>
         <div class="list" data-regex="mou?rning">
           <span class="option current">morning</span>
           <span class="option">mourning</span>
         </div>
       </div>
       the
-      <div class="slip folded">
+      <div class="slip">
+        <span class="regex">se(e|a)</span>
         <div class="list" data-regex="se(e|a)">
           <span class="option current">sea</span>
           <span class="option">see</span>
         </div>
       </div>
       is
-      <div class="slip folded">
+      <div class="slip">
+        <span class="regex">mis(t|sed)</span>
         <div class="list" data-regex="mis(t|sed)">
           <span class="option current">mist</span>
           <span class="option">missed</span>
