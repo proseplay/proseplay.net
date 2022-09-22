@@ -1,11 +1,12 @@
 import { setupSlips } from "./slips.js"
+import { setupShortcuts } from "./shortcuts.js"
 
-const slips = document.querySelectorAll(".slip")
 const viewButtons = document.querySelectorAll(".viewButton")
 
 let view = "visual"
 
 setupSlips()
+setupShortcuts()
 
 viewButtons.forEach(button => {
   button.addEventListener("input", handleViewChange)
