@@ -27,10 +27,14 @@ function handleViewChange(e) {
     const slips = text.querySelectorAll(".slip")
     slips.forEach(slip => {
       const current = slip.querySelector(".current")
+      const slipType = slip.classList.contains("slip-words") ? "words" : "lines"
       if (isShowingRegex) {
         slip.style.width = "auto"
       } else {
         slip.style.width = `${current.offsetWidth}px`
+        if (slipType === "lines") {
+          slip.style.height = `${current.offsetHeight}px`
+        }
       }
     })
   }, transitionTime);

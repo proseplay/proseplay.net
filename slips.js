@@ -42,28 +42,50 @@ function handleMouseMove(e) {
   if (!isMouseDown) return
   
   e.preventDefault()
-  let draggedListTop = parseInt(getComputedStyle(draggedList).getPropertyValue("top").replace("px", ""))
-  draggedListTop -= (mouse.y - e.clientY)
-  draggedList.style.top = `${draggedListTop}px`
-  mouse.y = e.clientY
+  let slipType = draggedList.parentElement.classList.contains("slip-words") ? "words" : "lines"
+  let draggedListPos
+  if (slipType === "words") {
+    draggedListPos = parseInt(getComputedStyle(draggedList).getPropertyValue("top").replace("px", ""))
+    draggedListPos -= (mouse.y - e.clientY)
+    draggedList.style.top = `${draggedListPos}px`
+    mouse.y = e.clientY
+  } else {
+    draggedListPos = parseInt(getComputedStyle(draggedList).getPropertyValue("left").replace("px", ""))
+    draggedListPos -= (mouse.x - e.clientX)
+    draggedList.style.left = `${draggedListPos}px`
+    mouse.x = e.clientX
+  }
 
   const listOptions = draggedList.querySelectorAll(".option")
-  const targetOption = getNearestOption(listOptions, draggedListTop)
+  const targetOption = getNearestOption(listOptions, slipType, draggedListPos)
   listOptions.forEach(option => option.classList.toggle("current", false))
   targetOption.classList.toggle("current", true)
   targetOption.parentElement.parentElement.style.width = `${targetOption.offsetWidth}px`
+  if (slipType === "lines") {
+    targetOption.parentElement.parentElement.style.height = `${targetOption.offsetHeight}px`
+  }
 }
 
 function handleMouseUp(e) {
   if (!isMouseDown) return
   isMouseDown = false
   
-  const draggedListTop = parseInt(getComputedStyle(draggedList).getPropertyValue("top").replace("px", ""))
+  let slipType = draggedList.parentElement.classList.contains("slip-words") ? "words" : "lines"
+  let draggedListPos
+  if (slipType === "words") {
+    draggedListPos = parseInt(getComputedStyle(draggedList).getPropertyValue("top").replace("px", ""))
+  } else {
+    draggedListPos = parseInt(getComputedStyle(draggedList).getPropertyValue("left").replace("px", ""))
+  }
   const listOptions = draggedList.querySelectorAll(".option")
-  const targetOption = getNearestOption(listOptions, draggedListTop)
+  const targetOption = getNearestOption(listOptions, slipType, draggedListPos)
 
   // set top
-  draggedList.style.top = `-${targetOption.offsetTop}px`
+  if (slipType === "words") {
+    draggedList.style.top = `-${targetOption.offsetTop}px`
+  } else {
+    draggedList.style.left = `-${targetOption.offsetLeft}px`
+  }
 
   // cancel hover
   draggedList.parentElement.classList.toggle("hover", false)
@@ -88,11 +110,17 @@ function handleMouseUp(e) {
   }
 }
 
-function getNearestOption(listOptions, draggedListTop) {
+function getNearestOption(listOptions, slipType, draggedListPos) {
   let minDist = Infinity
   let targetOption = null
   listOptions.forEach(option => {
-    const dist = Math.abs(draggedListTop + option.offsetTop)
+    let dist
+    if (slipType === "words") {
+      dist = Math.abs(draggedListPos + option.offsetTop)
+    } else {
+      dist = Math.abs(draggedListPos + option.offsetLeft)
+    }
+
     if (dist < minDist) {
       minDist = dist
       targetOption = option
