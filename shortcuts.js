@@ -1,35 +1,59 @@
 const text = document.querySelector(".text")
+const lines = document.querySelectorAll(".line")
 const slips = document.querySelectorAll(".slip")
 const showRegexButton = document.querySelector(".showRegexButton")
 
-let isComment = false
+let currentLine = null
 
 function setupShortcuts() {
+  lines.forEach(line => {
+    line.addEventListener("mousedown", handleMouseDown)
+  })
+
   text.addEventListener("keydown", handleKeyDown)
+}
+
+function handleMouseDown(e) {
+  currentLine = e.currentTarget
 }
 
 function handleKeyDown(e) {
   if (e.key === "/" && e.metaKey) {
     toggleComment()
+    return
   }
+
+  // if (e.key === "ArrowUp") {
+  //   const index = lines.indexOf(currentLine)
+  //   if (index > 0) {
+  //     currentLine = lines[index - 1]
+  //   }
+  // }
+
+  // if (e.key === "ArrowDown") {
+  //   const index = Array.from(lines).indexOf(currentLine)
+  //   if (index < lines.length - 1) {
+  //     currentLine = lines[index + 1]
+  //   }
+  // }
 }
 
 function toggleComment() {
-  isComment = !isComment
-  const line = text.querySelector(".line")
-  line.classList.toggle("comment", isComment)
+  if (!currentLine) return
+
+  const isComment = currentLine.classList.toggle("comment")
   if (isComment) {
     const before = document.createElement("span")
-    before.classList.add("comment-before")
+    before.classList.add("comment-wrapper")
     before.innerText = "("
-    line.insertBefore(before, line.firstChild)
+    currentLine.insertBefore(before, currentLine.firstChild)
 
     const after = document.createElement("span")
-    after.classList.add("comment-after")
+    after.classList.add("comment-wrapper")
     after.innerText = ")?"
-    line.appendChild(after)
+    currentLine.appendChild(after)
   } else {
-    const parens = line.querySelectorAll(".comment-before, .comment-after")
+    const parens = currentLine.querySelectorAll(".comment-wrapper")
     parens.forEach(paren => paren.remove())
   }
 
