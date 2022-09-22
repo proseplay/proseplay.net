@@ -1,0 +1,59 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #f9f9f9;
+}
+
+.text {
+  margin: 200px;
+  font-size: 24px;
+  font-family: "Hoefler Text", serif;
+}
+
+.card {
+  display: inline-block;
+  box-shadow: inset 1px 1px 5px rgba(0,0,0,0.15);
+  border-radius: 5px;
+  padding: 5px 5px;
+  position: relative;
+  height: 1em;
+  margin-bottom: -0.5em;
+}
+
+.list {
+  position: absolute;
+  top: -5px;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 5px 5px;
+  /* height: 1em; */
+  /* overflow: hidden; */
+}
+
+/* .card:hover .list {
+  overflow: visible;
+} */
+
+.option {
+  opacity: 0;
+  color: #999;
+  transition: opacity 0.15s ease-in-out;
+  /* margin: 0.5em 0 0.5em 0; */
+  padding: 5px 0;
+}
+
+.card.hover .option {
+  opacity: 1;
+}
+
+.current {
+  opacity: 1;
+  color: #000;
+  cursor: ns-resize;
+}
