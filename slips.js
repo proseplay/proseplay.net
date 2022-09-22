@@ -1,5 +1,6 @@
 const slips = document.querySelectorAll(".slip")
 const showRegexButton = document.querySelector(".showRegexButton")
+const generateButton = document.querySelector(".generateButton")
 
 let isMouseDown = false
 let mouse = {"x": 0, "y": 0}
@@ -15,6 +16,8 @@ function setupSlips() {
     currentOption.addEventListener("mouseout", handleMouseOut)
     currentOption.addEventListener("mousedown", handleMouseDown)
   })
+
+  generateButton.addEventListener("click", generate)
 }
 
 function handleMouseOver(e) {
@@ -42,7 +45,7 @@ function handleMouseMove(e) {
   if (!isMouseDown) return
   
   e.preventDefault()
-  let slipType = draggedList.parentElement.classList.contains("slip-words") ? "words" : "lines"
+  const slipType = draggedList.parentElement.classList.contains("slip-words") ? "words" : "lines"
   let draggedListPos
   if (slipType === "words") {
     draggedListPos = parseInt(getComputedStyle(draggedList).getPropertyValue("top").replace("px", ""))
@@ -70,7 +73,7 @@ function handleMouseUp(e) {
   if (!isMouseDown) return
   isMouseDown = false
   
-  let slipType = draggedList.parentElement.classList.contains("slip-words") ? "words" : "lines"
+  const slipType = draggedList.parentElement.classList.contains("slip-words") ? "words" : "lines"
   let draggedListPos
   if (slipType === "words") {
     draggedListPos = parseInt(getComputedStyle(draggedList).getPropertyValue("top").replace("px", ""))
@@ -127,6 +130,37 @@ function getNearestOption(listOptions, slipType, draggedListPos) {
     }
   })
   return targetOption
+}
+
+function generate() {
+  slips.forEach(slip => {
+    const options = slip.querySelectorAll(".option")
+    const chosenOption = options[Math.floor(Math.random() * options.length)]
+    options.forEach(option => {
+      option.classList.toggle("current", false)
+      option.removeEventListener("mouseover", handleMouseOver)
+      option.removeEventListener("mouseout", handleMouseOut)
+      option.removeEventListener("mousedown", handleMouseDown)
+    })
+    chosenOption.classList.toggle("current", true)
+    chosenOption.addEventListener("mouseover", handleMouseOver)
+    chosenOption.addEventListener("mouseout", handleMouseOut)
+    chosenOption.addEventListener("mousedown", handleMouseDown)
+
+    const slipType = slip.classList.contains("slip-words") ? "words" : "lines"
+    const list = slip.querySelector(".list")
+    if (slipType === "words") {
+      list.style.top = `-${chosenOption.offsetTop}px`
+    } else {
+      list.style.left = `-${chosenOption.offsetLeft}px`
+    }
+
+    if (showRegexButton.checked) {
+      slip.style.width = "auto"
+    } else {
+      slip.style.width = `${chosenOption.offsetWidth}px`
+    }
+  })
 }
 
 export { setupSlips }

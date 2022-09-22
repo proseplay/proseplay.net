@@ -14,6 +14,9 @@ body {
 
 .controls {
   margin: 200px 200px 50px;
+  display: flex;
+
+  gap: 1em;
 }
 
 input[type="checkbox"] {
@@ -22,6 +25,10 @@ input[type="checkbox"] {
 
 label {
   user-select: none;
+}
+
+button {
+  font-family: "Hoefler Text", serif;
 }
 
 /* TEXT */
