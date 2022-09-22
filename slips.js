@@ -1,18 +1,18 @@
-const cards = document.querySelectorAll(".card")
+const slips = document.querySelectorAll(".slip")
 
 let isMouseDown = false
 let mouse = {"x": 0, "y": 0}
 let draggedList = null
 
-function setupCards() {
+function setupSlips() {
   document.addEventListener("mousemove", handleMouseMove)
   document.addEventListener("mouseup", handleMouseUp)
 
-  cards.forEach(card => {
-    const options = card.querySelectorAll(".option")
-    card.style.width = `${options[0].offsetWidth}px` // ??
+  slips.forEach(slip => {
+    const options = slip.querySelectorAll(".option")
+    slip.style.width = `${options[0].offsetWidth}px` // ??
   
-    const currentOption = card.querySelector(".current")
+    const currentOption = slip.querySelector(".current")
     currentOption.addEventListener("mouseover", handleMouseOver)
     currentOption.addEventListener("mouseout", handleMouseOut)
     currentOption.addEventListener("mousedown", handleMouseDown)
@@ -96,4 +96,4 @@ function getNearestOption(listOptions, draggedListTop) {
   return targetOption
 }
 
-export { setupCards }
+export { setupSlips }

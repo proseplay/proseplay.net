@@ -15,7 +15,11 @@ body {
   font-size: 24px;
 }
 
-.card {
+.text:focus {
+  outline: none;
+}
+
+.slip {
   display: inline-block;
   box-shadow: inset 1px 1px 5px rgba(0,0,0,0.15);
   border-radius: 5px;
@@ -36,7 +40,7 @@ body {
   /* overflow: hidden; */
 }
 
-/* .card:hover .list {
+/* .slip:hover .list {
   overflow: visible;
 } */
 
@@ -48,7 +52,7 @@ body {
   padding: 5px 0;
 }
 
-.card.hover .option {
+.slip.hover .option {
   opacity: 1;
 }
 

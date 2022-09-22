@@ -1,11 +1,11 @@
-import { setupCards } from "./cards.js"
+import { setupSlips } from "./slips.js"
 
-const cards = document.querySelectorAll(".card")
+const slips = document.querySelectorAll(".slip")
 const viewButtons = document.querySelectorAll(".viewButton")
 
 let view = "visual"
 
-setupCards()
+setupSlips()
 
 viewButtons.forEach(button => {
   button.addEventListener("input", handleViewChange)
