@@ -7,12 +7,12 @@ body {
 
 body {
   background-color: #f9f9f9;
+  font-family: "Hoefler Text", serif;
 }
 
 .text {
   margin: 200px;
   font-size: 24px;
-  font-family: "Hoefler Text", serif;
 }
 
 .card {

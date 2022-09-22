@@ -4,18 +4,20 @@ let isMouseDown = false
 let mouse = {"x": 0, "y": 0}
 let draggedList = null
 
-document.addEventListener("mousemove", handleMouseMove)
-document.addEventListener("mouseup", handleMouseUp)
+function setupCards() {
+  document.addEventListener("mousemove", handleMouseMove)
+  document.addEventListener("mouseup", handleMouseUp)
 
-cards.forEach(card => {
-  const options = card.querySelectorAll(".option")
-  card.style.width = `${options[0].offsetWidth}px` // ??
-
-  const currentOption = card.querySelector(".current")
-  currentOption.addEventListener("mouseover", handleMouseOver)
-  currentOption.addEventListener("mouseout", handleMouseOut)
-  currentOption.addEventListener("mousedown", handleMouseDown)
-})
+  cards.forEach(card => {
+    const options = card.querySelectorAll(".option")
+    card.style.width = `${options[0].offsetWidth}px` // ??
+  
+    const currentOption = card.querySelector(".current")
+    currentOption.addEventListener("mouseover", handleMouseOver)
+    currentOption.addEventListener("mouseout", handleMouseOut)
+    currentOption.addEventListener("mousedown", handleMouseDown)
+  })
+}
 
 function handleMouseOver(e) {
   if (!isMouseDown) {
@@ -93,3 +95,5 @@ function getNearestOption(listOptions, draggedListTop) {
   })
   return targetOption
 }
+
+export { setupCards }
