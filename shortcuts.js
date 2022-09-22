@@ -16,20 +16,20 @@ function handleKeyDown(e) {
 
 function toggleComment() {
   isComment = !isComment
-  const para = text.querySelector(".p")
-  para.classList.toggle("comment", isComment)
+  const line = text.querySelector(".line")
+  line.classList.toggle("comment", isComment)
   if (isComment) {
     const before = document.createElement("span")
     before.classList.add("comment-before")
     before.innerText = "("
-    para.insertBefore(before, para.firstChild)
+    line.insertBefore(before, line.firstChild)
 
     const after = document.createElement("span")
     after.classList.add("comment-after")
     after.innerText = ")?"
-    para.appendChild(after)
+    line.appendChild(after)
   } else {
-    const parens = para.querySelectorAll(".comment-before, .comment-after")
+    const parens = line.querySelectorAll(".comment-before, .comment-after")
     parens.forEach(paren => paren.remove())
   }
 

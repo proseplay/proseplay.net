@@ -61,9 +61,9 @@ function handleMouseMove(e) {
   listOptions.forEach(option => option.classList.toggle("current", false))
   targetOption.classList.toggle("current", true)
   targetOption.parentElement.parentElement.style.width = `${targetOption.offsetWidth}px`
-  if (slipType === "lines") {
-    targetOption.parentElement.parentElement.style.height = `${targetOption.offsetHeight}px`
-  }
+  // if (slipType === "lines") {
+  //   targetOption.parentElement.parentElement.style.height = `${targetOption.offsetHeight}px`
+  // }
 }
 
 function handleMouseUp(e) {

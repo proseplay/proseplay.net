@@ -31,13 +31,20 @@ label {
   outline: none;
 }
 
-.p.comment {
+.line {
+  height: 1em;
+}
+
+.line.comment {
   font-style: italic;
   color: #999;
 }
 
 .regex {
+  display: inline-block;
   transition: opacity 0.15s ease-in-out;
+  /* padding: 5px; */
+  /* padding: 0 5px; */
 }
 
 .view-visual .regex {
@@ -59,11 +66,17 @@ label {
   display: inline-block;
   box-shadow: inset 1px 1px 5px rgba(0,0,0,0.15);
   border-radius: 5px;
-  padding: 5px 5px;
+  /* padding: 5px; */
   position: relative;
   /* height: 1em; */
-  margin-bottom: -0.5em;
+  /* margin-bottom: -0.5em; */
+  /* margin-top: -0.5em; */
+  /* margin-left: -0.5em; */
   transition: width 0.15s ease-in-out;
+}
+
+.view-visual .slip {
+  height: 0.75em;
 }
 
 .slip-words {
@@ -73,21 +86,24 @@ label {
 .list {
   position: absolute;
   display: flex;
-  padding: 5px 5px;
+  /* padding: 5px; */
   /* height: 1em; */
   /* overflow: hidden; */
+  top: 0;
+  left: 0;
+  height: 100%;
 }
 
 .slip-words .list {
   flex-direction: column;
-  top: -5px;
-  left: 0;
+  /* top: -5px; */
+  /* left: 0; */
 }
 
 .slip-lines .list {
   flex-direction: row;
-  top: 0;
-  left: -5px;
+  /* top: 0; */
+  /* left: -5px; */
 }
 
 /* .slip:hover .list {
@@ -100,15 +116,16 @@ label {
   transition: opacity 0.15s ease-in-out;
   /* margin: 0.5em 0 0.5em 0; */
   width: max-content;
+  /* padding: 5px; */
 }
 
-.slip-words .option {
+/* .slip-words .option {
   padding: 5px 0;
 }
 
 .slip-lines .option {
   padding: 0 5px;
-}
+} */
 
 .slip.hover .option {
   opacity: 1;
