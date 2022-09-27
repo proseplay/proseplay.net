@@ -1,6 +1,6 @@
 const text = document.querySelector(".text")
 const slips = document.querySelectorAll(".slip")
-const showRegexButton = document.querySelector(".showRegexButton")
+const showRegexBtn = document.querySelector(".showRegexBtn")
 const generateButton = document.querySelector(".generateButton")
 
 const transitionTime = 15
@@ -120,7 +120,7 @@ function handleMouseUp(e) {
   targetOption.addEventListener("mousedown", handleMouseDown)
 
   // account for regex
-  if (showRegexButton.checked) {
+  if (showRegexBtn.checked) {
     targetOption.parentElement.parentElement.style.width = "auto"
     console.log(targetOption.parentElement.parentElement)
   }
@@ -174,7 +174,7 @@ function generate() {
       list.style.left = `-${chosenOption.offsetLeft}px`
     }
 
-    if (showRegexButton.checked) {
+    if (showRegexBtn.checked) {
       slip.style.width = "auto"
     } else {
       slip.style.width = `${chosenOption.offsetWidth}px`

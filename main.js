@@ -2,7 +2,7 @@ import { setupSlips } from "./slips.js"
 import { setupShortcuts } from "./shortcuts.js"
 
 const text = document.querySelector(".text")
-const showRegexButton = document.querySelector(".showRegexButton")
+const showRegexBtn = document.querySelector(".showRegexBtn")
 
 const transitionTime = 15
 
@@ -12,12 +12,12 @@ document.addEventListener("DOMContentLoaded", () => {
   setupSlips()
   setupShortcuts()
   
-  showRegexButton.addEventListener("input", handleViewChange)
+  showRegexBtn.addEventListener("input", handleViewChange)
   handleViewChange()
 })
 
 function handleViewChange(e) {
-  isShowingRegex = showRegexButton.checked
+  isShowingRegex = showRegexBtn.checked
   text.classList.toggle("view-regex", isShowingRegex)
   text.classList.toggle("view-visual", !isShowingRegex)
   setTimeout(() => {
@@ -35,7 +35,8 @@ function handleViewChange(e) {
       } else {
         slip.style.width = `${current.offsetWidth}px`
         if (slipType === "lines") {
-          slip.style.height = `${current.offsetHeight}px`
+          // slip.style.height = `${current.offsetHeight}px`
+          slip.style.height = `1.3em`
         }
       }
     })

@@ -36,6 +36,7 @@ button {
 .text {
   margin: 100px 200px;
   font-size: 24px;
+  line-height: 1.5;
 }
 
 .text:focus {
@@ -50,7 +51,8 @@ button {
 /* LINES */
 
 .line {
-  height: 1em;
+  /* height: 1em; */
+  /* height: 1.5rem; */
 }
 
 .line.comment {
@@ -88,21 +90,21 @@ button {
   display: inline-block;
   box-shadow: inset 1px 1px 5px rgba(0,0,0,0.15);
   border-radius: 5px;
-  /* padding: 5px; */
+  /* padding: 0 5px; */
   position: relative;
   /* height: 1em; */
-  /* margin-bottom: -0.5em; */
+  margin-bottom: -0.3em;
   /* margin-top: -0.5em; */
   /* margin-left: -0.5em; */
   transition: width 0.15s ease-in-out;
 }
 
 .view-visual .slip {
-  height: 0.75em;
+  /* height: 0.75em; */
 }
 
 .slip-words {
-  height: 1em;
+  /* height: 1em; */
 }
 
 /* LIST */
@@ -115,6 +117,7 @@ button {
   /* overflow: hidden; */
   top: 0;
   left: 0;
+  /* left: 5px; */
   /* top: -5px; */
   /* left: -5px; */
   height: 100%;
