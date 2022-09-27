@@ -1,3 +1,4 @@
+const text = document.querySelector(".text")
 const slips = document.querySelectorAll(".slip")
 const showRegexButton = document.querySelector(".showRegexButton")
 const generateButton = document.querySelector(".generateButton")
@@ -25,12 +26,14 @@ function setupSlips() {
 function handleMouseOver(e) {
   if (!isMouseDown) {
     e.currentTarget.parentElement.parentElement.classList.toggle("hover", true)
+    text.classList.toggle("hasHover", true)
   }
 }
 
 function handleMouseOut(e) {
   if (!isMouseDown) {
     e.currentTarget.parentElement.parentElement.classList.toggle("hover", false)
+    text.classList.toggle("hasHover", false)
   }
 }
 
@@ -63,7 +66,15 @@ function handleMouseMove(e) {
 
   const listOptions = draggedList.querySelectorAll(".option")
   const targetOption = getNearestOption(listOptions, slipType, draggedListPos)
-  listOptions.forEach(option => option.classList.toggle("current", false))
+
+  // remove stuff from current option
+  const currentOption = draggedList.querySelector(".current")
+  currentOption.classList.toggle("current", false)
+  currentOption.removeEventListener("mouseover", handleMouseOver)
+  currentOption.removeEventListener("mouseout", handleMouseOut)
+  currentOption.removeEventListener("mousedown", handleMouseDown)
+
+  // listOptions.forEach(option => option.classList.toggle("current", false))
   targetOption.classList.toggle("current", true)
   targetOption.parentElement.parentElement.style.width = `${targetOption.offsetWidth}px`
   // if (slipType === "lines") {
@@ -113,6 +124,8 @@ function handleMouseUp(e) {
     targetOption.parentElement.parentElement.style.width = "auto"
     console.log(targetOption.parentElement.parentElement)
   }
+
+  text.classList.toggle("hasHover", false)
 }
 
 function getNearestOption(listOptions, slipType, draggedListPos) {

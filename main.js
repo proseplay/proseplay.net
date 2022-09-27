@@ -8,11 +8,13 @@ const transitionTime = 15
 
 let isShowingRegex = false
 
-setupSlips()
-setupShortcuts()
-
-showRegexButton.addEventListener("input", handleViewChange)
-handleViewChange()
+document.addEventListener("DOMContentLoaded", () => {
+  setupSlips()
+  setupShortcuts()
+  
+  showRegexButton.addEventListener("input", handleViewChange)
+  handleViewChange()
+})
 
 function handleViewChange(e) {
   isShowingRegex = showRegexButton.checked
