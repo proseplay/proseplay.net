@@ -50,22 +50,23 @@ function handleMouseMove(e) {
   if (!isMouseDown) return
   
   e.preventDefault()
-  const slipType = draggedList.parentElement.classList.contains("slip-words") ? "words" : "lines"
+  // const slipType = draggedList.parentElement.classList.contains("slip-words") ? "words" : "lines"
   let draggedListPos
-  if (slipType === "words") {
+  // if (slipType === "words") {
     draggedListPos = parseInt(getComputedStyle(draggedList).getPropertyValue("top").replace("px", ""))
     draggedListPos -= (mouse.y - e.clientY)
     draggedList.style.top = `${draggedListPos}px`
     mouse.y = e.clientY
-  } else {
-    draggedListPos = parseInt(getComputedStyle(draggedList).getPropertyValue("left").replace("px", ""))
-    draggedListPos -= (mouse.x - e.clientX)
-    draggedList.style.left = `${draggedListPos}px`
-    mouse.x = e.clientX
-  }
+  // } else {
+  //   draggedListPos = parseInt(getComputedStyle(draggedList).getPropertyValue("left").replace("px", ""))
+  //   draggedListPos -= (mouse.x - e.clientX)
+  //   draggedList.style.left = `${draggedListPos}px`
+  //   mouse.x = e.clientX
+  // }
 
   const listOptions = draggedList.querySelectorAll(".option")
-  const targetOption = getNearestOption(listOptions, slipType, draggedListPos)
+  // const targetOption = getNearestOption(listOptions, slipType, draggedListPos)
+  const targetOption = getNearestOption(listOptions, draggedListPos)
 
   // remove stuff from current option
   const currentOption = draggedList.querySelector(".current")
@@ -86,22 +87,23 @@ function handleMouseUp(e) {
   if (!isMouseDown) return
   isMouseDown = false
   
-  const slipType = draggedList.parentElement.classList.contains("slip-words") ? "words" : "lines"
+  // const slipType = draggedList.parentElement.classList.contains("slip-words") ? "words" : "lines"
   let draggedListPos
-  if (slipType === "words") {
+  // if (slipType === "words") {
     draggedListPos = parseInt(getComputedStyle(draggedList).getPropertyValue("top").replace("px", ""))
-  } else {
-    draggedListPos = parseInt(getComputedStyle(draggedList).getPropertyValue("left").replace("px", ""))
-  }
+  // } else {
+  //   draggedListPos = parseInt(getComputedStyle(draggedList).getPropertyValue("left").replace("px", ""))
+  // }
   const listOptions = draggedList.querySelectorAll(".option")
-  const targetOption = getNearestOption(listOptions, slipType, draggedListPos)
+  // const targetOption = getNearestOption(listOptions, slipType, draggedListPos)
+  const targetOption = getNearestOption(listOptions, draggedListPos)
 
   // set top
-  if (slipType === "words") {
+  // if (slipType === "words") {
     draggedList.style.top = `-${targetOption.offsetTop}px`
-  } else {
-    draggedList.style.left = `-${targetOption.offsetLeft}px`
-  }
+  // } else {
+  //   draggedList.style.left = `-${targetOption.offsetLeft}px`
+  // }
 
   // cancel hover
   draggedList.parentElement.classList.toggle("hover", false)
@@ -128,16 +130,17 @@ function handleMouseUp(e) {
   text.classList.toggle("hasHover", false)
 }
 
-function getNearestOption(listOptions, slipType, draggedListPos) {
+// function getNearestOption(listOptions, slipType, draggedListPos) {
+function getNearestOption(listOptions, draggedListPos) {
   let minDist = Infinity
   let targetOption = null
   listOptions.forEach(option => {
     let dist
-    if (slipType === "words") {
+    // if (slipType === "words") {
       dist = Math.abs(draggedListPos + option.offsetTop)
-    } else {
-      dist = Math.abs(draggedListPos + option.offsetLeft)
-    }
+    // } else {
+    //   dist = Math.abs(draggedListPos + option.offsetLeft)
+    // }
 
     if (dist < minDist) {
       minDist = dist
@@ -162,17 +165,17 @@ function generate() {
     chosenOption.addEventListener("mouseout", handleMouseOut)
     chosenOption.addEventListener("mousedown", handleMouseDown)
 
-    const slipType = slip.classList.contains("slip-words") ? "words" : "lines"
+    // const slipType = slip.classList.contains("slip-words") ? "words" : "lines"
     const list = slip.querySelector(".list")
     list.style.transition = "top 0.15s ease-in-out, left 0.15s ease-in-out";
     setTimeout(() => {
       list.style.transition = "";
     }, transitionTime);
-    if (slipType === "words") {
+    // if (slipType === "words") {
       list.style.top = `-${chosenOption.offsetTop}px`
-    } else {
-      list.style.left = `-${chosenOption.offsetLeft}px`
-    }
+    // } else {
+    //   list.style.left = `-${chosenOption.offsetLeft}px`
+    // }
 
     if (showRegexBtn.checked) {
       slip.style.width = "auto"

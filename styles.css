@@ -15,7 +15,6 @@ body {
 .controls {
   margin: 200px 200px 50px;
   display: flex;
-
   gap: 1em;
 }
 
@@ -92,19 +91,19 @@ button {
   border-radius: 5px;
   /* padding: 0 5px; */
   position: relative;
-  /* height: 1em; */
-  margin-bottom: -0.3em;
-  /* margin-top: -0.5em; */
-  /* margin-left: -0.5em; */
+  /* margin-bottom: -0.3em; */
   transition: width 0.15s ease-in-out;
 }
 
-.view-visual .slip {
-  /* height: 0.75em; */
-}
+/* .view-visual .slip {
+  height: 0.75em;
+} */
 
 .slip-words {
   /* height: 1em; */
+  height: 1.5em;
+  padding: 0 5px;
+  margin-bottom: -0.5em;
 }
 
 /* LIST */
@@ -116,12 +115,14 @@ button {
   /* height: 1em; */
   /* overflow: hidden; */
   top: 0;
-  left: 0;
-  /* left: 5px; */
+  /* top: 0.5em; */
+  /* margin-bottom: -0.5em; */
+  /* left: 0; */
+  left: 5px;
   /* top: -5px; */
   /* left: -5px; */
   height: 100%;
-  gap: 5px;
+  gap: 2.5px;
   /* transition: top 0.15s ease-in-out, left 0.15s ease-in-out; */
 }
 
@@ -129,9 +130,9 @@ button {
   flex-direction: column;
 }
 
-.slip-lines .list {
+/* .slip-lines .list {
   flex-direction: row;
-}
+} */
 
 /* .slip:hover .list {
   overflow: visible;
@@ -147,13 +148,13 @@ button {
   /* margin: 5px; */
 }
 
-.slip-words .option {
+/* .slip-words .option {
   padding: 5px 0;
 }
 
 .slip-lines .option {
   padding: 0 5px;
-}
+} */
 
 .slip.hover .option {
   opacity: 1;
@@ -164,9 +165,9 @@ button {
   color: #000;
 }
 
-.slip-lines .current {
+/* .slip-lines .current {
   cursor: ew-resize;
-}
+} */
 
 .slip-words .current {
   cursor: ns-resize;
