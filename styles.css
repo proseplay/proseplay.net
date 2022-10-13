@@ -127,14 +127,10 @@ button {
 
 .slip-words .list {
   flex-direction: column;
-  /* top: -5px; */
-  /* left: 0; */
 }
 
 .slip-lines .list {
   flex-direction: row;
-  /* top: 0; */
-  /* left: -5px; */
 }
 
 /* .slip:hover .list {
@@ -151,13 +147,13 @@ button {
   /* margin: 5px; */
 }
 
-/* .slip-words .option {
+.slip-words .option {
   padding: 5px 0;
 }
 
 .slip-lines .option {
   padding: 0 5px;
-} */
+}
 
 .slip.hover .option {
   opacity: 1;
