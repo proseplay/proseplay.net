@@ -279,6 +279,11 @@ main {
   z-index: 2;
 }
 
+#addVariantBtn:hover {
+  background-color: #ededed;
+  border: 1px solid #cbcbcb;
+}
+
 #addVariantBtn .box {
   width: 16px;
   height: 16px;
