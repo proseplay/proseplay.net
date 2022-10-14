@@ -11,7 +11,7 @@ body {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 .box {
@@ -268,7 +268,25 @@ main {
   position: absolute;
   top: 0;
   left: 0;
-  transform: translate(calc(-100% - 0.5em), 0);
+  transform: translate(-50%, 150%);
+  padding: 0.2em 0.5em;
+  background-color: #f2f2f2;
+  border-radius: 7px;
+  border: 1px solid #d9d9d9;
+  display: flex;
+  align-items: center;
+  color: #797979;
+  z-index: 2;
+}
+
+#addVariantBtn .box {
+  width: 16px;
+  height: 16px;
+}
+
+#addVariantBtn .glyph {
+  mask: url("icons/add.svg");
+  background-color: #797979;
 }
 
 #newOptionInput {

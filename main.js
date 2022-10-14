@@ -18,6 +18,8 @@ let isMouseDown = false
 // variants
 const addVariantBtn = document.querySelector("#addVariantBtn")
 let selectionRange = null
+// const mouse = {x: 0, y: 0}
+let mouseStartX = 0, mouseCurrentX = 0
 
 // snapshots
 const snapshotBtn = document.querySelector("#snapshotBtn")
@@ -56,10 +58,13 @@ function addEvents() {
 function handleMouseDown(e) {
   if (e.target.classList.contains("option")) return
   isMouseDown = true
+  mouseStartX = e.clientX
+  mouseCurrentX = mouseStartX
 }
 
 function handleMouseMove(e) {
   if (!isMouseDown) return
+  mouseCurrentX = e.clientX
 }
 
 function handleMouseUp(e) {
@@ -74,7 +79,9 @@ function handleSelection(e) {
     selectionRange = range
     // range.startContainer.parentElement.appendChild(addVariantContainer)
     addVariantBtn.style.top = `${range.startContainer.parentElement.offsetTop}px`
-    addVariantBtn.style.left = `${range.startContainer.parentElement.offsetLeft}px`
+    // addVariantBtn.style.left = `${range.startContainer.parentElement.offsetLeft}px`
+    // addVariantBtn.style.left = `${mouse.x}px`
+    addVariantBtn.style.left = `${mouseStartX + (mouseCurrentX - mouseStartX) / 2}px`
     addVariantBtn.classList.remove("hidden")
 
     addVariantBtn.addEventListener("click", addVariant)
