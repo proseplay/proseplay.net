@@ -23,7 +23,7 @@ let selectionRange = null
 const snapshotBtn = document.querySelector("#snapshotBtn")
 const snapshotTemp = document.querySelector(".snapshot").cloneNode(true)
 document.querySelector(".snapshot").remove()
-const snapshotNums = []
+let snapshotNums = []
 
 document.addEventListener("DOMContentLoaded", () => {
   initSlips(addToLink, getLinks)
@@ -294,4 +294,8 @@ function snapshot() {
 
 function clearSnapshot(snapshot) {
   snapshot.remove()
+  console.log(document.querySelectorAll(".snapshot").length)
+  if (document.querySelectorAll(".snapshot").length === 0) {
+    snapshotNums = []
+  }
 }
