@@ -51,7 +51,7 @@ function handleMouseDown(e) {
 
   if (isLinking()) {
     const slip = e.currentTarget.parentElement.parentElement
-    if (getLinks(slip).length === 0) {
+    if (getSlipLinks(slip).length === 0) {
       addToLink(slip)
     }
   } else {
@@ -60,7 +60,7 @@ function handleMouseDown(e) {
     mouse.y = e.clientY
     draggedList = e.currentTarget.parentElement
     draggedList.parentElement.classList.toggle("hover", true)
-    const linkedSlips = getLinks(draggedList.parentElement)
+    const linkedSlips = getSlipLinks(draggedList.parentElement)
     linkedSlips.forEach(slip => {
       slip.classList.toggle("hover", true)
     })
@@ -75,7 +75,7 @@ function handleMouseMove(e) {
   let draggedListPos = parseInt(getComputedStyle(draggedList).getPropertyValue("top").replace("px", ""))
   draggedListPos -= (mouse.y - e.clientY)
 
-  const slipsToMove = [draggedList.parentElement, ...getLinks(draggedList.parentElement)]
+  const slipsToMove = [draggedList.parentElement, ...getSlipLinks(draggedList.parentElement)]
 
   slipsToMove.forEach(slip => {
     const list = slip.querySelector(".list")
@@ -105,7 +105,7 @@ function handleMouseUp(e) {
   
   let draggedListPos = parseInt(getComputedStyle(draggedList).getPropertyValue("top").replace("px", ""))
 
-  const slipsToMove = [draggedList.parentElement, ...getLinks(draggedList.parentElement)]
+  const slipsToMove = [draggedList.parentElement, ...getSlipLinks(draggedList.parentElement)]
   slipsToMove.forEach(slip => {
     const list = slip.querySelector(".list")
 
@@ -161,42 +161,52 @@ function getNearestOption(listOptions, draggedListPos) {
 }
 
 function generate() {
-  slips.forEach(slip => {
-    const options = slip.querySelectorAll(".option")
-    const chosenOption = options[Math.floor(Math.random() * options.length)]
-    options.forEach(option => {
-      option.classList.toggle("current", false)
-      option.removeEventListener("mouseover", handleMouseOver)
-      option.removeEventListener("mouseout", handleMouseOut)
-      option.removeEventListener("mousedown", handleMouseDown)
-    })
-    chosenOption.classList.toggle("current", true)
-    chosenOption.addEventListener("mouseover", handleMouseOver)
-    chosenOption.addEventListener("mouseout", handleMouseOut)
-    chosenOption.addEventListener("mousedown", handleMouseDown)
+  const links = getLinks()
+  const isolatedSlips = Array.from(slips).filter(slip => getSlipLinks(slip).length === 0).map(slip => [slip])
+  const groups = [...links, ...isolatedSlips]
+  groups.forEach(group => {
+    const options = group[0].querySelectorAll(".option")
+    const optionIndex = Math.floor(Math.random() * options.length)
+    group.forEach(slip => {
+      const slipOptions = slip.querySelectorAll(".option")
+      slipOptions.forEach(option => {
+        option.classList.toggle("current", false)
+        option.removeEventListener("mouseover", handleMouseOver)
+        option.removeEventListener("mouseout", handleMouseOut)
+        option.removeEventListener("mousedown", handleMouseDown)
+      })
+      const chosenOption = slipOptions[optionIndex]
+      chosenOption.classList.toggle("current", true)
+      chosenOption.addEventListener("mouseover", handleMouseOver)
+      chosenOption.addEventListener("mouseout", handleMouseOut)
+      chosenOption.addEventListener("mousedown", handleMouseDown)
 
-    // const slipType = slip.classList.contains("slip-words") ? "words" : "lines"
-    const list = slip.querySelector(".list")
-    list.style.transition = "top 0.15s ease-in-out, left 0.15s ease-in-out";
-    setTimeout(() => {
-      list.style.transition = "";
-    }, transitionTime);
-    // if (slipType === "words") {
+      const list = slip.querySelector(".list")
+      list.style.transition = "top 0.15s ease-in-out, left 0.15s ease-in-out";
+      setTimeout(() => list.style.transition = "", transitionTime);
       list.style.top = `-${chosenOption.offsetTop}px`
-    // } else {
-    //   list.style.left = `-${chosenOption.offsetLeft}px`
-    // }
 
-    if (showRegexBtn.checked) {
-      slip.style.width = "auto"
-    } else {
-      slip.style.width = `${chosenOption.offsetWidth}px`
-    }
+      if (showRegexBtn.checked) {
+        slip.style.width = "auto"
+      } else {
+        slip.style.width = `${chosenOption.offsetWidth}px`
+      }
+    })
   })
 }
 
 function isLinking() {
   return document.body.classList.contains("is-linking")
+}
+
+function getSlipLinks(slip) {
+  let returnLink = []
+  getLinks().forEach(link => {
+    if (link.includes(slip)) {
+      returnLink = link
+    }
+  })
+  return returnLink
 }
 
 export { initSlips }

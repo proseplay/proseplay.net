@@ -88,14 +88,8 @@ function addToLink(slip) {
   slip.setAttribute("data-link", links.length)
 }
 
-function getLinks(slip) {
-  let returnLink = []
-  links.forEach(link => {
-    if (link.includes(slip)) {
-      returnLink = link
-    }
-  })
-  return returnLink
+function getLinks() {
+  return links
 }
 
 function resetLinks() {
