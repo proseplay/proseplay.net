@@ -1,7 +1,7 @@
 const text = document.querySelector(".text")
 const lines = document.querySelectorAll(".line")
 const slips = document.querySelectorAll(".slip")
-const showRegexBtn = document.querySelector(".showRegexBtn")
+const showRegexBtn = document.querySelector("#showRegexBtn")
 
 let currentLine = null
 
