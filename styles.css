@@ -150,6 +150,8 @@ button {
   width: max-content;
   /* padding: 5px; */
   /* margin: 5px; */
+  line-height: 1;
+  padding-top: 0.25em;
 }
 
 /* .slip-words .option {
@@ -167,6 +169,7 @@ button {
 .current {
   opacity: 1;
   color: #000;
+  z-index: 1;
 }
 
 /* .slip-lines .current {
