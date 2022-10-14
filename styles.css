@@ -14,6 +14,23 @@ body {
   display: none;
 }
 
+.box {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.glyph {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: inherit;
+  height: inherit;
+  transform: translate(-50%, -50%);
+  color: transparent;
+  background-repeat: no-repeat;
+}
+
 /* CONTROLS */
 
 .controls {
@@ -58,10 +75,18 @@ label {
   background-color: transparent; */
 }
 
+/* MAIN */
+
+main {
+  display: grid;
+  grid-template-columns: 70% 30%;
+  margin: 100px 200px;
+  gap: 100px;
+}
+
 /* TEXT */
 
 .text {
-  margin: 100px 200px;
   font-size: 24px;
   line-height: 1.5;
 }
@@ -253,20 +278,52 @@ label {
 /* snapshots */
 
 .snapshots {
-  position: absolute;
-  top: 390px;
-  left: 800px;
+  /* position: absolute; */
+  /* top: 390px; */
+  /* left: 800px; */
   font-size: 16px;
   color: #999;
   display: flex;
   flex-direction: column;
   gap: 1em;
+  margin-top: -1.5em;
+}
+
+.snapshot {
+  border-radius: 7px;
+  background-color: #f5f5f5;
+  padding: 1.5em;
+  border: 1px solid #ececec;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.snapshot header {
+  display: flex;
+  align-items: center;
 }
 
 .snapshot-heading {
-  margin-top: 0;
-  margin-bottom: 0.5em;
+  /* margin-top: 0; */
+  /* margin-bottom: 0.5em; */
+  margin: 0;
   font-family: sans-serif;
   font-size: 0.8em;
   text-transform: uppercase;
+  flex: 1;
+}
+
+.snapshot-clear {
+  cursor: pointer;
+}
+
+.snapshot-clear .box {
+  width: 24px;
+  height: 24px;
+}
+
+.snapshot-clear .glyph {
+  mask: url("icons/remove.svg");
+  background-color: #999;
 }

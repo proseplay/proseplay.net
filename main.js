@@ -21,7 +21,9 @@ let selectionRange = null
 
 // snapshots
 const snapshotBtn = document.querySelector("#snapshotBtn")
-let numSnapshots = 1
+const snapshotTemp = document.querySelector(".snapshot").cloneNode(true)
+document.querySelector(".snapshot").remove()
+const snapshotNums = []
 
 document.addEventListener("DOMContentLoaded", () => {
   initSlips(addToLink, getLinks)
@@ -247,15 +249,20 @@ function resetLinks() {
 function snapshot() {
   const lines = document.querySelectorAll(".line")
 
-  const snapshot = document.createElement("div")
+  const snapshot = snapshotTemp.cloneNode(true)
 
-  const snapshotHeading = document.createElement("h2")
-  snapshotHeading.classList.add("snapshot-heading")
-  snapshotHeading.innerText = `Snapshot ${numSnapshots}.`
-  snapshot.appendChild(snapshotHeading)
+  const snapshotHeading = snapshot.querySelector(".snapshot-heading")
+  let num
+  if (snapshotNums.length === 0) {
+    num = 1
+  } else {
+    num = snapshotNums[snapshotNums.length - 1] + 1
+  }
+  snapshotNums.push(num)
+  snapshotHeading.innerText = `Snapshot ${num}`
 
-  const snapshotText = document.createElement("div")
-  snapshotText.classList.add("snapshot-text")
+  // const snapshotText = document.createElement("div")
+  const snapshotText = snapshot.querySelector(".snapshot-text")
   let textContent = ""
   lines.forEach(line => {
     const nodes = line.childNodes
@@ -278,10 +285,13 @@ function snapshot() {
     })
     textContent += lineText + "\n"
   })
-
   snapshotText.innerText = textContent
-  snapshot.appendChild(snapshotText)
+
+  snapshot.querySelector(".snapshot-clear").addEventListener("click", () => clearSnapshot(snapshot))
 
   document.querySelector(".snapshots").appendChild(snapshot)
-  numSnapshots++
+}
+
+function clearSnapshot(snapshot) {
+  snapshot.remove()
 }
