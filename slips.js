@@ -1,7 +1,7 @@
 const text = document.querySelector(".text")
 const slips = document.querySelectorAll(".slip")
 const showRegexBtn = document.querySelector(".showRegexBtn")
-const generateButton = document.querySelector(".generateButton")
+const generateBtn = document.querySelector(".generateBtn")
 
 const transitionTime = 15
 
@@ -20,7 +20,7 @@ function initSlips() {
     currentOption.addEventListener("mousedown", handleMouseDown)
   })
 
-  generateButton.addEventListener("click", generate)
+  generateBtn.addEventListener("click", generate)
 }
 
 function handleMouseOver(e) {
@@ -185,4 +185,4 @@ function generate() {
   })
 }
 
-export { initSlips as setupSlips }
+export { initSlips }

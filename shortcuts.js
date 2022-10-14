@@ -1,7 +1,7 @@
 const text = document.querySelector(".text")
 const lines = document.querySelectorAll(".line")
 const slips = document.querySelectorAll(".slip")
-const showRegexButton = document.querySelector(".showRegexButton")
+const showRegexBtn = document.querySelector(".showRegexBtn")
 
 let currentLine = null
 
@@ -59,7 +59,7 @@ function toggleComment() {
 
   slips.forEach(slip => {
     const current = slip.querySelector(".current")
-    if (showRegexButton.checked) {
+    if (showRegexBtn.checked) {
       slip.style.width = "auto"
     } else {
       slip.style.width = `${current.offsetWidth}px`
@@ -67,4 +67,4 @@ function toggleComment() {
   })
 }
 
-export { initShortcuts as setupShortcuts }
+export { initShortcuts }
