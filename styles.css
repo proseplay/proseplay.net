@@ -38,7 +38,7 @@ label {
 
 button {
   font-family: "Hoefler Text", serif;
-  padding: 0.5em 0.75em;
+  /* padding: 0.5em 0.75em; */
   cursor: pointer;
 }
 
@@ -218,4 +218,10 @@ button {
   line-height: 1;
   padding-left: 3px;
   color: #999;
+}
+
+/* variants */
+
+.add-variant-container {
+  position: absolute;
 }

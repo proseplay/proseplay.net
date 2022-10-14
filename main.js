@@ -2,9 +2,9 @@ import { initSlips } from "./slips.js"
 import { initShortcuts } from "./shortcuts.js"
 
 const text = document.querySelector(".text")
-const showRegexBtn = document.querySelector(".showRegexBtn")
-const linkingBtn = document.querySelector(".linkingBtn")
-const resetLinksBtn = document.querySelector(".resetLinksBtn")
+const showRegexBtn = document.querySelector("#showRegexBtn")
+const linkingBtn = document.querySelector("#linkingBtn")
+const resetLinksBtn = document.querySelector("#resetLinksBtn")
 
 const transitionTime = 15
 
@@ -13,18 +13,61 @@ let isShowingRegex = false
 // linking
 const links = []
 let isLinking = false
+let isMouseDown = false
 
 document.addEventListener("DOMContentLoaded", () => {
   initSlips(addToLink, getLinks)
   initShortcuts()
-  
+  addEvents()
+})
+
+function addEvents() {
+  // regex
   showRegexBtn.addEventListener("input", handleViewChange)
   handleViewChange()
 
+  // linking
   linkingBtn.addEventListener("click", toggleLinking)
 
+  // reset
   resetLinksBtn.addEventListener("click", resetLinks)
-})
+
+  // selections
+  // text.addEventListener("select", handleSelection)
+  text.addEventListener("mousedown", handleMouseDown)
+  text.addEventListener("mousemove", handleMouseMove)
+  document.addEventListener("mouseup", handleMouseUp)
+  document.addEventListener("selectionchange", handleSelection)
+}
+
+function handleMouseDown(e) {
+  if (e.target.classList.contains("option")) return
+  isMouseDown = true
+}
+
+function handleMouseMove(e) {
+  if (!isMouseDown) return
+}
+
+function handleMouseUp(e) {
+  if (!isMouseDown) return
+  isMouseDown = false
+}
+
+function handleSelection(e) {
+  const selection = document.getSelection()
+  const range = selection.getRangeAt(0)
+  const startContainer = range.startContainer
+  if (!startContainer.parentElement.classList.contains("line")) return
+  const endContainer = range.endContainer
+  if (!endContainer.parentElement.classList.contains("line")) return
+  if (startContainer !== endContainer) return
+
+  const startOffset = range.startOffset
+  const endOffset = range.endOffset
+  const rangeVal = startContainer.textContent.slice(startOffset, endOffset)
+  console.log(startOffset, endOffset, rangeVal, selection, range)
+}
 
 function handleViewChange(e) {
   isShowingRegex = showRegexBtn.checked
