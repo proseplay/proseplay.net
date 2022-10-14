@@ -28,6 +28,13 @@ function initSlips(_addToLink, _getLinks) {
   generateBtn.addEventListener("click", generate)
 }
 
+function addSlip(slip) {
+  const currentOption = slip.querySelector(".current")
+  currentOption.addEventListener("mouseover", handleMouseOver)
+  currentOption.addEventListener("mouseout", handleMouseOut)
+  currentOption.addEventListener("mousedown", handleMouseDown)
+}
+
 function handleMouseOver(e) {
   if (isLinking()) return
 
@@ -209,4 +216,4 @@ function getSlipLinks(slip) {
   return returnLink
 }
 
-export { initSlips }
+export { initSlips, addSlip }

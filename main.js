@@ -1,4 +1,4 @@
-import { initSlips } from "./slips.js"
+import { initSlips, addSlip } from "./slips.js"
 import { initShortcuts } from "./shortcuts.js"
 
 const text = document.querySelector(".text")
@@ -14,6 +14,11 @@ let isShowingRegex = false
 const links = []
 let isLinking = false
 let isMouseDown = false
+
+// variants
+const addVariantContainer = document.querySelector(".add-variant-container")
+const addVariantBtn = document.querySelector("#addVariantBtn")
+let selectionRange = null
 
 document.addEventListener("DOMContentLoaded", () => {
   initSlips(addToLink, getLinks)
@@ -57,19 +62,108 @@ function handleMouseUp(e) {
 function handleSelection(e) {
   const selection = document.getSelection()
   const range = selection.getRangeAt(0)
+  if (rangeIsValid(range)) {
+    selectionRange = range
+    // range.startContainer.parentElement.appendChild(addVariantContainer)
+    addVariantContainer.style.top = `${range.startContainer.parentElement.offsetTop}px`
+    addVariantContainer.style.left = `${range.startContainer.parentElement.offsetLeft}px`
+    addVariantContainer.classList.remove("hidden")
+
+    addVariantBtn.addEventListener("click", addVariant)
+  } else {
+    selectionRange = null
+    addVariantContainer.classList.add("hidden")
+  }
+}
+
+function rangeIsValid(range) {
   const startContainer = range.startContainer
-  if (!startContainer.parentElement.classList.contains("line")) return
+  if (!startContainer.parentElement.classList.contains("line")) return false
+
   const endContainer = range.endContainer
-  if (!endContainer.parentElement.classList.contains("line")) return
-  if (startContainer !== endContainer) return
+  if (!endContainer.parentElement.classList.contains("line")) return false
+  if (startContainer !== endContainer) return false
 
   const startOffset = range.startOffset
   const endOffset = range.endOffset
   const rangeVal = startContainer.textContent.slice(startOffset, endOffset)
-  console.log(startOffset, endOffset, rangeVal, selection, range)
+  if (!rangeVal) return false
+
+  return true
 }
 
-function handleViewChange(e) {
+function addVariant() {
+  console.log(selectionRange)
+  const text = selectionRange.startContainer.textContent
+  const start = selectionRange.startOffset
+  const end = selectionRange.endOffset
+  const split = [
+    text.slice(0, start),
+    text.slice(start, end),
+    text.slice(end, text.length),
+  ]
+  const prev = document.createTextNode(split[0])
+  split[0] = prev
+  const next = document.createTextNode(split[2])
+  split[2] = next
+
+  const slip = document.createElement("div")
+  slip.classList.add("slip", "slip-words")
+  const regex = document.createElement("div")
+  regex.classList.add("regex")
+  slip.appendChild(regex)
+  const list = document.createElement("div")
+  list.classList.add("list")
+  slip.appendChild(list)
+  const originalOption = document.createElement("div")
+  originalOption.classList.add("option", "current")
+  originalOption.innerText = split[1]
+  list.appendChild(originalOption)
+  const newOption = document.createElement("div")
+  newOption.classList.add("option")
+  // newOption.innerText = "test"
+  list.appendChild(newOption)
+  setTimeout(() => {
+    originalOption.classList.remove("current")
+    newOption.classList.add("current")
+    list.style.top = `-${newOption.offsetTop}px`
+    addSlip(slip)
+
+    const newOptionInput = document.querySelector("#newOptionInput")
+    // newOptionInput.classList.remove("hidden")
+    const originalBB = originalOption.getBoundingClientRect()
+    const newBB = newOption.getBoundingClientRect()
+    newOptionInput.style.top = `${newBB.top}px`
+    newOptionInput.style.left = `${newBB.left}px`
+    // newOptionInput.style.width = "auto"
+    newOptionInput.style.height = `${originalBB.height}px`
+    newOptionInput.value = ""
+    newOptionInput.focus()
+    newOptionInput.addEventListener("keyup", function inputKeyup(e) { inputNewOption(e, newOptionInput, newOption) })
+  }, 10);
+  split[1] = slip
+
+  handleViewChange()
+
+  for (let i = 0; i < split.length; i++) {
+    selectionRange.startContainer.parentElement.insertBefore(split[i], selectionRange.startContainer)
+  }
+  selectionRange.startContainer.remove()
+}
+
+function inputNewOption(e, newOptionInput, newOption) {
+  newOptionInput.style.width = `${newOptionInput.value.length * 20}px`
+  newOption.innerText = newOptionInput.value
+  console.log(newOptionInput.value, newOption.innerText)
+  handleViewChange()
+  if (e.key === "Enter") {
+    // newOptionInput.classList.add("hidden")
+    newOptionInput.blur()
+    newOptionInput.removeEventListener("keyup", inputKeyup)
+  }
+}
+
+function handleViewChange() {
   isShowingRegex = showRegexBtn.checked
   text.classList.toggle("view-regex", isShowingRegex)
   text.classList.toggle("view-visual", !isShowingRegex)

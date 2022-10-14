@@ -32,14 +32,26 @@ input[type="checkbox"] {
   user-select: none;
 }
 
+input[type="text"] {
+  font-family: "Hoefler Text", serif;
+  font-size: 1em;
+}
+
 label {
   user-select: none;
 }
 
-button {
+.controls button {
   font-family: "Hoefler Text", serif;
-  /* padding: 0.5em 0.75em; */
+  padding: 0.5em 0.75em;
   cursor: pointer;
+}
+
+#newOptionInput {
+  font-size: 24px;
+  outline: 0;
+  border: 0;
+  opacity: 0;
 }
 
 /* TEXT */
@@ -64,6 +76,7 @@ button {
 .line {
   /* height: 1em; */
   /* height: 1.5rem; */
+  position: relative;
 }
 
 .line.comment {
@@ -223,5 +236,12 @@ button {
 /* variants */
 
 .add-variant-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(calc(-100% - 0.5em), 0);
+}
+
+#newOptionInput {
   position: absolute;
 }
