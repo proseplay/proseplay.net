@@ -31,7 +31,6 @@ function addEvents() {
 
   // reset
   resetLinksBtn.addEventListener("click", resetLinks)
-<<<<<<< HEAD
 
   // selections
   // text.addEventListener("select", handleSelection)
@@ -39,8 +38,6 @@ function addEvents() {
   text.addEventListener("mousemove", handleMouseMove)
   document.addEventListener("mouseup", handleMouseUp)
   document.addEventListener("selectionchange", handleSelection)
-=======
->>>>>>> main
 }
 
 function handleMouseDown(e) {
