@@ -254,7 +254,7 @@ function resetLinks() {
 }
 
 function snapshot() {
-  const lines = document.querySelectorAll(".line")
+  const lines = text.querySelectorAll(".line")
 
   const snapshot = snapshotTemp.cloneNode(true)
 
@@ -313,5 +313,11 @@ function loadTemp(e) {
   const id = linkText.slice(1, linkText.length)
   const template = document.querySelector(`#${id}`)
   text.innerHTML = template.outerHTML
+
+  // clear snapshots
+  document.querySelector(".snapshots").innerHTML = ""
+  snapshotNums = []
+
+  // re-initialise
   init()
 }
