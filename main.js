@@ -1,5 +1,5 @@
-import { setupSlips } from "./slips.js"
-import { setupShortcuts } from "./shortcuts.js"
+import { initSlips } from "./slips.js"
+import { initShortcuts } from "./shortcuts.js"
 
 const text = document.querySelector(".text")
 const showRegexBtn = document.querySelector(".showRegexBtn")
@@ -9,8 +9,8 @@ const transitionTime = 15
 let isShowingRegex = false
 
 document.addEventListener("DOMContentLoaded", () => {
-  setupSlips()
-  setupShortcuts()
+  initSlips()
+  initShortcuts()
   
   showRegexBtn.addEventListener("input", handleViewChange)
   handleViewChange()

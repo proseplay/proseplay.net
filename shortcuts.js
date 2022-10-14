@@ -5,7 +5,7 @@ const showRegexButton = document.querySelector(".showRegexButton")
 
 let currentLine = null
 
-function setupShortcuts() {
+function initShortcuts() {
   lines.forEach(line => {
     line.addEventListener("mousedown", handleMouseDown)
   })
@@ -67,4 +67,4 @@ function toggleComment() {
   })
 }
 
-export { setupShortcuts }
+export { initShortcuts as setupShortcuts }

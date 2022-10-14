@@ -9,7 +9,7 @@ let isMouseDown = false
 let mouse = {"x": 0, "y": 0}
 let draggedList = null
 
-function setupSlips() {
+function initSlips() {
   document.addEventListener("mousemove", handleMouseMove)
   document.addEventListener("mouseup", handleMouseUp)
 
@@ -185,4 +185,4 @@ function generate() {
   })
 }
 
-export { setupSlips }
+export { initSlips as setupSlips }
