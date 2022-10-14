@@ -26,7 +26,6 @@ body {
 .controls div:first-of-type {
   width: 100%;
   font-style: italic;
-  color: #999;
 }
 
 input[type="checkbox"] {
@@ -39,6 +38,8 @@ label {
 
 button {
   font-family: "Hoefler Text", serif;
+  padding: 0.5em 0.75em;
+  cursor: pointer;
 }
 
 /* TEXT */
