@@ -16,7 +16,6 @@ let isLinking = false
 let isMouseDown = false
 
 // variants
-const addVariantContainer = document.querySelector(".add-variant-container")
 const addVariantBtn = document.querySelector("#addVariantBtn")
 let selectionRange = null
 
@@ -72,14 +71,14 @@ function handleSelection(e) {
   if (rangeIsValid(range)) {
     selectionRange = range
     // range.startContainer.parentElement.appendChild(addVariantContainer)
-    addVariantContainer.style.top = `${range.startContainer.parentElement.offsetTop}px`
-    addVariantContainer.style.left = `${range.startContainer.parentElement.offsetLeft}px`
-    addVariantContainer.classList.remove("hidden")
+    addVariantBtn.style.top = `${range.startContainer.parentElement.offsetTop}px`
+    addVariantBtn.style.left = `${range.startContainer.parentElement.offsetLeft}px`
+    addVariantBtn.classList.remove("hidden")
 
     addVariantBtn.addEventListener("click", addVariant)
   } else {
     selectionRange = null
-    addVariantContainer.classList.add("hidden")
+    addVariantBtn.classList.add("hidden")
   }
 }
 
@@ -215,6 +214,7 @@ function toggleLinking() {
   showRegexBtn.disabled = isLinking
   document.querySelector("#generateBtn").disabled = isLinking
   resetLinksBtn.disabled = isLinking
+  snapshotBtn.disabled = isLinking
 
   // change text on button
   linkingBtn.textContent = isLinking ? "Done" : "Create link"

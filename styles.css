@@ -239,7 +239,7 @@ label {
 
 /* variants */
 
-.add-variant-container {
+#addVariantBtn {
   position: absolute;
   top: 0;
   left: 0;
