@@ -41,7 +41,7 @@ body {
 }
 
 .templates a {
-  color: #999;
+  color: #444;
   text-decoration: none;
 }
 
@@ -87,6 +87,10 @@ label {
   /* padding-top: 4px;
   padding-left: 0;
   background-color: transparent; */
+}
+
+label[for="showRegexBtn"] {
+  color: #999;
 }
 
 /* MAIN */
