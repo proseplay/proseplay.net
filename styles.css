@@ -10,6 +10,10 @@ body {
   font-family: "Hoefler Text", serif;
 }
 
+.hidden {
+  display: none;
+}
+
 /* CONTROLS */
 
 .controls {
@@ -177,6 +181,14 @@ button {
   cursor: pointer;
 }
 
+.is-linking .slip-words[data-link] {
+  opacity: 0.5;
+}
+
+.is-linking .slip-words[data-link] .current {
+  cursor: default;
+}
+
 .view-regex .current {
   opacity: 0;
 }
@@ -191,7 +203,7 @@ button {
 
 /* linking */
 
-.link-symbol {
+.link-ref {
   line-height: 1;
   padding-left: 3px;
   color: #999;

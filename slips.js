@@ -50,7 +50,10 @@ function handleMouseDown(e) {
   e.preventDefault()
 
   if (isLinking()) {
-    addToLink(e.currentTarget.parentElement.parentElement)
+    const slip = e.currentTarget.parentElement.parentElement
+    if (getLinks(slip).length === 0) {
+      addToLink(slip)
+    }
   } else {
     isMouseDown = true
     mouse.x = e.clientX
@@ -131,7 +134,6 @@ function handleMouseUp(e) {
     // account for regex
     if (showRegexBtn.checked) {
       targetOption.parentElement.parentElement.style.width = "auto"
-      console.log(targetOption.parentElement.parentElement)
     }
 
     text.classList.toggle("hasHover", false)

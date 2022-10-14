@@ -4,13 +4,13 @@ import { initShortcuts } from "./shortcuts.js"
 const text = document.querySelector(".text")
 const showRegexBtn = document.querySelector(".showRegexBtn")
 const linkingBtn = document.querySelector(".linkingBtn")
+const resetLinksBtn = document.querySelector(".resetLinksBtn")
 
 const transitionTime = 15
 
 let isShowingRegex = false
 
 // linking
-const linkSymbols = ["*", "†", "‡", "§", "||", "#"]
 const links = []
 let isLinking = false
 
@@ -22,6 +22,8 @@ document.addEventListener("DOMContentLoaded", () => {
   handleViewChange()
 
   linkingBtn.addEventListener("click", toggleLinking)
+
+  resetLinksBtn.addEventListener("click", resetLinks)
 })
 
 function handleViewChange(e) {
@@ -56,7 +58,9 @@ function toggleLinking() {
   if (isLinking) {
     links.push([])
   } else {
-    console.log(links)
+    if (links.length > 0) {
+      resetLinksBtn.classList.remove("hidden")
+    }
   }
 
   // toggle body class
@@ -65,18 +69,23 @@ function toggleLinking() {
   // toggle other controls
   showRegexBtn.disabled = isLinking
   document.querySelector("#generateBtn").disabled = isLinking
+  resetLinksBtn.disabled = isLinking
 
   // change text on button
-  linkingBtn.textContent = isLinking ? "Done" : "Link choices"
+  linkingBtn.textContent = isLinking ? "Done" : "Create link"
 }
 
 function addToLink(slip) {
   links[links.length - 1].push(slip)
-
+  
+  // add superscript
   const sup = document.createElement("sup")
-  sup.classList.add("link-symbol")
-  sup.textContent = linkSymbols[links.length - 1]
+  sup.classList.add("link-ref")
+  sup.textContent = links.length
   slip.insertAdjacentElement("afterend", sup)
+  
+  // add data
+  slip.setAttribute("data-link", links.length)
 }
 
 function getLinks(slip) {
@@ -87,4 +96,11 @@ function getLinks(slip) {
     }
   })
   return returnLink
+}
+
+function resetLinks() {
+  text.querySelectorAll("sup").forEach(slip => slip.remove())
+  text.querySelectorAll("[data-link]").forEach(slip => slip.removeAttribute("data-link"))
+  links.splice(0, links.length)
+  resetLinksBtn.classList.add("hidden")
 }
