@@ -304,7 +304,10 @@ main {
 }
 
 #addVariantBtn .glyph {
+  -webkit-mask: url("icons/add.svg");
   mask: url("icons/add.svg");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
   background-color: #797979;
 }
 
@@ -361,6 +364,9 @@ main {
 }
 
 .snapshot-clear .glyph {
+  -webkit-mask: url("icons/remove.svg");
   mask: url("icons/remove.svg");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
   background-color: #999;
 }
