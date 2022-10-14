@@ -1,5 +1,5 @@
 const text = document.querySelector(".text")
-const slips = document.querySelectorAll(".slip")
+let slips = document.querySelectorAll(".slip")
 const showRegexBtn = document.querySelector("#showRegexBtn")
 const generateBtn = document.querySelector("#generateBtn")
 
@@ -169,6 +169,7 @@ function getNearestOption(listOptions, draggedListPos) {
 
 function generate() {
   const links = getLinks()
+  let slips = document.querySelectorAll(".slip")
   const isolatedSlips = Array.from(slips).filter(slip => getSlipLinks(slip).length === 0).map(slip => [slip])
   const groups = [...links, ...isolatedSlips]
   groups.forEach(group => {
