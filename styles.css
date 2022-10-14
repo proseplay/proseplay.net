@@ -17,7 +17,7 @@ body {
 /* CONTROLS */
 
 .controls {
-  margin: 200px 200px 50px;
+  margin: 100px 200px 50px;
   display: flex;
   flex-wrap: wrap;
   gap: 2em;
