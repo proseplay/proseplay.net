@@ -60,6 +60,9 @@ function toggleLinking() {
   } else {
     if (links.length > 0) {
       resetLinksBtn.classList.remove("hidden")
+      if (links[links.length - 1].length === 0) {
+        links.splice(links[links.length - 1], 1)
+      }
     }
   }
 
