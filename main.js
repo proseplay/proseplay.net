@@ -18,8 +18,9 @@ let isMouseDown = false
 // variants
 const addVariantBtn = document.querySelector("#addVariantBtn")
 let selectionRange = null
-// const mouse = {x: 0, y: 0}
 let mouseStartX = 0, mouseCurrentX = 0
+const inputTemp = document.querySelector("#newOptionInput").cloneNode(true)
+inputTemp.remove()
 
 // snapshots
 const snapshotBtn = document.querySelector("#snapshotBtn")
@@ -45,7 +46,6 @@ function addEvents() {
   resetLinksBtn.addEventListener("click", resetLinks)
 
   // selections
-  // text.addEventListener("select", handleSelection)
   text.addEventListener("mousedown", handleMouseDown)
   text.addEventListener("mousemove", handleMouseMove)
   document.addEventListener("mouseup", handleMouseUp)
@@ -77,10 +77,7 @@ function handleSelection(e) {
   const range = selection.getRangeAt(0)
   if (rangeIsValid(range)) {
     selectionRange = range
-    // range.startContainer.parentElement.appendChild(addVariantContainer)
     addVariantBtn.style.top = `${range.startContainer.parentElement.offsetTop}px`
-    // addVariantBtn.style.left = `${range.startContainer.parentElement.offsetLeft}px`
-    // addVariantBtn.style.left = `${mouse.x}px`
     addVariantBtn.style.left = `${mouseStartX + (mouseCurrentX - mouseStartX) / 2}px`
     addVariantBtn.classList.remove("hidden")
 
@@ -143,17 +140,16 @@ function addVariant() {
     list.style.top = `-${newOption.offsetTop}px`
     addSlip(slip)
 
-    const newOptionInput = document.querySelector("#newOptionInput")
-    // newOptionInput.classList.remove("hidden")
+    const newOptionInput = inputTemp.cloneNode(true)
+    document.querySelector(".controls").appendChild(newOptionInput)
     const originalBB = originalOption.getBoundingClientRect()
     const newBB = newOption.getBoundingClientRect()
     newOptionInput.style.top = `${newBB.top}px`
     newOptionInput.style.left = `${newBB.left}px`
-    // newOptionInput.style.width = "auto"
     newOptionInput.style.height = `${originalBB.height}px`
     newOptionInput.value = ""
     newOptionInput.focus()
-    newOptionInput.addEventListener("keyup", function inputKeyup(e) { inputNewOption(e, newOptionInput, newOption) })
+    newOptionInput.addEventListener("keyup", e => { inputNewOption(e, newOptionInput, newOption) })
   }, 10);
   split[1] = slip
 
@@ -170,9 +166,7 @@ function inputNewOption(e, newOptionInput, newOption) {
   newOption.innerText = newOptionInput.value
   handleViewChange()
   if (e.key === "Enter") {
-    // newOptionInput.classList.add("hidden")
-    newOptionInput.blur()
-    newOptionInput.removeEventListener("keyup", inputKeyup)
+    newOptionInput.remove()
   }
 }
 
