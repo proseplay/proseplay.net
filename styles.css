@@ -52,6 +52,10 @@ label {
   outline: 0;
   border: 0;
   opacity: 0;
+  /* color: transparent; */
+  /* padding-top: 4px;
+  padding-left: 0;
+  background-color: transparent; */
 }
 
 /* TEXT */
