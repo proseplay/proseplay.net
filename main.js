@@ -28,11 +28,13 @@ const snapshotTemp = document.querySelector(".snapshot").cloneNode(true)
 document.querySelector(".snapshot").remove()
 let snapshotNums = []
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", init)
+
+function init() {
   initSlips(addToLink, getLinks)
   initShortcuts()
   addEvents()
-})
+}
 
 function addEvents() {
   // regex
@@ -53,6 +55,10 @@ function addEvents() {
 
   // snapshots
   snapshotBtn.addEventListener("click", snapshot)
+
+  // links
+  const templates = document.querySelectorAll(".templates a")
+  templates.forEach(temp => temp.addEventListener("click", loadTemp))
 }
 
 function handleMouseDown(e) {
@@ -299,4 +305,13 @@ function clearSnapshot(snapshot) {
   if (document.querySelectorAll(".snapshot").length === 0) {
     snapshotNums = []
   }
+}
+
+function loadTemp(e) {
+  e.preventDefault()
+  const linkText = e.target.innerText
+  const id = linkText.slice(1, linkText.length)
+  const template = document.querySelector(`#${id}`)
+  text.innerHTML = template.outerHTML
+  init()
 }

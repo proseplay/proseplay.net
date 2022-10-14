@@ -6,6 +6,13 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <div class="templates">
+    <a href="">/regex</a>
+    <a href="">/hypothetically-hello</a>
+    <a href="">/dickinson</a>
+    <a href="">/carpenter</a>
+  </div>
+
   <div class="controls">
     <div>
       <input type="checkbox" class="showRegexBtn" name="showRegex" id="showRegexBtn">
@@ -31,369 +38,7 @@
 
   <main>
     <div class="text view-regex" contenteditable="">
-      <!-- <div class="line">
-        in the
-        <div class="slip slip-words">
-          <div class="regex">w?ri(ght|te)s</div>
-          <div class="list" data-regex="w?ri(ght|te)s">
-            <span class="option current">rites</span>
-            <span class="option">rights</span>
-            <span class="option">wrights</span>
-            <span class="option">writes</span>
-          </div>
-        </div>
-        of
-        <div class="slip slip-words">
-          <div class="regex">mou?rning</div>
-          <div class="list" data-regex="mou?rning">
-            <span class="option current">morning</span>
-            <span class="option">mourning</span>
-          </div>
-        </div>
-        the
-        <div class="slip slip-words">
-          <div class="regex">se(e|a)</div>
-          <div class="list" data-regex="se(e|a)">
-            <span class="option current">sea</span>
-            <span class="option">see</span>
-          </div>
-        </div>
-        is
-        <div class="slip slip-words">
-          <div class="regex">mis(t|sed)</div>
-          <div class="list" data-regex="mis(t|sed)">
-            <span class="option current">mist</span>
-            <span class="option">missed</span>
-          </div>
-        </div>
-      </div> -->
-  
-      <!-- <div class="line">
-        <div class="slip slip-lines">
-          <div class="regex">
-            hypothetically|hello<br>
-            what if|i said<br>
-            we fell|and held<br>
-            in love|till death
-          </div>
-          <div class="list">
-            <div class="option current">
-              hypothetically<br>
-              what if<br>
-              we fell<br>
-              in love<br>
-            </div>
-            <div class="option">
-              hello<br>
-              i said<br>
-              and held<br>
-              till death<br>
-            </div>
-          </div>
-        </div>
-      </div> -->
-  
-      <!-- <div class="line"></div> -->
-  
-      <!-- <div class="line">
-        <div class="slip slip-words">
-          <div class="regex">hypothetically|hello</div>
-          <div class="list">
-            <div class="option current">hypothetically</div>
-            <div class="option">hello</div>
-          </div>
-        </div>
-      </div>
-      <div class="line">
-        <div class="slip slip-words">
-          <div class="regex">what if|i said</div>
-          <div class="list">
-            <div class="option current">what if</div>
-            <div class="option">i said</div>
-          </div>
-        </div>
-      </div>
-      <div class="line">
-        <div class="slip slip-words">
-          <div class="regex">we fell|and held</div>
-          <div class="list">
-            <div class="option current">we fell</div>
-            <div class="option">and held</div>
-          </div>
-        </div>
-      </div>
-      <div class="line">
-        <div class="slip slip-words">
-          <div class="regex">in love|till death</div>
-          <div class="list">
-            <div class="option current">in love</div>
-            <div class="option">till death</div>
-          </div>
-        </div>
-      </div> -->
-  
-      <!-- <div class="line"></div> -->
-  
-      <!-- <div class="line">
-        in the
-        <div class="slip slip-words">
-          <div class="regex">mis(t|sed)</div>
-          <div class="list">
-            <div class="option current">mist</div>
-            <div class="option">missed</div>
-          </div>
-        </div>
-        <div class="slip slip-words">
-          <div class="regex">se(e|a)</div>
-          <div class="list">
-            <div class="option current">see</div>
-            <div class="option">sea</div>
-          </div>
-        </div>
-      </div>
-      <div class="line">
-        <div class="slip slip-words">
-          <div class="regex">pr(e|a)y</div>
-          <div class="list">
-            <div class="option current">prey</div>
-            <div class="option">pray</div>
-          </div>
-        </div>
-        in the
-        <div class="slip slip-words">
-          <div class="regex">mou?rning</div>
-          <div class="list">
-            <div class="option current">morning</div>
-            <div class="option">mourning</div>
-          </div>
-        </div>
-      </div>
-      <div class="line">
-        for
-        <div class="slip slip-words">
-          <div class="regex">worl?ds</div>
-          <div class="list">
-            <div class="option current">words</div>
-            <div class="option">worlds</div>
-          </div>
-        </div>
-        that
-        <div class="slip slip-words">
-          <div class="regex">exis?t</div>
-          <div class="list">
-            <div class="option current">exit</div>
-            <div class="option">exist</div>
-          </div>
-        </div>
-      </div>
-      <div class="line">
-        as
-        <div class="slip slip-words">
-          <div class="regex">sl?eep</div>
-          <div class="list">
-            <div class="option current">seep</div>
-            <div class="option">sleep</div>
-          </div>
-        </div>
-      </div> -->
-  
-      <!-- <div class="line">hello</div> -->
-  
-      <!-- <div class="line">We talked with each other about each other</div>
-      <div class="line">Though neither of us spoke —</div>
-      <div class="line">
-        We were
-        <div class="slip slip-words">
-          <div class="regex">too engrossed with|listening to</div>
-          <div class="list">
-            <div class="option current">too engrossed with</div>
-            <div class="option">listening to</div>
-          </div>
-        </div>
-        the Second’s Races
-      </div>
-      <div class="line">And the Hoofs of the Clock —</div>
-      <div class="line">Pausing in Front of our
-        <div class="slip slip-words">
-          <div class="regex">(Sentenced|Foundering) Faces</div>
-          <div class="list">
-            <div class="option current">Sentenced Faces</div>
-            <div class="option">Foundering Faces</div>
-          </div>
-        </div>
-      </div>
-      <div class="line">
-        <div class="slip slip-words">
-          <div class="regex">Time(’s)? (Decision|compassion) (sh|T)ook</div>
-          <div class="list">
-            <div class="option current">Time’s Decision shook —</div>
-            <div class="option">Time compassion Took</div>
-          </div>
-        </div>
-      </div>
-      <div class="line">Arks of Reprieve he offered to us —</div>
-      <div class="line">Ararats — we took —</div> -->
-  
-      <div class="line">
-        Once upon a
-        <div class="slip slip-words">
-          <div class="list">
-            <div class="option current">high</div>
-            <div class="option">spring</div>
-            <div class="option">slack</div>
-            <div class="option">neap</div>
-          </div>
-        </div>
-        tide we
-        <div class="slip slip-words">
-          <div class="list">
-            <div class="option current">drifted</div>
-            <div class="option">coasted</div>
-            <div class="option">slid</div>
-            <div class="option">slipped</div>
-            <div class="option">tacked</div>
-          </div>
-        </div>
-        past a
-        <div class="slip slip-words">
-          <div class="list">
-            <div class="option current">bay</div>
-            <div class="option">beach</div>
-            <div class="option">cape</div>
-            <div class="option">cove</div>
-            <div class="option">dune</div>
-            <div class="option">lagoon</div>
-          </div>
-        </div>
-        , our ship
-        <div class="slip slip-words">
-          <div class="list">
-            <div class="option current">brought us hither</div>
-            <div class="option">a brave vessel</div>
-            <div class="option">tight and yar and bravely rigged</div>
-            <div class="option">most strangely landed</div>
-            <div class="option">so near the bottom run</div>
-          </div>
-        </div>
-        .
-      </div>
-  
-      <div class="line">&nbsp;</div>
-  
-      <div class="line">
-        On the
-        <div class="slip slip-words">
-          <div class="list">
-            <div class="option current">lower</div>
-            <div class="option">main</div>
-            <div class="option">middle</div>
-            <div class="option">poop</div>
-            <div class="option">side</div>
-            <div class="option">quarter</div>
-          </div>
-        </div>
-        deck two
-        <div class="slip slip-words">
-          <div class="list">
-            <div class="option current">old</div>
-            <div class="option">young</div>
-            <div class="option">slim</div>
-          </div>
-        </div>
-        <div class="slip slip-words">
-          <div class="list">
-            <div class="option current">friends</div>
-            <div class="option">boatswains</div>
-            <div class="option">sailors</div>
-          </div>
-        </div>
-        <div class="slip slip-words">
-          <div class="list">
-            <div class="option current">hunched</div>
-            <div class="option">perched</div>
-            <div class="option">crouched</div>
-            <div class="option">sat</div>
-          </div>
-        </div>
-        <div class="slip slip-words">
-          <div class="list">
-            <div class="option current">mending nets</div>
-            <div class="option">baiting lines</div>
-            <div class="option">spinning yarns</div>
-            <div class="option">twisting tales</div>
-          </div>
-        </div>
-        . From their
-        <div class="slip slip-words">
-          <div class="list">
-            <div class="option current">accents</div>
-            <div class="option">apparel</div>
-            <div class="option">dress</div>
-            <div class="option">gestures</div>
-            <div class="option">looks</div>
-            <div class="option">movements</div>
-          </div>
-        </div>
-        I
-        <div class="slip slip-words">
-          <div class="list">
-            <div class="option current">guessed</div>
-            <div class="option">gathered</div>
-            <div class="option">suspected</div>
-            <div class="option">assumed</div>
-          </div>
-        </div>
-        that
-        <div class="slip slip-words">
-          <div class="list">
-            <div class="option current">they</div>
-            <div class="option">both</div>
-            <div class="option">the pair</div>
-            <div class="option">the two of them</div>
-          </div>
-        </div>
-        had
-        <div class="slip slip-words">
-          <div class="list">
-            <div class="option current">been born</div>
-            <div class="option">come</div>
-            <div class="option">hailed</div>
-            <div class="option">sailed</div>
-            <div class="option">journeyed</div>
-          </div>
-        </div>
-        from
-        <div class="slip slip-words">
-          <div class="list">
-            <div class="option current">braver</div>
-            <div class="option">better known</div>
-            <div class="option">far</div>
-            <div class="option">fairer</div>
-            <div class="option">gentler</div>
-          </div>
-        </div>
-        shores,
-        <div class="slip slip-words">
-          <div class="list">
-            <div class="option current">clearly</div>
-            <div class="option">surely</div>
-            <div class="option">obviously</div>
-          </div>
-        </div>
-        none so
-        <div class="slip slip-words">
-          <div class="list">
-            <div class="option current">barren</div>
-            <div class="option">bleak</div>
-            <div class="option">harsh</div>
-            <div class="option">haunted</div>
-            <div class="option">wicked</div>
-            <div class="option">wild</div>
-          </div>
-        </div>
-        as these.
-      </div>
-  
+      <div class="line">hello</div>
     </div>
   
     <div class="snapshots">
@@ -406,6 +51,26 @@
       </div>
     </div>
   </main>
+
+  <div class="templates hidden">
+    <div id="regex">
+      <!-- <div class="line">in the <div class="slip slip-words"><div class="regex">w?ri(ght|te)s</div><div class="list" data-regex="w?ri(ght|te)s"><span class="option current">rites</span><span class="option">rights</span><span class="option">wrights</span><span class="option">writes</span></div></div>of <div class="slip slip-words"><div class="regex">mou?rning</div><div class="list" data-regex="mou?rning"><span class="option current">morning</span><span class="option">mourning</span></div></div>the <div class="slip slip-words"><div class="regex">se(e|a)</div><div class="list" data-regex="se(e|a)"><span class="option current">sea</span><span class="option">see</span></div></div>is <div class="slip slip-words"><div class="regex">mis(t|sed)</div><div class="list" data-regex="mis(t|sed)"><span class="option current">mist</span><span class="option">missed</span></div></div></div> -->
+      <div class="line">in the <div class="slip slip-words"><div class="regex">mis(t|sed)</div><div class="list"><div class="option current">mist</div><div class="option">missed</div></div></div> <div class="slip slip-words"><div class="regex">se(e|a)</div><div class="list"><div class="option current">see</div><div class="option">sea</div></div></div></div><div class="line"> <div class="slip slip-words"><div class="regex">pr(e|a)y</div><div class="list"><div class="option current">prey</div><div class="option">pray</div></div></div> in the <div class="slip slip-words"><div class="regex">mou?rning</div><div class="list"><div class="option current">morning</div><div class="option">mourning</div></div></div></div><div class="line">for <div class="slip slip-words"><div class="regex">worl?ds</div><div class="list"><div class="option current">words</div><div class="option">worlds</div></div></div> that <div class="slip slip-words"><div class="regex">exis?t</div><div class="list"><div class="option current">exit</div><div class="option">exist</div></div></div></div><div class="line">as <div class="slip slip-words"><div class="regex">sl?eep</div><div class="list"><div class="option current">seep</div><div class="option">sleep</div></div></div></div>
+    </div>
+
+    <div id="hypothetically-hello">
+      <!-- <div class="line"> <div class="slip slip-lines"><div class="regex">hypothetically|hello<br>what if|i said<br>we fell|and held<br>in love|till death</div><div class="list"><div class="option current">hypothetically<br>what if<br>we fell<br>in love<br></div><div class="option">hello<br>i said<br>and held<br>till death<br></div></div></div></div> -->
+      <div class="line"> <div class="slip slip-words"><div class="regex">hypothetically|hello</div><div class="list"><div class="option current">hypothetically</div><div class="option">hello</div></div></div></div><div class="line"> <div class="slip slip-words"><div class="regex">what if|i said</div><div class="list"><div class="option current">what if</div><div class="option">i said</div></div></div></div><div class="line"> <div class="slip slip-words"><div class="regex">we fell|and held</div><div class="list"><div class="option current">we fell</div><div class="option">and held</div></div></div></div><div class="line"> <div class="slip slip-words"><div class="regex">in love|till death</div><div class="list"><div class="option current">in love</div><div class="option">till death</div></div></div></div>
+    </div>
+
+    <div id="dickinson">
+      <div class="line">We talked with each other about each other</div><div class="line">Though neither of us spoke —</div><div class="line">We were <div class="slip slip-words"><div class="regex">too engrossed with|listening to</div><div class="list"><div class="option current">too engrossed with</div><div class="option">listening to</div></div></div> the Second’s Races</div><div class="line">And the Hoofs of the Clock —</div><div class="line">Pausing in Front of our <div class="slip slip-words"><div class="regex">(Sentenced|Foundering) Faces</div><div class="list"><div class="option current">Sentenced Faces</div><div class="option">Foundering Faces</div></div></div></div><div class="line"> <div class="slip slip-words"><div class="regex">Time(’s)? (Decision|compassion) (sh|T)ook</div><div class="list"><div class="option current">Time’s Decision shook —</div><div class="option">Time compassion Took</div></div></div></div><div class="line">Arks of Reprieve he offered to us —</div><div class="line">Ararats — we took —</div>
+    </div>
+
+    <div id="carpenter">
+      <div class="line">Once upon a <div class="slip slip-words"><div class="list"><div class="option current">high</div><div class="option">spring</div><div class="option">slack</div><div class="option">neap</div></div></div> tide we <div class="slip slip-words"><div class="list"><div class="option current">drifted</div><div class="option">coasted</div><div class="option">slid</div><div class="option">slipped</div><div class="option">tacked</div></div></div> past a <div class="slip slip-words"><div class="list"><div class="option current">bay</div><div class="option">beach</div><div class="option">cape</div><div class="option">cove</div><div class="option">dune</div><div class="option">lagoon</div></div></div>, our ship <div class="slip slip-words"><div class="list"><div class="option current">brought us hither</div><div class="option">a brave vessel</div><div class="option">tight and yar and bravely rigged</div><div class="option">most strangely landed</div><div class="option">so near the bottom run</div></div></div>.</div><div class="line">&nbsp;</div><div class="line">On the <div class="slip slip-words"><div class="list"><div class="option current">lower</div><div class="option">main</div><div class="option">middle</div><div class="option">poop</div><div class="option">side</div><div class="option">quarter</div></div></div> deck two <div class="slip slip-words"><div class="list"><div class="option current">old</div><div class="option">young</div><div class="option">slim</div></div></div> <div class="slip slip-words"><div class="list"><div class="option current">friends</div><div class="option">boatswains</div><div class="option">sailors</div></div></div> <div class="slip slip-words"><div class="list"><div class="option current">hunched</div><div class="option">perched</div><div class="option">crouched</div><div class="option">sat</div></div></div> <div class="slip slip-words"><div class="list"><div class="option current">mending nets</div><div class="option">baiting lines</div><div class="option">spinning yarns</div><div class="option">twisting tales</div></div></div>. From their <div class="slip slip-words"><div class="list"><div class="option current">accents</div><div class="option">apparel</div><div class="option">dress</div><div class="option">gestures</div><div class="option">looks</div><div class="option">movements</div></div></div> I <div class="slip slip-words"><div class="list"><div class="option current">guessed</div><div class="option">gathered</div><div class="option">suspected</div><div class="option">assumed</div></div></div> that <div class="slip slip-words"><div class="list"><div class="option current">they</div><div class="option">both</div><div class="option">the pair</div><div class="option">the two of them</div></div></div> had <div class="slip slip-words"><div class="list"><div class="option current">been born</div><div class="option">come</div><div class="option">hailed</div><div class="option">sailed</div><div class="option">journeyed</div></div></div> from <div class="slip slip-words"><div class="list"><div class="option current">braver</div><div class="option">better known</div><div class="option">far</div><div class="option">fairer</div><div class="option">gentler</div></div></div> shores, <div class="slip slip-words"><div class="list"><div class="option current">clearly</div><div class="option">surely</div><div class="option">obviously</div></div></div> none so <div class="slip slip-words"><div class="list"><div class="option current">barren</div><div class="option">bleak</div><div class="option">harsh</div><div class="option">haunted</div><div class="option">wicked</div><div class="option">wild</div></div></div> as these.</div>
+    </div>
+  </div>
 
   <script type="module" src="main.js"></script>
 </body>

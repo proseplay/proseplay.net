@@ -31,6 +31,20 @@ body {
   background-repeat: no-repeat;
 }
 
+/* LINKS */
+
+.templates {
+  margin: 100px 200px 50px;
+  display: flex;
+  gap: 2em;
+  font-style: italic;
+}
+
+.templates a {
+  color: #999;
+  text-decoration: none;
+}
+
 /* CONTROLS */
 
 .controls {

@@ -1,5 +1,5 @@
 const text = document.querySelector(".text")
-let slips = document.querySelectorAll(".slip")
+let slips
 const showRegexBtn = document.querySelector("#showRegexBtn")
 const generateBtn = document.querySelector("#generateBtn")
 
@@ -18,6 +18,7 @@ function initSlips(_addToLink, _getLinks) {
   document.addEventListener("mousemove", handleMouseMove)
   document.addEventListener("mouseup", handleMouseUp)
 
+  slips = document.querySelectorAll(".slip")
   slips.forEach(slip => {
     const currentOption = slip.querySelector(".current")
     currentOption.addEventListener("mouseover", handleMouseOver)
