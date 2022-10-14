@@ -2,9 +2,9 @@ import { initSlips } from "./slips.js"
 import { initShortcuts } from "./shortcuts.js"
 
 const text = document.querySelector(".text")
-const showRegexBtn = document.querySelector(".showRegexBtn")
-const linkingBtn = document.querySelector(".linkingBtn")
-const resetLinksBtn = document.querySelector(".resetLinksBtn")
+const showRegexBtn = document.querySelector("#showRegexBtn")
+const linkingBtn = document.querySelector("#linkingBtn")
+const resetLinksBtn = document.querySelector("#resetLinksBtn")
 
 const transitionTime = 15
 
@@ -13,18 +13,39 @@ let isShowingRegex = false
 // linking
 const links = []
 let isLinking = false
+let isMouseDown = false
 
 document.addEventListener("DOMContentLoaded", () => {
   initSlips(addToLink, getLinks)
   initShortcuts()
-  
+  addEvents()
+})
+
+function addEvents() {
+  // regex
   showRegexBtn.addEventListener("input", handleViewChange)
   handleViewChange()
 
+  // linking
   linkingBtn.addEventListener("click", toggleLinking)
 
+  // reset
   resetLinksBtn.addEventListener("click", resetLinks)
-})
+}
+
+function handleMouseDown(e) {
+  if (e.target.classList.contains("option")) return
+  isMouseDown = true
+}
+
+function handleMouseMove(e) {
+  if (!isMouseDown) return
+}
+
+function handleMouseUp(e) {
+  if (!isMouseDown) return
+  isMouseDown = false
+}
 
 function handleViewChange(e) {
   isShowingRegex = showRegexBtn.checked

@@ -1,7 +1,7 @@
 const text = document.querySelector(".text")
 const slips = document.querySelectorAll(".slip")
-const showRegexBtn = document.querySelector(".showRegexBtn")
-const generateBtn = document.querySelector(".generateBtn")
+const showRegexBtn = document.querySelector("#showRegexBtn")
+const generateBtn = document.querySelector("#generateBtn")
 
 const transitionTime = 15
 
