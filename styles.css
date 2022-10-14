@@ -19,7 +19,14 @@ body {
 .controls {
   margin: 200px 200px 50px;
   display: flex;
-  gap: 1em;
+  flex-wrap: wrap;
+  gap: 2em;
+}
+
+.controls div:first-of-type {
+  width: 100%;
+  font-style: italic;
+  color: #999;
 }
 
 input[type="checkbox"] {
