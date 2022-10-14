@@ -20,6 +20,10 @@ const addVariantContainer = document.querySelector(".add-variant-container")
 const addVariantBtn = document.querySelector("#addVariantBtn")
 let selectionRange = null
 
+// snapshots
+const snapshotBtn = document.querySelector("#snapshotBtn")
+let numSnapshots = 1
+
 document.addEventListener("DOMContentLoaded", () => {
   initSlips(addToLink, getLinks)
   initShortcuts()
@@ -43,6 +47,9 @@ function addEvents() {
   text.addEventListener("mousemove", handleMouseMove)
   document.addEventListener("mouseup", handleMouseUp)
   document.addEventListener("selectionchange", handleSelection)
+
+  // snapshots
+  snapshotBtn.addEventListener("click", snapshot)
 }
 
 function handleMouseDown(e) {
@@ -93,7 +100,6 @@ function rangeIsValid(range) {
 }
 
 function addVariant() {
-  console.log(selectionRange)
   const text = selectionRange.startContainer.textContent
   const start = selectionRange.startOffset
   const end = selectionRange.endOffset
@@ -154,7 +160,6 @@ function addVariant() {
 function inputNewOption(e, newOptionInput, newOption) {
   newOptionInput.style.width = `${newOptionInput.value.length * 20}px`
   newOption.innerText = newOptionInput.value
-  console.log(newOptionInput.value, newOption.innerText)
   handleViewChange()
   if (e.key === "Enter") {
     // newOptionInput.classList.add("hidden")
@@ -237,4 +242,41 @@ function resetLinks() {
   text.querySelectorAll("[data-link]").forEach(slip => slip.removeAttribute("data-link"))
   links.splice(0, links.length)
   resetLinksBtn.classList.add("hidden")
+}
+
+function snapshot() {
+  const lines = document.querySelectorAll(".line")
+
+  const snapshot = document.createElement("div")
+
+  const snapshotHeading = document.createElement("h2")
+  snapshotHeading.classList.add("snapshot-heading")
+  snapshotHeading.innerText = `Snapshot ${numSnapshots}.`
+  snapshot.appendChild(snapshotHeading)
+
+  const snapshotText = document.createElement("div")
+  snapshotText.classList.add("snapshot-text")
+  let textContent = ""
+  lines.forEach(line => {
+    const nodes = line.childNodes
+    let lineText = ""
+    nodes.forEach(node => {
+      if (node.nodeName === "#text") {
+        lineText += node.textContent.trim()
+      } else if (node.nodeName === "DIV") {
+        const current = node.querySelector(".current")
+        if (lineText !== "") {
+          lineText += " "
+        }
+        lineText += current.textContent + " "
+      }
+    })
+    textContent += lineText + "\n"
+  })
+
+  snapshotText.innerText = textContent
+  snapshot.appendChild(snapshotText)
+
+  document.querySelector(".snapshots").appendChild(snapshot)
+  numSnapshots++
 }
