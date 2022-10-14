@@ -173,6 +173,10 @@ button {
   cursor: ns-resize;
 }
 
+.is-linking .slip-words .current {
+  cursor: pointer;
+}
+
 .view-regex .current {
   opacity: 0;
 }
@@ -182,5 +186,13 @@ button {
 }
 
 .comment .current {
+  color: #999;
+}
+
+/* linking */
+
+.link-symbol {
+  line-height: 1;
+  padding-left: 3px;
   color: #999;
 }

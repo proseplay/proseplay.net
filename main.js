@@ -3,17 +3,25 @@ import { initShortcuts } from "./shortcuts.js"
 
 const text = document.querySelector(".text")
 const showRegexBtn = document.querySelector(".showRegexBtn")
+const linkingBtn = document.querySelector(".linkingBtn")
 
 const transitionTime = 15
 
 let isShowingRegex = false
 
+// linking
+const linkSymbols = ["*", "†", "‡", "§", "||", "#"]
+const links = []
+let isLinking = false
+
 document.addEventListener("DOMContentLoaded", () => {
-  initSlips()
+  initSlips(addToLink, getLinks)
   initShortcuts()
   
   showRegexBtn.addEventListener("input", handleViewChange)
   handleViewChange()
+
+  linkingBtn.addEventListener("click", toggleLinking)
 })
 
 function handleViewChange(e) {
@@ -41,4 +49,42 @@ function handleViewChange(e) {
       }
     })
   }, transitionTime);
+}
+
+function toggleLinking() {
+  isLinking = !isLinking
+  if (isLinking) {
+    links.push([])
+  } else {
+    console.log(links)
+  }
+
+  // toggle body class
+  document.body.classList.toggle("is-linking", isLinking)
+
+  // toggle other controls
+  showRegexBtn.disabled = isLinking
+  document.querySelector("#generateBtn").disabled = isLinking
+
+  // change text on button
+  linkingBtn.textContent = isLinking ? "Done" : "Link choices"
+}
+
+function addToLink(slip) {
+  links[links.length - 1].push(slip)
+
+  const sup = document.createElement("sup")
+  sup.classList.add("link-symbol")
+  sup.textContent = linkSymbols[links.length - 1]
+  slip.insertAdjacentElement("afterend", sup)
+}
+
+function getLinks(slip) {
+  let returnLink = []
+  links.forEach(link => {
+    if (link.includes(slip)) {
+      returnLink = link
+    }
+  })
+  return returnLink
 }

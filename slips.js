@@ -9,7 +9,12 @@ let isMouseDown = false
 let mouse = {"x": 0, "y": 0}
 let draggedList = null
 
-function initSlips() {
+let addToLink, getLinks // callbacks
+
+function initSlips(_addToLink, _getLinks) {
+  addToLink = _addToLink
+  getLinks = _getLinks
+
   document.addEventListener("mousemove", handleMouseMove)
   document.addEventListener("mouseup", handleMouseUp)
 
@@ -24,6 +29,8 @@ function initSlips() {
 }
 
 function handleMouseOver(e) {
+  if (isLinking()) return
+
   if (!isMouseDown) {
     e.currentTarget.parentElement.parentElement.classList.toggle("hover", true)
     text.classList.toggle("hasHover", true)
@@ -31,6 +38,8 @@ function handleMouseOver(e) {
 }
 
 function handleMouseOut(e) {
+  if (isLinking()) return
+
   if (!isMouseDown) {
     e.currentTarget.parentElement.parentElement.classList.toggle("hover", false)
     text.classList.toggle("hasHover", false)
@@ -39,95 +48,94 @@ function handleMouseOut(e) {
 
 function handleMouseDown(e) {
   e.preventDefault()
-  isMouseDown = true
-  mouse.x = e.clientX
-  mouse.y = e.clientY
-  draggedList = e.currentTarget.parentElement
-  draggedList.parentElement.classList.toggle("hover", true)
+
+  if (isLinking()) {
+    addToLink(e.currentTarget.parentElement.parentElement)
+  } else {
+    isMouseDown = true
+    mouse.x = e.clientX
+    mouse.y = e.clientY
+    draggedList = e.currentTarget.parentElement
+    draggedList.parentElement.classList.toggle("hover", true)
+    const linkedSlips = getLinks(draggedList.parentElement)
+    linkedSlips.forEach(slip => {
+      slip.classList.toggle("hover", true)
+    })
+  }
 }
 
 function handleMouseMove(e) {
+  if (isLinking()) return
   if (!isMouseDown) return
   
   e.preventDefault()
-  // const slipType = draggedList.parentElement.classList.contains("slip-words") ? "words" : "lines"
-  let draggedListPos
-  // if (slipType === "words") {
-    draggedListPos = parseInt(getComputedStyle(draggedList).getPropertyValue("top").replace("px", ""))
-    draggedListPos -= (mouse.y - e.clientY)
-    draggedList.style.top = `${draggedListPos}px`
+  let draggedListPos = parseInt(getComputedStyle(draggedList).getPropertyValue("top").replace("px", ""))
+  draggedListPos -= (mouse.y - e.clientY)
+
+  const slipsToMove = [draggedList.parentElement, ...getLinks(draggedList.parentElement)]
+
+  slipsToMove.forEach(slip => {
+    const list = slip.querySelector(".list")
+
+    list.style.top = `${draggedListPos}px`
     mouse.y = e.clientY
-  // } else {
-  //   draggedListPos = parseInt(getComputedStyle(draggedList).getPropertyValue("left").replace("px", ""))
-  //   draggedListPos -= (mouse.x - e.clientX)
-  //   draggedList.style.left = `${draggedListPos}px`
-  //   mouse.x = e.clientX
-  // }
 
-  const listOptions = draggedList.querySelectorAll(".option")
-  // const targetOption = getNearestOption(listOptions, slipType, draggedListPos)
-  const targetOption = getNearestOption(listOptions, draggedListPos)
+    const listOptions = list.querySelectorAll(".option")
+    const targetOption = getNearestOption(listOptions, draggedListPos)
 
-  // remove stuff from current option
-  const currentOption = draggedList.querySelector(".current")
-  currentOption.classList.toggle("current", false)
-  currentOption.removeEventListener("mouseover", handleMouseOver)
-  currentOption.removeEventListener("mouseout", handleMouseOut)
-  currentOption.removeEventListener("mousedown", handleMouseDown)
+    // remove stuff from current option
+    const currentOption = list.querySelector(".current")
+    currentOption.classList.toggle("current", false)
+    currentOption.removeEventListener("mouseover", handleMouseOver)
+    currentOption.removeEventListener("mouseout", handleMouseOut)
+    currentOption.removeEventListener("mousedown", handleMouseDown)
 
-  // listOptions.forEach(option => option.classList.toggle("current", false))
-  targetOption.classList.toggle("current", true)
-  targetOption.parentElement.parentElement.style.width = `${targetOption.offsetWidth}px`
-  // if (slipType === "lines") {
-  //   targetOption.parentElement.parentElement.style.height = `${targetOption.offsetHeight}px`
-  // }
+    targetOption.classList.toggle("current", true)
+    targetOption.parentElement.parentElement.style.width = `${targetOption.offsetWidth}px`
+  })
 }
 
 function handleMouseUp(e) {
+  if (isLinking()) return
   if (!isMouseDown) return
   isMouseDown = false
   
-  // const slipType = draggedList.parentElement.classList.contains("slip-words") ? "words" : "lines"
-  let draggedListPos
-  // if (slipType === "words") {
-    draggedListPos = parseInt(getComputedStyle(draggedList).getPropertyValue("top").replace("px", ""))
-  // } else {
-  //   draggedListPos = parseInt(getComputedStyle(draggedList).getPropertyValue("left").replace("px", ""))
-  // }
-  const listOptions = draggedList.querySelectorAll(".option")
-  // const targetOption = getNearestOption(listOptions, slipType, draggedListPos)
-  const targetOption = getNearestOption(listOptions, draggedListPos)
+  let draggedListPos = parseInt(getComputedStyle(draggedList).getPropertyValue("top").replace("px", ""))
 
-  // set top
-  // if (slipType === "words") {
-    draggedList.style.top = `-${targetOption.offsetTop}px`
-  // } else {
-  //   draggedList.style.left = `-${targetOption.offsetLeft}px`
-  // }
+  const slipsToMove = [draggedList.parentElement, ...getLinks(draggedList.parentElement)]
+  slipsToMove.forEach(slip => {
+    const list = slip.querySelector(".list")
 
-  // cancel hover
-  draggedList.parentElement.classList.toggle("hover", false)
+    const listOptions = list.querySelectorAll(".option")
+    const targetOption = getNearestOption(listOptions, draggedListPos)
 
-  // remove stuff from current option
-  const currentOption = draggedList.querySelector(".current")
-  currentOption.classList.toggle("current", false)
-  currentOption.removeEventListener("mouseover", handleMouseOver)
-  currentOption.removeEventListener("mouseout", handleMouseOut)
-  currentOption.removeEventListener("mousedown", handleMouseDown)
+    // set top
+    list.style.top = `-${targetOption.offsetTop}px`
 
-  // set new current option
-  targetOption.classList.toggle("current", true)
-  targetOption.addEventListener("mouseover", handleMouseOver)
-  targetOption.addEventListener("mouseout", handleMouseOut)
-  targetOption.addEventListener("mousedown", handleMouseDown)
+    // cancel hover
+    list.parentElement.classList.toggle("hover", false)
 
-  // account for regex
-  if (showRegexBtn.checked) {
-    targetOption.parentElement.parentElement.style.width = "auto"
-    console.log(targetOption.parentElement.parentElement)
-  }
+    // remove stuff from current option
+    const currentOption = list.querySelector(".current")
+    currentOption.classList.toggle("current", false)
+    currentOption.removeEventListener("mouseover", handleMouseOver)
+    currentOption.removeEventListener("mouseout", handleMouseOut)
+    currentOption.removeEventListener("mousedown", handleMouseDown)
 
-  text.classList.toggle("hasHover", false)
+    // set new current option
+    targetOption.classList.toggle("current", true)
+    targetOption.addEventListener("mouseover", handleMouseOver)
+    targetOption.addEventListener("mouseout", handleMouseOut)
+    targetOption.addEventListener("mousedown", handleMouseDown)
+
+    // account for regex
+    if (showRegexBtn.checked) {
+      targetOption.parentElement.parentElement.style.width = "auto"
+      console.log(targetOption.parentElement.parentElement)
+    }
+
+    text.classList.toggle("hasHover", false)
+  })
 }
 
 // function getNearestOption(listOptions, slipType, draggedListPos) {
@@ -183,6 +191,10 @@ function generate() {
       slip.style.width = `${chosenOption.offsetWidth}px`
     }
   })
+}
+
+function isLinking() {
+  return document.body.classList.contains("is-linking")
 }
 
 export { initSlips }
