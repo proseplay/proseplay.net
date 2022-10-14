@@ -262,7 +262,12 @@ function snapshot() {
     let lineText = ""
     nodes.forEach(node => {
       if (node.nodeName === "#text") {
-        lineText += node.textContent.trim()
+        const nodeText = node.textContent.trim()
+        const punctuation = /[.,!?]/g
+        if (punctuation.test(nodeText.slice(0, 1))) {
+          lineText = lineText.slice(0, lineText.length - 1)
+        }
+        lineText += nodeText
       } else if (node.nodeName === "DIV") {
         const current = node.querySelector(".current")
         if (lineText !== "") {
