@@ -9,6 +9,10 @@ class Slip {
   choices: Choice[];
   currentChoice: Choice | undefined;
 
+  isHoverable: boolean;
+  isHovered: boolean;
+  isDragged: boolean;
+
   static {
     Slip.template = document.createElement("div");
     Slip.template.classList.add("slip", "slip-words");
@@ -17,12 +21,19 @@ class Slip {
   constructor(parent: HTMLElement) {
     this.el = Slip.template.cloneNode(true) as HTMLElement;
     parent.appendChild(this.el);
+    this.el.addEventListener("mouseover", this.handleMouseOver);
+    this.el.addEventListener("mousedown", this.handleMouseDown);
+    this.el.addEventListener("mouseout", this.handleMouseOut);
 
     this.listEl = document.createElement("div");
     this.listEl.classList.add("list");
     this.el.append(this.listEl);
 
     this.choices = [];
+
+    this.isHoverable = true;
+    this.isHovered = false;
+    this.isDragged = false;
   }
 
   addChoice(choice: Choice): void {
@@ -78,6 +89,44 @@ class Slip {
 
     this.listEl.style.transition = "top 0.15s ease-in-out, left 0.15s ease-in-out";
     setTimeout(() => this.listEl.style.transition = "", TRANSITION_TIME);
+    this.listEl.style.top = `-${choice.offsetTop}px`;
+  }
+
+  handleMouseOver = (e: MouseEvent): void => {
+    if (!this.isHoverable) return;
+
+    const target = e.target as HTMLElement;
+    if (!target.classList.contains("current")) return;
+
+    this.isHovered = true;
+    this.el.classList.add("hover");
+  }
+
+  handleMouseDown = (e: MouseEvent): void => {
+    if (!this.isHoverable) return;
+
+    this.isHovered = true;
+    this.isDragged = true;
+  }
+
+  handleMouseOut = (e: MouseEvent): void => {
+    if (this.isDragged) return;
+    this.isHovered = false;
+    this.isDragged = false;
+    this.el.classList.remove("hover");
+  }
+
+  handleMouseUp = (e: MouseEvent): void => {
+    this.snapToNearestChoice();
+    this.isHovered = false;
+    this.isDragged = false;
+    this.el.classList.remove("hover");
+  }
+
+  snapToNearestChoice(): void {
+    const choice = this.getNearestChoice(this.top);
+    if (!choice) return;
+    this.activateChoice(choice);
     this.listEl.style.top = `-${choice.offsetTop}px`;
   }
 }

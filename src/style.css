@@ -114,7 +114,9 @@ main {
 }
 
 .text.hasHover,
-.hasHover .slip:not(.hover) .current {
+.hasHover .slip:not(.hover) .current,
+.text.has-hover,
+.has-hover .slip:not(.hover) .current {
   color: rgba(0,0,0,0.1);
 }
 
@@ -165,6 +167,7 @@ main {
   position: relative;
   /* margin-bottom: -0.3em; */
   transition: width 0.15s ease-in-out;
+  user-select: none;
 }
 
 /* .view-visual .slip {

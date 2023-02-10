@@ -15,15 +15,18 @@ class ProsePlay {
   private slips: Slip[];
 
   private mouse: {x: number, y: number};
+  private isMouseDown: boolean;
   private draggedSlip: Slip | null;
 
   constructor(el: HTMLElement) {
     this.el = el;
     this.slips = [];
-
-    this.mouse = {x: 0, y: 0};
-    this.draggedSlip = null;
     
+    this.mouse = {x: 0, y: 0};
+    this.isMouseDown = false;
+    this.draggedSlip = null;
+
+    document.addEventListener("mousedown", this.handleMouseDown);
     document.addEventListener("mousemove", this.handleMouseMove);
     document.addEventListener("mouseup", this.handleMouseUp);
   }
@@ -81,30 +84,55 @@ class ProsePlay {
     });
   }
 
-  handleMouseMove(e: MouseEvent): void {
-    if (!this.draggedSlip) return;
-    
-    e.preventDefault();
-  
-    let draggedSlipPos = this.draggedSlip.top;
-    draggedSlipPos -= (this.mouse.y - e.clientY);
-    this.mouse.y = e.clientY;
-    this.draggedSlip.slideTo(draggedSlipPos);
-  }
-  
-  handleMouseUp(e: MouseEvent): void {
-    if (!this.draggedSlip) return;
-
-    const draggedSlipPos = this.draggedSlip.top;
-    this.draggedSlip.slideTo(draggedSlipPos);
-
-    // cancel hover
-    this.draggedSlip.noHover();
-    this.el.classList.toggle("hasHover", false);
-  }
-
   generate() {
     this.slips.forEach(slip => slip.random());
+  }
+
+  handleMouseDown = (e: MouseEvent): void => {
+    this.isMouseDown = true;
+    this.mouse.x = e.clientX;
+    this.mouse.y = e.clientY;
+
+    this.slips.forEach(slip => {
+      if (slip.isDragged) {
+        this.draggedSlip = slip;
+      }
+    });
+
+    if (this.draggedSlip) {
+      this.slips.forEach(slip => {
+        slip.isHoverable = false;
+      });
+    }
+  }
+
+  handleMouseMove = (e: MouseEvent): void => {
+    e.preventDefault();
+
+    if (!this.isMouseDown) {
+      let hasHover = false;
+      this.slips.forEach(slip => {
+        if (slip.isHovered) {
+          hasHover = true;
+        }
+      });
+      this.el.classList.toggle("has-hover", hasHover);
+      return;
+    }
+
+    if (!this.draggedSlip) return;
+    let draggedListPos = this.draggedSlip.top;
+    draggedListPos -= (this.mouse.y - e.clientY);
+    this.mouse.y = e.clientY;
+    this.draggedSlip.slideTo(draggedListPos);
+  }
+
+  handleMouseUp = (e: MouseEvent): void => {
+    this.isMouseDown = false;
+    this.el.classList.remove("has-hover");
+    if (!this.draggedSlip) return;
+    this.draggedSlip.handleMouseUp(e);
+    this.slips.forEach(slip => slip.isHoverable = true);
   }
 }
 
