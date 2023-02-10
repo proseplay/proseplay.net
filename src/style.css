@@ -78,7 +78,7 @@ label {
   cursor: pointer;
 }
 
-#newOptionInput {
+#newChoiceInput {
   font-size: 24px;
   outline: 0;
   border: 0;
@@ -210,7 +210,7 @@ main {
   overflow: visible;
 } */
 
-.option {
+.choice {
   opacity: 0;
   color: #999;
   transition: opacity 0.15s ease-in-out;
@@ -222,15 +222,15 @@ main {
   padding-top: 0.25em;
 }
 
-/* .slip-words .option {
+/* .slip-words .choice {
   padding: 5px 0;
 }
 
-.slip-lines .option {
+.slip-lines .choice {
   padding: 0 5px;
 } */
 
-.slip.hover .option {
+.slip.hover .choice {
   opacity: 1;
 }
 
@@ -315,7 +315,7 @@ main {
   background-color: #797979;
 }
 
-#newOptionInput {
+#newChoiceInput {
   position: absolute;
 }
 
