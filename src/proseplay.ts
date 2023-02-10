@@ -63,7 +63,7 @@ class ProsePlay {
     this.constructText(textTokens);
   }
   
-  constructText(text: TokenizedText): void {
+  private constructText(text: TokenizedText): void {
     this.el.innerHTML = "";
     text.forEach(line => {
       const lineEl = lineTemplate.cloneNode(true) as HTMLElement;
@@ -88,7 +88,7 @@ class ProsePlay {
     this.slips.forEach(slip => slip.random());
   }
 
-  handleMouseDown = (e: MouseEvent): void => {
+  private handleMouseDown = (e: MouseEvent): void => {
     this.isMouseDown = true;
     this.mouse.x = e.clientX;
     this.mouse.y = e.clientY;
@@ -106,7 +106,7 @@ class ProsePlay {
     }
   }
 
-  handleMouseMove = (e: MouseEvent): void => {
+  private handleMouseMove = (e: MouseEvent): void => {
     e.preventDefault();
 
     if (!this.isMouseDown) {
@@ -127,7 +127,7 @@ class ProsePlay {
     this.draggedSlip.slideTo(draggedListPos);
   }
 
-  handleMouseUp = (e: MouseEvent): void => {
+  private handleMouseUp = (e: MouseEvent): void => {
     this.isMouseDown = false;
     this.el.classList.remove("has-hover");
     if (!this.draggedSlip) return;

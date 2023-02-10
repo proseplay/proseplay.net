@@ -48,6 +48,16 @@ class Slip {
     this.el.style.width = `${choice.el.offsetWidth}px`;
   }
 
+  random(): void {
+    const randomIndex = Math.floor(Math.random() * this.choices.length);
+    const choice = this.choices[randomIndex];
+    this.activateChoice(choice);
+
+    this.listEl.style.transition = "top 0.15s ease-in-out, left 0.15s ease-in-out";
+    setTimeout(() => this.listEl.style.transition = "", TRANSITION_TIME);
+    this.listEl.style.top = `-${choice.offsetTop}px`;
+  }
+
   slideTo(yPos: number): void {
     this.listEl.style.top = `${yPos}px`;
 
@@ -57,7 +67,7 @@ class Slip {
     this.activateChoice(targetChoice);
   }
 
-  getNearestChoice(yPos: number): Choice | null {
+  private getNearestChoice(yPos: number): Choice | null {
     let minDist = Infinity;
     let targetChoice: Choice | null = null;
     this.choices.forEach(choice => {
@@ -70,26 +80,15 @@ class Slip {
     return targetChoice;
   }
 
+  private snapToNearestChoice(): void {
+    const choice = this.getNearestChoice(this.top);
+    if (!choice) return;
+    this.activateChoice(choice);
+    this.listEl.style.top = `-${choice.offsetTop}px`;
+  }
+
   get top(): number {
     return parseInt(getComputedStyle(this.listEl).getPropertyValue("top").replace("px", ""));
-  }
-
-  hover(): void {
-    this.el.classList.add("hover");
-  }
-
-  noHover(): void {
-    this.el.classList.remove("hover");
-  }
-
-  random(): void {
-    const randomIndex = Math.floor(Math.random() * this.choices.length);
-    const choice = this.choices[randomIndex];
-    this.activateChoice(choice);
-
-    this.listEl.style.transition = "top 0.15s ease-in-out, left 0.15s ease-in-out";
-    setTimeout(() => this.listEl.style.transition = "", TRANSITION_TIME);
-    this.listEl.style.top = `-${choice.offsetTop}px`;
   }
 
   handleMouseOver = (e: MouseEvent): void => {
@@ -121,13 +120,6 @@ class Slip {
     this.isHovered = false;
     this.isDragged = false;
     this.el.classList.remove("hover");
-  }
-
-  snapToNearestChoice(): void {
-    const choice = this.getNearestChoice(this.top);
-    if (!choice) return;
-    this.activateChoice(choice);
-    this.listEl.style.top = `-${choice.offsetTop}px`;
   }
 }
 
