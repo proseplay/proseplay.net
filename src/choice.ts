@@ -5,8 +5,8 @@ class Choice {
   isCurrent: boolean;
 
   static {
-    Choice.template = document.querySelector(".choice") as HTMLElement;
-    Choice.template.remove();
+    Choice.template = document.createElement("div");
+    Choice.template.classList.add("choice");
   }
 
   constructor(text: string) {
@@ -25,6 +25,10 @@ class Choice {
   deactivate() {
     this.isCurrent = false;
     this.el.classList.remove("current");
+  }
+
+  get offsetTop(): number {
+    return this.el.offsetTop;
   }
 }
 

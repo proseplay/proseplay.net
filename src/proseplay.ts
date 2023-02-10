@@ -7,14 +7,25 @@ type Token = string | string[];
 type TokenizedLine = Token[];
 type TokenizedText = TokenizedLine[];
 
-const lineTemplate = document.querySelector(".line") as HTMLElement;
-lineTemplate.remove();
+const lineTemplate = document.createElement("div");
+lineTemplate.classList.add("line");
 
 class ProsePlay {
   private el: HTMLElement;
+  private slips: Slip[];
+
+  private mouse: {x: number, y: number};
+  private draggedSlip: Slip | null;
 
   constructor(el: HTMLElement) {
     this.el = el;
+    this.slips = [];
+
+    this.mouse = {x: 0, y: 0};
+    this.draggedSlip = null;
+    
+    document.addEventListener("mousemove", this.handleMouseMove);
+    document.addEventListener("mouseup", this.handleMouseUp);
   }
 
   loadSample(name: "homophones" | "hypothetically" | "dickinson" | "carpenter"): void {
@@ -59,6 +70,7 @@ class ProsePlay {
           lineEl.append(document.createTextNode(token));
         } else {
           const slip = new Slip(lineEl);
+          this.slips.push(slip);
           token.forEach(str => slip.addChoice(new Choice(str)));
           slip.activateChoice(slip.choices[0]);
         }
@@ -67,6 +79,32 @@ class ProsePlay {
         lineEl.innerHTML = "&nbsp;";
       }
     });
+  }
+
+  handleMouseMove(e: MouseEvent): void {
+    if (!this.draggedSlip) return;
+    
+    e.preventDefault();
+  
+    let draggedSlipPos = this.draggedSlip.top;
+    draggedSlipPos -= (this.mouse.y - e.clientY);
+    this.mouse.y = e.clientY;
+    this.draggedSlip.slideTo(draggedSlipPos);
+  }
+  
+  handleMouseUp(e: MouseEvent): void {
+    if (!this.draggedSlip) return;
+
+    const draggedSlipPos = this.draggedSlip.top;
+    this.draggedSlip.slideTo(draggedSlipPos);
+
+    // cancel hover
+    this.draggedSlip.noHover();
+    this.el.classList.toggle("hasHover", false);
+  }
+
+  generate() {
+    this.slips.forEach(slip => slip.random());
   }
 }
 
