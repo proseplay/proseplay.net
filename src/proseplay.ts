@@ -1,4 +1,4 @@
-import "./style.css";
+import "./proseplay.css";
 
 import { Slip } from "./slip";
 import { Choice } from "./choice";
@@ -20,6 +20,7 @@ class ProsePlay {
 
   constructor(el: HTMLElement) {
     this.el = el;
+    this.el.classList.add("proseplay")
     this.slips = [];
     
     this.mouse = {x: 0, y: 0};

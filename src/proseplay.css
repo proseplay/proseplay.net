@@ -1,0 +1,77 @@
+.proseplay {
+  line-height: 1.5;
+}
+
+.proseplay.has-hover,
+.proseplay.has-hover .slip:not(.hover) .current {
+  color: rgba(0,0,0,0.1);
+}
+
+/* LINES */
+
+.proseplay .line {
+  position: relative;
+}
+
+.proseplay .line.comment {
+  font-style: italic;
+  color: #999;
+}
+
+/* SLIP */
+
+.proseplay .slip {
+  display: inline-block;
+  box-shadow: inset 1px 1px 5px rgba(0,0,0,0.15);
+  border-radius: 5px;
+  position: relative;
+  transition: width 0.15s ease-in-out;
+  user-select: none;
+}
+
+.proseplay .slip-words {
+  height: 1.3em;
+  padding: 0 5px;
+  margin-bottom: -0.35em;
+}
+
+/* LIST */
+
+.proseplay .list {
+  position: absolute;
+  display: flex;
+  top: 0;
+  left: 5px;
+  height: 100%;
+}
+
+.proseplay .slip-words .list {
+  flex-direction: column;
+}
+
+.proseplay .choice {
+  opacity: 0;
+  color: #999;
+  transition: opacity 0.15s ease-in-out;
+  width: max-content;
+  line-height: 1;
+  padding-top: 0.25em;
+}
+
+.proseplay .slip.hover .choice {
+  opacity: 1;
+}
+
+.proseplay .current {
+  opacity: 1;
+  color: #000;
+  z-index: 1;
+}
+
+.proseplay .slip-words .current {
+  cursor: ns-resize;
+}
+
+.proseplay .comment .current {
+  color: #999;
+}
