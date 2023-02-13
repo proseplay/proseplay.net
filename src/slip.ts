@@ -15,7 +15,7 @@ class Slip {
 
   static {
     Slip.template = document.createElement("div");
-    Slip.template.classList.add("slip", "slip-words");
+    Slip.template.classList.add("slip");
   }
 
   constructor(parent: HTMLElement) {

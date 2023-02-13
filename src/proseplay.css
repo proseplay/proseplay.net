@@ -27,9 +27,6 @@
   position: relative;
   transition: width 0.15s ease-in-out;
   user-select: none;
-}
-
-.proseplay .slip-words {
   height: 1.3em;
   padding: 0 5px;
   margin-bottom: -0.35em;
@@ -40,13 +37,10 @@
 .proseplay .list {
   position: absolute;
   display: flex;
+  flex-direction: column;
   top: 0;
   left: 5px;
   height: 100%;
-}
-
-.proseplay .slip-words .list {
-  flex-direction: column;
 }
 
 .proseplay .choice {
@@ -66,9 +60,6 @@
   opacity: 1;
   color: #000;
   z-index: 1;
-}
-
-.proseplay .slip-words .current {
   cursor: ns-resize;
 }
 
