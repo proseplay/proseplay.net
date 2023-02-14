@@ -38,7 +38,7 @@ class ProsePlay {
       .then(text => this.parseText(text));
   }
 
-  parseText(str: string): void {
+  parseText(str: string): ProsePlay {
     str = str.trim();
     console.log(str);
     let textTokens: TokenizedText = [];
@@ -64,6 +64,8 @@ class ProsePlay {
     console.log(textTokens);
   
     this.constructText(textTokens);
+
+    return this;
   }
   
   private constructText(text: TokenizedText): void {
