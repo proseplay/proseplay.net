@@ -27,7 +27,8 @@ class ProsePlay {
     this.isMouseDown = false;
     this.draggedWindow = null;
 
-    document.addEventListener("mousedown", this.handleMouseDown);
+    this.el.addEventListener("click", this.handleClick);
+    this.el.addEventListener("mousedown", this.handleMouseDown);
     document.addEventListener("mousemove", this.handleMouseMove);
     document.addEventListener("mouseup", this.handleMouseUp);
   }
@@ -122,7 +123,15 @@ class ProsePlay {
     return this;
   }
 
-  private handleMouseDown = (e: MouseEvent): void => {
+  private handleClick = (e: MouseEvent): void => {
+    if (this.draggedWindow) {
+      e.preventDefault();
+    }
+  }
+
+  private handleMouseDown = (e: MouseEvent): boolean => {
+    e.preventDefault();
+
     this.isMouseDown = true;
     this.mouse.x = e.clientX;
     this.mouse.y = e.clientY;
@@ -138,9 +147,11 @@ class ProsePlay {
         window.isHoverable = false;
       });
     }
+
+    return false;
   }
 
-  private handleMouseMove = (e: MouseEvent): void => {
+  private handleMouseMove = (e: MouseEvent): boolean => {
     e.preventDefault();
 
     if (!this.isMouseDown) {
@@ -151,23 +162,27 @@ class ProsePlay {
         }
       });
       this.el.classList.toggle("proseplay-has-hover", hasHover);
-      return;
+      return false;
     }
 
-    if (!this.draggedWindow) return;
+    if (!this.draggedWindow) return false;
     let draggedListPos = this.draggedWindow.top;
     draggedListPos -= (this.mouse.y - e.clientY);
     this.mouse.y = e.clientY;
     this.draggedWindow.slideTo(draggedListPos);
+
+    return false;
   }
 
-  private handleMouseUp = (): void => {
+  private handleMouseUp = (e: MouseEvent): boolean => {
+    e.preventDefault();
     this.isMouseDown = false;
     this.el.classList.remove("proseplay-has-hover");
     this.windows.forEach(window => window.isHoverable = true);
-    if (!this.draggedWindow) return;
-    this.draggedWindow.handleMouseUp();
+    if (!this.draggedWindow) return false;
+    this.draggedWindow.handleMouseUp(e);
     this.draggedWindow = null;
+    return false;
   }
 }
 

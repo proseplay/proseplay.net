@@ -101,11 +101,15 @@ class Window {
     this.el.classList.add("proseplay-hover");
   }
 
-  handleMouseDown = (): void => {
-    if (!this.isHoverable) return;
+  handleMouseDown = (e: MouseEvent): boolean => {
+    e.preventDefault();
+
+    if (!this.isHoverable) return false;
 
     this.isHovered = true;
     this.isDragged = true;
+
+    return false;
   }
 
   handleMouseOut = (): void => {
@@ -115,11 +119,14 @@ class Window {
     this.el.classList.remove("proseplay-hover");
   }
 
-  handleMouseUp = (): void => {
+  handleMouseUp = (e: MouseEvent): boolean => {
+    e.preventDefault();
+    
     this.snapToNearestChoice();
     this.isHovered = false;
     this.isDragged = false;
     this.el.classList.remove("proseplay-hover");
+    return false;
   }
 }
 
