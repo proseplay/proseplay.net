@@ -32,10 +32,25 @@ class ProsePlay {
     document.addEventListener("mouseup", this.handleMouseUp);
   }
 
-  loadSample(name: "homophones" | "hypothetically" | "dickinson" | "carpenter"): void {
+  private static createInstance(): ProsePlay {
+    const container = document.createElement("div");
+    container.classList.add("proseplay");
+    document.body.appendChild(container);
+    const pp = new ProsePlay(container);
+    return pp;
+  }
+
+  loadSample(name: "homophones" | "hypothetically" | "dickinson" | "carpenter"): ProsePlay {
     fetch(`/samples/${name}.txt`)
       .then(r => r.text())
       .then(text => this.parseText(text));
+    return this;
+  }
+
+  static loadSample(name: "homophones" | "hypothetically" | "dickinson" | "carpenter"): ProsePlay {
+    const pp = ProsePlay.createInstance();
+    pp.loadSample(name);
+    return pp;
   }
 
   parseText(str: string): ProsePlay {
@@ -67,6 +82,12 @@ class ProsePlay {
 
     return this;
   }
+
+  static parseText(str: string): ProsePlay {
+    const pp = ProsePlay.createInstance();
+    pp.parseText(str);
+    return pp;
+  }
   
   private constructText(text: TokenizedText): void {
     this.el.innerHTML = "";
@@ -91,6 +112,7 @@ class ProsePlay {
 
   generate() {
     this.slips.forEach(slip => slip.random());
+    return this;
   }
 
   private handleMouseDown = (e: MouseEvent): void => {
