@@ -53,7 +53,7 @@ class ProsePlay {
         lineTokens.push(split);
         currIndex = (match.index as number) + match[0].length;
       }
-      if (currIndex < line.length - 1) {
+      if (currIndex < line.length) {
         lineTokens.push(line.slice(currIndex));
       }
       textTokens.push(lineTokens);
