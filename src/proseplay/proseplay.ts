@@ -44,12 +44,13 @@ class ProsePlay {
     let lines = str.split("\n");
     lines.forEach(line => {
       const lineTokens: TokenizedLine = [];
-      let m = line.matchAll(/\(([^(|)]+\|?)+\)/g);
+      let m = line.matchAll(/\(([^(|)]*\|?)+\)/g);
       let currIndex = 0;
       for (const match of m) {
         let prevStr = line.slice(currIndex, match.index);
         lineTokens.push(prevStr);
-        let split = match[0].split(/[(|)]/).filter(x => x);
+        let split = match[0].split(/[(|)]/);
+        split = split.filter(x => x);
         lineTokens.push(split);
         currIndex = (match.index as number) + match[0].length;
       }

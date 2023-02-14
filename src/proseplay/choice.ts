@@ -14,7 +14,11 @@ class Choice {
     this.isCurrent = false;
 
     this.el = Choice.template.cloneNode(true) as HTMLElement;
-    this.el.innerText = text;
+    if (text !== " ") {
+      this.el.innerText = text;
+    } else {
+      this.el.innerHTML = "&hairsp;";
+    }
   }
 
   activate() {
