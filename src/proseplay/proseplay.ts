@@ -60,7 +60,7 @@ class ProsePlay {
     let lines = str.split("\n");
     lines.forEach(line => {
       const lineTokens: TokenizedLine = [];
-      let m = line.matchAll(/\(([^(|)]*\|?)+\)/g);
+      let m = line.matchAll(/\(([^(|)]+\|)([^(|)]+\|?)+\)/g);
       let currIndex = 0;
       for (const match of m) {
         const index = match.index as number;
