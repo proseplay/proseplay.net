@@ -1,6 +1,6 @@
 import "./style.css";
 
-import { ProsePlay } from "./proseplay";
+import { ProsePlay } from "./proseplay/proseplay";
 
 const textEl = document.querySelector(".text") as HTMLElement;
 const pp = new ProsePlay(textEl);
