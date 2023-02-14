@@ -2,7 +2,7 @@ import { Choice } from "./choice";
 
 const TRANSITION_TIME = 15;
 
-class Slip {
+class Window {
   static template: HTMLElement;
   el: HTMLElement;
   listEl: HTMLElement;
@@ -14,12 +14,12 @@ class Slip {
   isDragged: boolean;
 
   static {
-    Slip.template = document.createElement("div");
-    Slip.template.classList.add("proseplay-slip");
+    Window.template = document.createElement("div");
+    Window.template.classList.add("proseplay-window");
   }
 
   constructor(parent: HTMLElement) {
-    this.el = Slip.template.cloneNode(true) as HTMLElement;
+    this.el = Window.template.cloneNode(true) as HTMLElement;
     parent.appendChild(this.el);
     this.el.addEventListener("mouseover", this.handleMouseOver);
     this.el.addEventListener("mousedown", this.handleMouseDown);
@@ -123,4 +123,4 @@ class Slip {
   }
 }
 
-export { Slip }
+export { Window }

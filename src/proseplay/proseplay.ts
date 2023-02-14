@@ -1,6 +1,6 @@
 import "./proseplay.css";
 
-import { Slip } from "./slip";
+import { Window } from "./window";
 import { Choice } from "./choice";
 
 type Token = string | string[];
@@ -12,20 +12,20 @@ lineTemplate.classList.add("proseplay-line");
 
 class ProsePlay {
   private el: HTMLElement;
-  private slips: Slip[];
+  private windows: Window[];
 
   private mouse: {x: number, y: number};
   private isMouseDown: boolean;
-  private draggedSlip: Slip | null;
+  private draggedWindow: Window | null;
 
   constructor(el: HTMLElement) {
     this.el = el;
     this.el.classList.add("proseplay")
-    this.slips = [];
+    this.windows = [];
     
     this.mouse = {x: 0, y: 0};
     this.isMouseDown = false;
-    this.draggedSlip = null;
+    this.draggedWindow = null;
 
     document.addEventListener("mousedown", this.handleMouseDown);
     document.addEventListener("mousemove", this.handleMouseMove);
@@ -105,10 +105,10 @@ class ProsePlay {
         if (typeof token === "string") {
           lineEl.append(document.createTextNode(token));
         } else {
-          const slip = new Slip(lineEl);
-          this.slips.push(slip);
-          token.forEach(str => slip.addChoice(new Choice(str)));
-          slip.activateChoice(slip.choices[0]);
+          const window = new Window(lineEl);
+          this.windows.push(window);
+          token.forEach(str => window.addChoice(new Choice(str)));
+          window.activateChoice(window.choices[0]);
         }
       });
       if (line.length === 0) {
@@ -118,7 +118,7 @@ class ProsePlay {
   }
 
   generate() {
-    this.slips.forEach(slip => slip.random());
+    this.windows.forEach(window => window.random());
     return this;
   }
 
@@ -127,15 +127,15 @@ class ProsePlay {
     this.mouse.x = e.clientX;
     this.mouse.y = e.clientY;
 
-    this.slips.forEach(slip => {
-      if (slip.isDragged) {
-        this.draggedSlip = slip;
+    this.windows.forEach(window => {
+      if (window.isDragged) {
+        this.draggedWindow = window;
       }
     });
 
-    if (this.draggedSlip) {
-      this.slips.forEach(slip => {
-        slip.isHoverable = false;
+    if (this.draggedWindow) {
+      this.windows.forEach(window => {
+        window.isHoverable = false;
       });
     }
   }
@@ -145,8 +145,8 @@ class ProsePlay {
 
     if (!this.isMouseDown) {
       let hasHover = false;
-      this.slips.forEach(slip => {
-        if (slip.isHovered) {
+      this.windows.forEach(window => {
+        if (window.isHovered) {
           hasHover = true;
         }
       });
@@ -154,20 +154,20 @@ class ProsePlay {
       return;
     }
 
-    if (!this.draggedSlip) return;
-    let draggedListPos = this.draggedSlip.top;
+    if (!this.draggedWindow) return;
+    let draggedListPos = this.draggedWindow.top;
     draggedListPos -= (this.mouse.y - e.clientY);
     this.mouse.y = e.clientY;
-    this.draggedSlip.slideTo(draggedListPos);
+    this.draggedWindow.slideTo(draggedListPos);
   }
 
   private handleMouseUp = (): void => {
     this.isMouseDown = false;
     this.el.classList.remove("proseplay-has-hover");
-    this.slips.forEach(slip => slip.isHoverable = true);
-    if (!this.draggedSlip) return;
-    this.draggedSlip.handleMouseUp();
-    this.draggedSlip = null;
+    this.windows.forEach(window => window.isHoverable = true);
+    if (!this.draggedWindow) return;
+    this.draggedWindow.handleMouseUp();
+    this.draggedWindow = null;
   }
 }
 

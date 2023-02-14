@@ -1,7 +1,7 @@
 .proseplay {
   line-height: 1.5;
 
-  .proseplay-slip {
+  .proseplay-window {
     display: inline-block;
     box-shadow: inset .05em .05em .2em rgba(0,0,0,0.15);
     border-radius: .2em;
@@ -59,7 +59,7 @@
 
   &.proseplay-has-hover {
     color: rgba(0,0,0,0.1);
-    .proseplay-slip:not(.proseplay-hover) {
+    .proseplay-window:not(.proseplay-hover) {
       .proseplay-current {
         color: rgba(0,0,0,0.1);      
       }
