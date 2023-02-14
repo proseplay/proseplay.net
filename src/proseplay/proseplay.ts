@@ -63,12 +63,19 @@ class ProsePlay {
       let m = line.matchAll(/\(([^(|)]*\|?)+\)/g);
       let currIndex = 0;
       for (const match of m) {
-        let prevStr = line.slice(currIndex, match.index);
-        lineTokens.push(prevStr);
-        let split = match[0].split(/[(|)]/);
-        split = split.filter(x => x);
-        lineTokens.push(split);
-        currIndex = (match.index as number) + match[0].length;
+        const index = match.index as number;
+        let isEscaped = line[index - 1] === "\\";
+        if (isEscaped) {
+          lineTokens.push(line.slice(currIndex, index - 1));
+          lineTokens.push(line.slice(index, index + match[0].length));
+        } else {
+          let prevStr = line.slice(currIndex, index);
+          lineTokens.push(prevStr);
+          let split = match[0].split(/[(|)]/);
+          split = split.filter(x => x);
+          lineTokens.push(split);
+        }
+        currIndex = index + match[0].length;
       }
       if (currIndex < line.length) {
         lineTokens.push(line.slice(currIndex));
