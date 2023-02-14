@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>prose play</title>
+</head>
+<body>
+  <header>
+    <h1 class="title"><a href="/">ProsePlay</a></h1>
+    <nav class="nav">
+      <ul>
+        <li><a href="/docs">Docs</a></li>
+        <li><a href="/playground">Playground</a></li>
+        <li><a href="https://github.com/whykatherine/prose-play">Source</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <div>
+      <h1>Docs</h1>
+    </div>
+    <div>
+      <h2>Development</h2>
+      <pre><code>npm install
+npm run dev</code></pre>
+    </div>
+    <div>
+      <h2>Usage</h2>
+      <p>First, import the library.</p>
+      <pre><code>import { ProsePlay } from "./proseplay/proseplay";</code></pre>
+      <p>The fastest way to see what this library does is to load up a sample text.</p>
+      <pre><code>ProsePlay.loadSample("dickinson");</code></pre>
+      <p>Making sure that we've run <code>npm run dev</code>, we can go to the specified server (open <code>localhost:5173</code> in a browser) and see an interactive poem.</p>
+      <p>Let's try something more creative! ProsePlay can take your formatted poem and turn it into the same kind of interactive experience.</p>
+      <p><i>Note: There are two main approaches to calling ProsePlay—the static method and the non-static method. These examples will focus on the static methods for brevity, but the non-static methods are given in comments in case you want to control where the poem goes on the page.</i></p>
+      <pre><code>const poem = `this is (my|your|our)
+very (lovely|cool|weird)
+(poem|experience)`;
+ProsePlay.parseText(poem);
+
+// // non-static
+// const container = document.querySelector(".text");
+// const pp = new ProsePlay(container);
+// pp.parseText(poem);</code></pre>
+      <p>Opening the page, you should see how the parentheses and vertical bars have allowed ProsePlay to transform the poem.</p>
+      <p>You can now add your own CSS styles to position and shape the container, as well as change things like font family, font size, and line height. Beyond those properties, it may take some trial and error to get the intended effects.</p>
+      <p><i>Note: the auto-reloading functionality of the framework used here means that spacing issues can sometimes be fixed if you give the page a quick reload.</i></p>
+      <p>You can also have multiple ProsePlay poems running on the page, like this:</p>
+      <pre><code>const poem1 = `this is (my|your|our)
+(lovely|cool|weird)
+(poem|experience)`;
+const poem2 = `let us (read|write|play)`;
+ProsePlay.parseText(poem1);
+ProsePlay.parseText(poem2);
+
+// // non-static
+// const poems = [poem1, poem2];
+// const containers = document.querySelectorAll(".text");
+// containers.forEach((container, i) => {
+//   const pp = new ProsePlay(container);
+//   pp.parseText(poems[i]);
+// });</code></pre>
+    </div>
+    <div>
+      <h2>Syntax</h2>
+      <p>A window is denoted by a pair of parentheses that contains two or more choices within, delimited by a vertical bar, or pipe. In the line <code>this is (my|your|our)</code>, there are three choices: “my”, “your”, and “our”. The choices can be multi-word strings containing spaces (but not line breaks), such as <code>(foundering faces|gentle spaces)</code>, which are the two choices “foundering faces” and “gentle spaces”. You can also include an empty choice. For example: <code>my dream job is (poet|artist|astronaut| )</code>, which breaks out into “poet”, “artist”, “astronaut”, and an empty choice denoted by the space.</p>
+      <p>The first item in the list is the default choice—i.e. the one that shows before you begin interacting with the window.</p>
+      <p>To escape a window (i.e. to leave it as text and not make it interactive), insert a backslash before the opening parentheses. For example, to escape the window in the string <code>this is (my|your|our)</code>, write <code>this is \(my|your|our)</code>.</p>
+    </div>
+  </main>
+  <footer>
+    <a href="https://whykatherine.github.io"><img src="/logo.svg" alt="Logo" class="logo" width="20" height="20"></a>
+  </footer>
+
+  <script type="module" src="/src/playground.ts"></script>
+</body>
+</html>
