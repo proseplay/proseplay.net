@@ -15,7 +15,7 @@ class Slip {
 
   static {
     Slip.template = document.createElement("div");
-    Slip.template.classList.add("slip");
+    Slip.template.classList.add("proseplay-slip");
   }
 
   constructor(parent: HTMLElement) {
@@ -26,7 +26,7 @@ class Slip {
     this.el.addEventListener("mouseout", this.handleMouseOut);
 
     this.listEl = document.createElement("div");
-    this.listEl.classList.add("list");
+    this.listEl.classList.add("proseplay-list");
     this.el.append(this.listEl);
 
     this.choices = [];
@@ -95,10 +95,10 @@ class Slip {
     if (!this.isHoverable) return;
 
     const target = e.target as HTMLElement;
-    if (!target.classList.contains("current")) return;
+    if (!target.classList.contains("proseplay-current")) return;
 
     this.isHovered = true;
-    this.el.classList.add("hover");
+    this.el.classList.add("proseplay-hover");
   }
 
   handleMouseDown = (): void => {
@@ -112,14 +112,14 @@ class Slip {
     if (this.isDragged) return;
     this.isHovered = false;
     this.isDragged = false;
-    this.el.classList.remove("hover");
+    this.el.classList.remove("proseplay-hover");
   }
 
   handleMouseUp = (): void => {
     this.snapToNearestChoice();
     this.isHovered = false;
     this.isDragged = false;
-    this.el.classList.remove("hover");
+    this.el.classList.remove("proseplay-hover");
   }
 }
 

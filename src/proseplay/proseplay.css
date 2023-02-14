@@ -1,47 +1,47 @@
 .proseplay {
   line-height: 1.5;
 
-  .slip {
+  .proseplay-slip {
     display: inline-block;
-    box-shadow: inset 1px 1px 5px rgba(0,0,0,0.15);
-    border-radius: 5px;
+    box-shadow: inset .05em .05em .2em rgba(0,0,0,0.15);
+    border-radius: .2em;
     position: relative;
     transition: width 0.15s ease-in-out;
     user-select: none;
     height: 1.3em;
-    padding: 0 5px;
+    padding: 0 .2em;
     margin-bottom: -0.35em;
 
-    &.hover {
-      .choice {
+    &.proseplay-hover {
+      .proseplay-choice {
         opacity: 1;
       }
     }
   }
 
-  .line {
+  .proseplay-line {
     position: relative;
 
-    &.comment {
+    &.proseplay-comment {
       font-style: italic;
       color: #999;
 
-      .current {
+      .proseplay-current {
         color: #999;
       }
     }
   }
 
-  .list {
+  .proseplay-list {
     position: absolute;
     display: flex;
     flex-direction: column;
     top: 0;
-    left: 5px;
+    left: .2em;
     height: 100%;
   }
   
-  .choice {
+  .proseplay-choice {
     opacity: 0;
     color: #999;
     transition: opacity 0.15s ease-in-out;
@@ -50,17 +50,17 @@
     padding-top: 0.25em;
   }
   
-  .current {
+  .proseplay-current {
     opacity: 1;
     color: #000;
     z-index: 1;
     cursor: ns-resize;
   }
 
-  &.has-hover {
+  &.proseplay-has-hover {
     color: rgba(0,0,0,0.1);
-    .slip:not(.hover) {
-      .current {
+    .proseplay-slip:not(.proseplay-hover) {
+      .proseplay-current {
         color: rgba(0,0,0,0.1);      
       }
     }

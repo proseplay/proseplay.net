@@ -8,7 +8,7 @@ type TokenizedLine = Token[];
 type TokenizedText = TokenizedLine[];
 
 const lineTemplate = document.createElement("div");
-lineTemplate.classList.add("line");
+lineTemplate.classList.add("proseplay-line");
 
 class ProsePlay {
   private el: HTMLElement;
@@ -39,6 +39,7 @@ class ProsePlay {
   }
 
   parseText(str: string): void {
+    str = str.trim();
     console.log(str);
     let textTokens: TokenizedText = [];
     let lines = str.split("\n");
@@ -118,7 +119,7 @@ class ProsePlay {
           hasHover = true;
         }
       });
-      this.el.classList.toggle("has-hover", hasHover);
+      this.el.classList.toggle("proseplay-has-hover", hasHover);
       return;
     }
 
@@ -131,7 +132,7 @@ class ProsePlay {
 
   private handleMouseUp = (): void => {
     this.isMouseDown = false;
-    this.el.classList.remove("has-hover");
+    this.el.classList.remove("proseplay-has-hover");
     this.slips.forEach(slip => slip.isHoverable = true);
     if (!this.draggedSlip) return;
     this.draggedSlip.handleMouseUp();

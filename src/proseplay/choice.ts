@@ -6,7 +6,7 @@ class Choice {
 
   static {
     Choice.template = document.createElement("div");
-    Choice.template.classList.add("choice");
+    Choice.template.classList.add("proseplay-choice");
   }
 
   constructor(text: string) {
@@ -23,12 +23,12 @@ class Choice {
 
   activate() {
     this.isCurrent = true;
-    this.el.classList.add("current");
+    this.el.classList.add("proseplay-current");
   }
   
   deactivate() {
     this.isCurrent = false;
-    this.el.classList.remove("current");
+    this.el.classList.remove("proseplay-current");
   }
 
   get offsetTop(): number {

@@ -1,7 +1,6 @@
-const text = document.querySelector(".text");
-const lines = document.querySelectorAll(".line");
-const slips = document.querySelectorAll(".slip");
-const showRegexBtn = document.querySelector("#showRegexBtn") as HTMLInputElement;
+const text = document.querySelector(".proseplay");
+const lines = document.querySelectorAll(".proseplay-line");
+const slips = document.querySelectorAll(".proseplay-slip");
 
 let currentLine: HTMLElement;
 
@@ -41,29 +40,25 @@ function handleKeyDown(e: KeyboardEvent): void {
 function toggleComment(): void {
   if (!currentLine) return;
 
-  const isComment = currentLine.classList.toggle("comment");
+  const isComment = currentLine.classList.toggle("proseplay-comment");
   if (isComment) {
     const before = document.createElement("span");
-    before.classList.add("comment-wrapper");
+    before.classList.add("proseplay-comment-wrapper");
     before.innerText = "(";
     currentLine.insertBefore(before, currentLine.firstChild);
 
     const after = document.createElement("span");
-    after.classList.add("comment-wrapper");
+    after.classList.add("proseplay-comment-wrapper");
     after.innerText = ")?";
     currentLine.appendChild(after);
   } else {
-    const parens = currentLine.querySelectorAll(".comment-wrapper");
+    const parens = currentLine.querySelectorAll(".proseplay-comment-wrapper");
     parens.forEach(paren => paren.remove());
   }
 
   slips.forEach(slip => {
-    const current = slip.querySelector(".current");
-    if (showRegexBtn.checked) {
-      (slip as HTMLElement).style.width = "auto";
-    } else {
-      (slip as HTMLElement).style.width = `${(current as HTMLElement).offsetWidth}px`;
-    }
+    const current = slip.querySelector(".proseplay-current");
+    (slip as HTMLElement).style.width = `${(current as HTMLElement).offsetWidth}px`;
   });
 }
 
