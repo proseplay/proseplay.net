@@ -128,11 +128,11 @@ class ProsePlay {
     this.draggedSlip.slideTo(draggedListPos);
   }
 
-  private handleMouseUp = (e: MouseEvent): void => {
+  private handleMouseUp = (): void => {
     this.isMouseDown = false;
     this.el.classList.remove("has-hover");
     if (!this.draggedSlip) return;
-    this.draggedSlip.handleMouseUp(e);
+    this.draggedSlip.handleMouseUp();
     this.slips.forEach(slip => slip.isHoverable = true);
   }
 }

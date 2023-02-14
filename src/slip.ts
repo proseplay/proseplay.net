@@ -101,21 +101,21 @@ class Slip {
     this.el.classList.add("hover");
   }
 
-  handleMouseDown = (e: MouseEvent): void => {
+  handleMouseDown = (): void => {
     if (!this.isHoverable) return;
 
     this.isHovered = true;
     this.isDragged = true;
   }
 
-  handleMouseOut = (e: MouseEvent): void => {
+  handleMouseOut = (): void => {
     if (this.isDragged) return;
     this.isHovered = false;
     this.isDragged = false;
     this.el.classList.remove("hover");
   }
 
-  handleMouseUp = (e: MouseEvent): void => {
+  handleMouseUp = (): void => {
     this.snapToNearestChoice();
     this.isHovered = false;
     this.isDragged = false;
