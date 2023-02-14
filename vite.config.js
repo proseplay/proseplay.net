@@ -1,5 +1,6 @@
 import { defineConfig } from "vite";
 import postcssNesting from 'postcss-nesting';
+import { resolve } from "path";
 
 export default defineConfig({
   css: {
@@ -10,6 +11,12 @@ export default defineConfig({
     },
   },
   build: {
+    rollupOptions: {
+      input: {
+        main: resolve(__dirname, "index.html"),
+        playground: resolve(__dirname, "playground/index.html")
+      }
+    },
     sourcemap: true
   }
 });

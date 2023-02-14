@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>prose play</title>
+</head>
+<body>
+  <header>
+    <h1 class="title"><a href="/">ProsePlay</a></h1>
+    <nav class="nav">
+      <ul>
+        <li><a href="/docs">Docs</a></li>
+        <li><a href="/playground">Playground</a></li>
+        <li><a href="https://github.com/whykatherine/prose-play">Source</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <div>
+      <form action="">
+        <div class="input-container">
+          <textarea name="input" id="input"></textarea>
+        </div>
+        <div>
+          <button type="submit" id="submit">Parse</button>
+        </div>
+      </form>
+    </div>
+    <div class="text"></div>
+  </main>
+  <footer>
+    <a href="https://whykatherine.github.io"><img src="/logo.svg" alt="Logo" class="logo" width="20" height="20"></a>
+  </footer>
+
+  <script type="module" src="/src/playground.ts"></script>
+</body>
+</html>
