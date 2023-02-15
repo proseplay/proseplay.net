@@ -175,6 +175,12 @@ class ProsePlay {
       this.windows.forEach(window => {
         window.isHoverable = false;
       });
+
+      let windowsToDrag = [this.draggedWindow];
+      if (this.draggedWindow.linkIndex) {
+        windowsToDrag.push(...this.links[this.draggedWindow.linkIndex]);
+      }
+      windowsToDrag.forEach(window => window.el.classList.add("proseplay-hover"));
     }
 
     return false;
