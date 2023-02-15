@@ -330,6 +330,8 @@ class ProsePlay {
   }
 
   private handleMouseUp = (e: MouseEvent): boolean => {
+    if (!this.isMouseDown) return false;
+    
     e.preventDefault();
 
     if (this._isPeeking) return false;
