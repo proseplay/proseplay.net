@@ -148,7 +148,19 @@ class ProsePlay {
   }
 
   generate() {
-    this.windows.forEach(window => window.random());
+    let windowsDragged: Window[] = [];
+    this.windows.forEach(window => {
+      if (windowsDragged.includes(window)) return;
+      let choiceIndex = window.random();
+      windowsDragged.push(window);
+      if (window.linkIndex) {
+        this.links[window.linkIndex].forEach(otherWindow => {
+          if (windowsDragged.includes(otherWindow)) return;
+          otherWindow.random(choiceIndex);
+          windowsDragged.push(otherWindow);
+        });
+      }
+    });
     return this;
   }
 

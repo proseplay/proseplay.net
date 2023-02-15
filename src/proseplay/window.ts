@@ -58,14 +58,21 @@ class Window {
     this.el.style.width = `${choice.el.offsetWidth}px`;
   }
 
-  random(): void {
-    const randomIndex = Math.floor(Math.random() * this.choices.length);
-    const choice = this.choices[randomIndex];
+  random(choiceIndex?: number): number {
+    if (choiceIndex === undefined) {
+      choiceIndex = Math.floor(Math.random() * this.choices.length);
+    }
+    if (choiceIndex > this.choices.length - 1) {
+      choiceIndex = this.choices.length - 1;
+    }
+    const choice = this.choices[choiceIndex];
     this.activateChoice(choice);
 
-    this.listEl.style.transition = "top 0.15s ease-in-out, left 0.15s ease-in-out";
-    setTimeout(() => this.listEl.style.transition = "", TRANSITION_TIME);
+    this.listEl.classList.add("proseplay-has-transition");
+    setTimeout(() => this.listEl.classList.remove("proseplay-has-transition"), TRANSITION_TIME);
     this.listEl.style.top = `-${choice.offsetTop}px`;
+
+    return choiceIndex;
   }
 
   slideTo(yPos: number): void {
