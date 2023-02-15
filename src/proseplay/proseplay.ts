@@ -3,7 +3,10 @@ import "./proseplay.css";
 import { Window } from "./window";
 import { Choice } from "./choice";
 
-type Token = string | string[];
+type Token = {
+  strings: string[]
+  linkIndex?: number | null
+};
 type TokenizedLine = Token[];
 type TokenizedText = TokenizedLine[];
 
@@ -17,6 +20,7 @@ class ProsePlay {
   private mouse: {x: number, y: number};
   private isMouseDown: boolean;
   private draggedWindow: Window | null;
+  private links: Window[][];
 
   constructor(el: HTMLElement) {
     this.el = el;
@@ -26,6 +30,7 @@ class ProsePlay {
     this.mouse = {x: 0, y: 0};
     this.isMouseDown = false;
     this.draggedWindow = null;
+    this.links = [];
 
     this.el.addEventListener("click", this.handleClick);
     this.el.addEventListener("mousedown", this.handleMouseDown);
@@ -61,29 +66,46 @@ class ProsePlay {
     let lines = str.split("\n");
     lines.forEach(line => {
       const lineTokens: TokenizedLine = [];
-      let m = line.matchAll(/\(([^(|)]+\|)([^(|)]+\|?)+\)/g);
+      let m = line.matchAll(new RegExp(
+        "\\(" + // open parentheses
+          "(" + // start capturing group
+            "[^(|)]+" + // first string
+            "\\|" + // pipe
+            "([^(|)]+\\|?)+" + // one or more strings, with optional pipe
+          ")" + // end capturing group
+        "\\)" + // close parentheses
+        "(\\[(\\d)+\\])?" // link index
+        , "g"));
+      const stringsIndex = 1,
+        linkIndex = 4;
+
       let currIndex = 0;
       for (const match of m) {
         const index = match.index as number;
         let isEscaped = line[index - 1] === "\\";
+
+        let prevToken: Token = {strings: []},
+          currentToken: Token = {strings: []};
         if (isEscaped) {
-          lineTokens.push(line.slice(currIndex, index - 1));
-          lineTokens.push(line.slice(index, index + match[0].length));
+          prevToken.strings = [line.slice(currIndex, index - 1)];
+          currentToken.strings = [line.slice(index, index + match[0].length)];
         } else {
-          let prevStr = line.slice(currIndex, index);
-          lineTokens.push(prevStr);
-          let split = match[0].split(/[(|)]/);
-          split = split.filter(x => x);
-          lineTokens.push(split);
+          prevToken.strings = [line.slice(currIndex, index)];
+          currentToken.strings = match[stringsIndex].split("|");
+          if (match[linkIndex]) {
+            currentToken.linkIndex = parseInt(match[linkIndex]);
+          }
         }
+        lineTokens.push(prevToken);
+        lineTokens.push(currentToken);
+
         currIndex = index + match[0].length;
       }
       if (currIndex < line.length) {
-        lineTokens.push(line.slice(currIndex));
+        lineTokens.push({strings: [line.slice(currIndex)]});
       }
       textTokens.push(lineTokens);
     });
-    textTokens = textTokens.filter(x => x);
     console.log(textTokens);
   
     this.constructText(textTokens);
@@ -103,12 +125,19 @@ class ProsePlay {
       const lineEl = lineTemplate.cloneNode(true) as HTMLElement;
       this.el.appendChild(lineEl);
       line.forEach(token => {
-        if (typeof token === "string") {
-          lineEl.append(document.createTextNode(token));
+        if (token.strings.length === 1) {
+          lineEl.append(document.createTextNode(token.strings[0]));
         } else {
           const window = new Window(lineEl);
+          if (token.linkIndex) {
+            window.setLink(token.linkIndex);
+            if (!this.links[token.linkIndex]) {
+              this.links[token.linkIndex] = [];
+            }
+            this.links[token.linkIndex].push(window);
+          }
           this.windows.push(window);
-          token.forEach(str => window.addChoice(new Choice(str)));
+          token.strings.forEach(str => window.addChoice(new Choice(str)));
           window.activateChoice(window.choices[0]);
         }
       });
@@ -169,7 +198,14 @@ class ProsePlay {
     let draggedListPos = this.draggedWindow.top;
     draggedListPos -= (this.mouse.y - e.clientY);
     this.mouse.y = e.clientY;
-    this.draggedWindow.slideTo(draggedListPos);
+
+    let windowsToDrag = [this.draggedWindow];
+    if (this.draggedWindow.linkIndex) {
+      windowsToDrag.push(...this.links[this.draggedWindow.linkIndex]);
+    }
+    windowsToDrag.forEach(window => {
+      window.slideTo(draggedListPos);
+    });
 
     return false;
   }
@@ -180,7 +216,15 @@ class ProsePlay {
     this.el.classList.remove("proseplay-has-hover");
     this.windows.forEach(window => window.isHoverable = true);
     if (!this.draggedWindow) return false;
-    this.draggedWindow.handleMouseUp(e);
+
+    let windowsToDrag = [this.draggedWindow];
+    if (this.draggedWindow.linkIndex) {
+      windowsToDrag.push(...this.links[this.draggedWindow.linkIndex]);
+    }
+    windowsToDrag.forEach(window => {
+      window.handleMouseUp(e);
+    });
+    
     this.draggedWindow = null;
     return false;
   }

@@ -4,8 +4,11 @@ const TRANSITION_TIME = 15;
 
 class Window {
   static template: HTMLElement;
+  static linkRefTemplate: HTMLElement;
+
   el: HTMLElement;
   listEl: HTMLElement;
+
   choices: Choice[];
   currentChoice: Choice | undefined;
 
@@ -13,9 +16,14 @@ class Window {
   isHovered: boolean;
   isDragged: boolean;
 
+  linkIndex: number | null;
+
   static {
     Window.template = document.createElement("div");
     Window.template.classList.add("proseplay-window");
+
+    Window.linkRefTemplate = document.createElement("sup");
+    Window.linkRefTemplate.classList.add("proseplay-link-ref");
   }
 
   constructor(parent: HTMLElement) {
@@ -34,6 +42,8 @@ class Window {
     this.isHoverable = true;
     this.isHovered = false;
     this.isDragged = false;
+
+    this.linkIndex = null;
   }
 
   addChoice(choice: Choice): void {
@@ -127,6 +137,15 @@ class Window {
     this.isDragged = false;
     this.el.classList.remove("proseplay-hover");
     return false;
+  }
+
+  setLink(linkIndex: number | null): void {
+    this.linkIndex = linkIndex;
+    if (linkIndex) {
+      const sup = Window.linkRefTemplate.cloneNode(true) as HTMLElement;
+      this.el.insertAdjacentElement("afterend", sup);
+      sup.innerText = `${linkIndex}`;
+    }
   }
 }
 
