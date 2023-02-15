@@ -1,5 +1,11 @@
 .proseplay {
   line-height: 1.5;
+
+  &.proseplay-is-peeking {
+    .proseplay-current {
+      cursor: not-allowed;
+    }
+  }
 }
 
 .proseplay-window {

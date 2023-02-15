@@ -15,22 +15,33 @@ lineTemplate.classList.add("proseplay-line");
 
 class ProsePlay {
   private el: HTMLElement;
+
+  private lines: {
+    el: HTMLElement,
+    windows: Window[]
+  }[];
   private windows: Window[];
+  private links: Window[][];
 
   private mouse: {x: number, y: number};
   private isMouseDown: boolean;
   private draggedWindow: Window | null;
-  private links: Window[][];
+
+  private _isPeeking: boolean;
 
   constructor(el: HTMLElement) {
     this.el = el;
-    this.el.classList.add("proseplay")
+    this.el.classList.add("proseplay");
+
+    this.lines = [];
     this.windows = [];
+    this.links = [];
     
     this.mouse = {x: 0, y: 0};
     this.isMouseDown = false;
     this.draggedWindow = null;
-    this.links = [];
+
+    this._isPeeking = false;
 
     this.el.addEventListener("click", this.handleClick);
     this.el.addEventListener("mousedown", this.handleMouseDown);
@@ -46,20 +57,26 @@ class ProsePlay {
     return pp;
   }
 
-  loadSample(name: "homophones" | "hypothetically" | "dickinson" | "carpenter"): ProsePlay {
-    fetch(`/samples/${name}.txt`)
+  async loadSample(name: "homophones" | "hypothetically" | "dickinson" | "carpenter"): Promise<ProsePlay> {
+    this.lines = [];
+    this.windows = [];
+    this.links = [];
+
+    return fetch(`/samples/${name}.txt`)
       .then(r => r.text())
       .then(text => this.parseText(text));
-    return this;
   }
 
-  static loadSample(name: "homophones" | "hypothetically" | "dickinson" | "carpenter"): ProsePlay {
+  static async loadSample(name: "homophones" | "hypothetically" | "dickinson" | "carpenter"): Promise<ProsePlay> {
     const pp = ProsePlay.createInstance();
-    pp.loadSample(name);
-    return pp;
+    return pp.loadSample(name);
   }
 
   parseText(str: string): ProsePlay {
+    this.lines = [];
+    this.windows = [];
+    this.links = [];
+
     str = str.trim();
     console.log(str);
     let textTokens: TokenizedText = [];
@@ -124,6 +141,8 @@ class ProsePlay {
     text.forEach(line => {
       const lineEl = lineTemplate.cloneNode(true) as HTMLElement;
       this.el.appendChild(lineEl);
+      this.lines.push({el: lineEl, windows: []});
+
       line.forEach(token => {
         if (token.strings.length === 1) {
           lineEl.append(document.createTextNode(token.strings[0]));
@@ -136,6 +155,7 @@ class ProsePlay {
             }
             this.links[token.linkIndex].push(window);
           }
+          this.lines[this.lines.length - 1].windows.push(window);
           this.windows.push(window);
           token.strings.forEach(str => window.addChoice(new Choice(str)));
           window.activateChoice(window.choices[0]);
@@ -147,7 +167,7 @@ class ProsePlay {
     });
   }
 
-  generate() {
+  generate(): void {
     let windowsDragged: Window[] = [];
     this.windows.forEach(window => {
       if (windowsDragged.includes(window)) return;
@@ -161,7 +181,61 @@ class ProsePlay {
         });
       }
     });
-    return this;
+  }
+
+  peek(): void {
+    this._isPeeking = true;
+    this.el.classList.toggle("proseplay-is-peeking", this._isPeeking);
+
+    const em = parseFloat(getComputedStyle(this.el).fontSize);
+    
+    this.lines.forEach(line => {
+      let marginBottom = 0;
+
+      line.windows.forEach(window => {
+        let height = window.el.scrollHeight - window.listEl.offsetTop;
+        window.el.style.height = `${height}px`;
+        
+        let y = window.el.scrollHeight - (window.currentChoiceIndex + 1) * 1.25 * em - 0.06 * em;
+        window.el.style.top = `${y}px`;
+        window.el.style.marginTop = `${-y}px`;
+        marginBottom = Math.max(marginBottom, y);
+
+        window.listEl.style.top = "0px";
+
+        let maxWidth = 0;
+        window.choices.forEach(choice => {
+          choice.el.style.opacity = "1";
+          maxWidth = Math.max(maxWidth, choice.el.offsetWidth);
+        });
+        window.el.style.width = `${maxWidth}px`;
+
+      });
+
+      line.el.style.marginBottom = `${marginBottom}px`;
+    });
+  }
+
+  hide(): void {
+    this._isPeeking = false;
+    this.el.classList.toggle("proseplay-is-peeking", this._isPeeking);
+
+    this.lines.forEach(line => {
+      line.el.style.removeProperty("margin-bottom");
+
+      line.windows.forEach(window => {
+        window.el.style.removeProperty("height");
+        window.el.style.removeProperty("top");
+        window.el.style.removeProperty("margin-top");
+        window.listEl.style.removeProperty("top");
+        window.choices.forEach(choice => {
+          choice.el.style.removeProperty("opacity");
+        });
+        window.listEl.style.removeProperty("width");
+
+        window.activateChoice();
+      });
+    });
   }
 
   private handleClick = (e: MouseEvent): void => {
@@ -172,6 +246,8 @@ class ProsePlay {
 
   private handleMouseDown = (e: MouseEvent): boolean => {
     e.preventDefault();
+
+    if (this._isPeeking) return false;
 
     this.isMouseDown = true;
     this.mouse.x = e.clientX;
@@ -200,6 +276,8 @@ class ProsePlay {
 
   private handleMouseMove = (e: MouseEvent): boolean => {
     e.preventDefault();
+
+    if (this._isPeeking) return false;
 
     if (!this.isMouseDown) {
       let hasHover = false;
@@ -230,6 +308,9 @@ class ProsePlay {
 
   private handleMouseUp = (e: MouseEvent): boolean => {
     e.preventDefault();
+
+    if (this._isPeeking) return false;
+
     this.isMouseDown = false;
     this.el.classList.remove("proseplay-has-hover");
     this.windows.forEach(window => window.isHoverable = true);
@@ -245,6 +326,10 @@ class ProsePlay {
     
     this.draggedWindow = null;
     return false;
+  }
+
+  isPeeking(): boolean {
+    return this._isPeeking;
   }
 }
 

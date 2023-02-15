@@ -10,7 +10,7 @@ class Window {
   listEl: HTMLElement;
 
   choices: Choice[];
-  currentChoice: Choice | undefined;
+  currentChoiceIndex: number;
 
   isHoverable: boolean;
   isHovered: boolean;
@@ -38,6 +38,7 @@ class Window {
     this.el.append(this.listEl);
 
     this.choices = [];
+    this.currentChoiceIndex = 0;
 
     this.isHoverable = true;
     this.isHovered = false;
@@ -51,8 +52,12 @@ class Window {
     this.listEl.appendChild(choice.el);
   }
 
-  activateChoice(choice: Choice): void {
-    this.currentChoice = choice;
+  activateChoice(choice?: Choice): void {
+    if (!choice) {
+      choice = this.choices[this.currentChoiceIndex];
+      this.listEl.style.top = `-${choice.offsetTop}px`;
+    }
+    this.currentChoiceIndex = this.choices.indexOf(choice);
     this.choices.forEach(otherChoice => otherChoice.deactivate());
     choice.activate();
     this.el.style.width = `${choice.el.offsetWidth}px`;
