@@ -58,7 +58,7 @@ code {
 header,
 main,
 footer {
-  margin: 100px auto;
+  margin: 75px auto;
 }
 
 header,
@@ -108,6 +108,10 @@ main {
     max-width: 800px;
     width: 100%;
     margin: auto;
+
+    .section {
+      margin-bottom: 50px;
+    }
   }
 }
 
@@ -155,12 +159,9 @@ form {
   box-shadow: 1px 1px 5px 5px rgba(0,0,0,0.01);
   line-height: 1.5;
   font-size: 12px;
-  opacity: 0.4;
-  transition: 0.1s opacity;
-
-  &:hover {
-    opacity: 0.8;
-  }
+  font-family: monospace;
+  background-color: #f9f9f9;
+  color: #777;
 }
 
 .snapshots {
