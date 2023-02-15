@@ -2,4 +2,8 @@ import "./style.css";
 
 import { ProsePlay } from "./proseplay/proseplay";
 
-(new ProsePlay(document.querySelector(".title") as HTMLElement)).parseText("(Prose|Puzzle)(Play|Poetry)");
+(document.querySelectorAll(".play") as NodeListOf<HTMLElement>).forEach(el => {
+  el.classList.remove("play");
+  let text = el.innerText;
+  (new ProsePlay(el)).parseText(text);
+});
