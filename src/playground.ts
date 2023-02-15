@@ -2,7 +2,8 @@ import "./style.css";
 
 import { ProsePlay } from "./proseplay/proseplay";
 
-(new ProsePlay(document.querySelector(".title") as HTMLElement)).parseText("(Prose|Puzzle)(Play|Poetry)");
+const title = document.querySelector(".title") as HTMLElement;
+(new ProsePlay(title)).parseText(title.innerText);
 
 const container = document.querySelector(".text") as HTMLElement;
 const pp = new ProsePlay(container);
@@ -15,11 +16,12 @@ const input = document.querySelector("#input") as HTMLTextAreaElement,
 const snapshotContainer = document.querySelector(".snapshots") as HTMLElement,
   snapshotTemplate = document.querySelector(".snapshot") as HTMLElement;
 snapshotTemplate.remove();
-let numSnapshots = 0;
+let snapshots: HTMLElement[] = [];
 
-input.value = `this is (my|your|our)[1]
-very (lovely|cool|weird)[1]
-(poem|experience)`;
+input.value = `in the (mist|missed) (see|sea)
+(prey|pray) in the (morning|mourning)
+for (words|worlds)[1] that (exit|exist)[1]
+as (seep|sleep)`;
 
 submit.addEventListener("click", e => {
   e.preventDefault();
@@ -35,15 +37,21 @@ peek.addEventListener("click", () => {
 });
 
 snapshot.addEventListener("click", () => {
-  numSnapshots++;
-
   let snapshotHtml = snapshotTemplate.cloneNode(true) as HTMLElement;
   snapshotContainer.appendChild(snapshotHtml);
+  snapshots.push(snapshotHtml);
 
   let snapshotHeading = snapshotHtml.querySelector(".snapshot--heading") as HTMLElement;
-  snapshotHeading.innerText = `Snapshot ${numSnapshots}`;
+  snapshotHeading.innerText = `Snapshot ${snapshots.length}`;
 
   let snapshotText = snapshotHtml.querySelector(".snapshot--text") as HTMLElement;
   let text = pp.snapshot();
   snapshotText.innerText = text;
+
+  let snapshotClear = snapshotHtml.querySelector(".snapshot--clear") as HTMLElement;
+  snapshotClear.addEventListener("click", () => {
+    snapshotHtml.remove();
+    let index = snapshots.indexOf(snapshotHtml);
+    snapshots.splice(index, 1);
+  });
 });
