@@ -50,7 +50,12 @@ code {
 header,
 main,
 footer {
-  margin: 100px 200px;
+  margin: 100px auto;
+}
+
+header,
+footer {
+  max-width: 800px;
 }
 
 /* HEADER */
@@ -70,7 +75,7 @@ header {
 
 .title {
   font-size: 24px;
-  font-weight: 600;
+  font-weight: 400;
   margin: 0;
 
   & a {
@@ -81,13 +86,13 @@ header {
 /* MAIN */
 
 main {
-  flex: 1;
-  
   &.playground {
+    max-width: 80%;
     display: grid;
     grid-template-columns: 30% 70%;
     gap: 50px;
     min-height: 50vh;
+    align-items: start;
   }
 
   &:not(.playground) {
@@ -98,11 +103,11 @@ main {
 }
 
 form {
-  height: 100%;
+  width: 100%;
+  height: 400px;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  transform: translate(-25%, 0);
 
   & .input-container {
     flex: 1;

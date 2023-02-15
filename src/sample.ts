@@ -4,4 +4,4 @@ import { ProsePlay } from "./proseplay/proseplay";
 
 const textEl = document.querySelector(".text") as HTMLElement;
 const pp = new ProsePlay(textEl);
-pp.loadSample("carpenter");
+pp.loadSample("homophones");
