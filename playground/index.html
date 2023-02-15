@@ -18,23 +18,32 @@
     </nav>
   </header>
   <main class="playground">
+    <div class="toolbar">
+      <button type="button" id="generateBtn">Generate</button>
+      <button type="button" id="peekBtn">Peek</button>
+      <button type="button" id="snapshotBtn">Snapshot</button>
+    </div>
     <div class="form-container">
-      <div class="toolbar"></div>
       <form action="">
         <div class="input-container">
           <textarea name="input" id="input"></textarea>
         </div>
         <div>
-          <button type="submit" id="submit">Parse</button>
+          <button type="submit" id="submitBtn">Parse</button>
         </div>
       </form>
     </div>
     <div class="text-container">
-      <div class="toolbar">
-        <button type="button" id="generate">Generate</button>
-        <button type="button" id="peek">Peek</button>
-      </div>
       <div class="text"></div>
+    </div>
+    <div class="snapshots">
+      <div class="snapshot">
+        <div class="snapshot--header">
+          <h2 class="snapshot--heading"></h2>
+          <div class="snapshot--clear"><div class="box"><div class="glyph"></div></div></div>
+        </div>
+        <div class="snapshot--text"></div>
+      </div>
     </div>
   </main>
   <footer>

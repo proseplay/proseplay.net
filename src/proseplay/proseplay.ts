@@ -18,6 +18,7 @@ class ProsePlay {
 
   private lines: {
     el: HTMLElement,
+    tokens: (string | Window)[],
     windows: Window[]
   }[];
   private windows: Window[];
@@ -141,11 +142,16 @@ class ProsePlay {
     text.forEach(line => {
       const lineEl = lineTemplate.cloneNode(true) as HTMLElement;
       this.el.appendChild(lineEl);
-      this.lines.push({el: lineEl, windows: []});
+      this.lines.push({
+        el: lineEl,
+        tokens: [],
+        windows: []
+      });
 
       line.forEach(token => {
         if (token.strings.length === 1) {
           lineEl.append(document.createTextNode(token.strings[0]));
+          this.lines[this.lines.length - 1].tokens.push(token.strings[0]);
         } else {
           const window = new Window(lineEl);
           if (token.linkIndex) {
@@ -155,6 +161,7 @@ class ProsePlay {
             }
             this.links[token.linkIndex].push(window);
           }
+          this.lines[this.lines.length - 1].tokens.push(window);
           this.lines[this.lines.length - 1].windows.push(window);
           this.windows.push(window);
           token.strings.forEach(str => window.addChoice(new Choice(str)));
@@ -236,6 +243,22 @@ class ProsePlay {
         window.activateChoice();
       });
     });
+  }
+
+  snapshot(): string {
+    let text = "";
+    this.lines.forEach(line => {
+      line.tokens.forEach(token => {
+        if (token instanceof Window) {
+          text += token.choices[token.currentChoiceIndex].text;
+        } else {
+          text += token;
+        }
+      })
+      text += "\n";
+    });
+
+    return text;
   }
 
   private handleClick = (e: MouseEvent): void => {
