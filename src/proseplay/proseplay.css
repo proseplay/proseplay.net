@@ -20,7 +20,7 @@
   margin-bottom: -0.35em;
 
   &.proseplay-hover {
-    .proseplay-choice {
+    & .proseplay-choice {
       opacity: 1;
     }
   }
@@ -33,7 +33,7 @@
     font-style: italic;
     color: #999;
 
-    .proseplay-current {
+    & .proseplay-current {
       color: #999;
     }
   }
@@ -74,10 +74,10 @@
   cursor: ns-resize;
 }
 
-&.proseplay-has-hover {
+.proseplay-has-hover {
   color: rgba(0,0,0,0.1);
-  .proseplay-window:not(.proseplay-hover) {
-    .proseplay-current {
+  & .proseplay-window:not(.proseplay-hover) {
+    & .proseplay-current {
       color: rgba(0,0,0,0.1);      
     }
   }
