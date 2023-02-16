@@ -100,7 +100,7 @@ class ProsePlay {
       let currIndex = 0;
       for (const match of m) {
         const index = match.index as number;
-        let isEscaped = line[index - 1] === "\\";
+        let isEscaped = line[index - 2] === "\\";
 
         let prevToken: Token = {strings: []},
           currentToken: Token = {strings: []};
@@ -175,6 +175,8 @@ class ProsePlay {
   }
 
   generate(): void {
+    if (this._isPeeking) return;
+
     let windowsDragged: Window[] = [];
     this.windows.forEach(window => {
       if (windowsDragged.includes(window)) return;
@@ -271,7 +273,7 @@ class ProsePlay {
     e.preventDefault();
 
     if (this._isPeeking) return false;
-
+    
     this.isMouseDown = true;
     this.mouse.x = e.clientX;
     this.mouse.y = e.clientY;

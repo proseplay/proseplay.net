@@ -65,6 +65,7 @@
   width: max-content;
   line-height: 1;
   padding-top: 0.25em;
+  pointer-events: none;
 }
 
 .proseplay-current {
@@ -72,6 +73,7 @@
   color: #000;
   z-index: 1;
   cursor: ns-resize;
+  pointer-events: unset;
 }
 
 .proseplay-has-hover {
