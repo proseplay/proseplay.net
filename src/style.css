@@ -115,10 +115,6 @@ main {
   }
 }
 
-.toolbar {
-  grid-column: 2;
-}
-
 .form-container,
 .text-container {
   display: flex;

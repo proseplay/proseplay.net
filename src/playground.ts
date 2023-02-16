@@ -18,6 +18,15 @@ const snapshotContainer = document.querySelector(".snapshots") as HTMLElement,
 snapshotTemplate.remove();
 let snapshots: HTMLElement[] = [];
 
+const loadBtns = document.querySelectorAll(".loadBtn") as NodeListOf<HTMLButtonElement>;
+loadBtns.forEach(btn => {
+  btn.addEventListener("click", () => {
+    fetch(`/samples/${btn.value}.txt`)
+      .then(r => r.text())
+      .then(text => input.value = text);
+  });
+})
+
 input.value = `in the (mist|missed) (see|sea)
 (prey|pray) in the (morning|mourning)
 for (words|worlds)[1] that (exit|exist)[1]
