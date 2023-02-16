@@ -29,7 +29,7 @@ loadBtns.forEach(btn => {
 
 input.value = `in the (mist|missed) (see|sea)
 (prey|pray) in the (morning|mourning)
-for (words|worlds)[1] that (exit|exist)[1]
+for (words|worlds) that (exit|exist)
 as (seep|sleep)`;
 
 submit.addEventListener("click", e => {
