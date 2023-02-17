@@ -7,6 +7,8 @@ const title = document.querySelector(".title") as HTMLElement;
 
 const container = document.querySelector(".text") as HTMLElement;
 const pp = new ProsePlay(container);
+pp.setFunction("turnGrey", turnGrey);
+pp.setFunction("turnBlue", turnBlue);
 const input = document.querySelector("#input") as HTMLTextAreaElement,
   submit = document.querySelector("#submitBtn") as HTMLElement,
   generate = document.querySelector("#generateBtn") as HTMLElement,
@@ -27,7 +29,7 @@ loadBtns.forEach(btn => {
   });
 })
 
-input.value = `in the (mist|missed) (see|sea)
+input.value = `in the (mist->turnGrey|missed->turnBlue) (see|sea)
 (prey|pray) in the (morning|mourning)
 for (words|worlds) that (exit|exist)
 as (seep|sleep)`;
@@ -64,3 +66,13 @@ snapshot.addEventListener("click", () => {
     snapshots.splice(index, 1);
   });
 });
+
+function turnGrey() {
+  document.body.classList.remove("blue");
+  document.body.classList.add("grey");
+}
+
+function turnBlue() {
+  document.body.classList.remove("grey");
+  document.body.classList.add("blue");
+}
