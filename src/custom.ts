@@ -31,4 +31,4 @@ they all crumble by my eyes as sil(t|k)
 oh, but I grieve
 to (leave|love) my (love|leave) in a dream 
 `;
-pp.parseText(text);
+pp.parse(text);

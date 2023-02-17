@@ -62,19 +62,19 @@ pp.setFunction("turnBlue", turnBlue);</code></pre>
       <p>In your project, import the library.</p>
       <pre><code>import { ProsePlay } from "proseplay";</code></pre>
       <p>The fastest way to see what this library does is to load up a sample text.</p>
-      <pre><code>ProsePlay.loadSample("dickinson");</code></pre>
+      <pre><code>ProsePlay.load("dickinson");</code></pre>
       <p>Opening your webpage, you should be able to see an interactive poem.</p>
       <p>Let's try it with our own creations!</p>
       <p><i>Note: There are two main approaches to calling ProsePlay—the static method and the non-static method. These examples will focus on the static methods for brevity, but the non-static methods are given in comments in case you want to control where the poem goes on the page.</i></p>
       <pre><code>const poem = `this is (my|your|our)
 very (lovely|cool|weird)
 (poem|experience)`;
-ProsePlay.parseText(poem);
+ProsePlay.parse(poem);
 
 // // non-static
 // const container = document.querySelector(".text");
 // const pp = new ProsePlay(container);
-// pp.parseText(poem);</code></pre>
+// pp.parse(poem);</code></pre>
       <p>Opening the page, you should see how the parentheses and vertical bars have allowed ProsePlay to transform the poem.</p>
       <p>You can now add your own CSS styles to position and shape the container, as well as change things like font family, font size, and line height. Beyond those properties, it may take some trial and error to get the intended effects.</p>
       <p><i>Note: the auto-reloading functionality of the framework used here means that spacing issues can sometimes be fixed if you give the page a quick reload.</i></p>
@@ -83,15 +83,15 @@ ProsePlay.parseText(poem);
 (lovely|cool|weird)
 (poem|experience)`;
 const poem2 = `let us (read|write|play)`;
-ProsePlay.parseText(poem1);
-ProsePlay.parseText(poem2);
+ProsePlay.parse(poem1);
+ProsePlay.parse(poem2);
 
 // // non-static
 // const poems = [poem1, poem2];
 // const containers = document.querySelectorAll(".text");
 // containers.forEach((container, i) => {
 //   const pp = new ProsePlay(container);
-//   pp.parseText(poems[i]);
+//   pp.parse(poems[i]);
 // });</code></pre>
     </div>
     <div>
@@ -102,19 +102,19 @@ ProsePlay.parseText(poem2);
           <dd><p>Creates a new ProsePlay object which will operate in the given HTML element.</p></dd>
         </div>
         <div>
-          <dt><code>ProsePlay.parseText(str: string): ProsePlay</code></dt>
+          <dt><code>ProsePlay.parse(str: string): ProsePlay</code></dt>
           <dd><p>Parses the given string and create the interactive components.</p></dd>
         </div>
         <div>
-          <dt><code>static ProsePlay.parseText(str: string): ProsePlay</code></dt>
+          <dt><code>static ProsePlay.parse(str: string): ProsePlay</code></dt>
           <dd><p>Same as above, but without first creating a ProsePlay object and providing an existing HTML element. This will insert a new <code>div</code> into the body of the page.</p></dd>
         </div>
         <div>
-          <dt><code>ProsePlay.loadSample(name: "homophones" | "hypothetically" | "dickinson" | "carpenter"): Promise&lt;ProsePlay&gt;</code></dt>
-          <dd><p>Loads one of the four available samples and create the interactive components.</p></dd>
+          <dt><code>ProsePlay.load(name: "homophones" | "hypothetically" | "dickinson"): ProsePlay</code></dt>
+          <dd><p>Loads one of the three available samples and create the interactive components.</p></dd>
         </div>
         <div>
-          <dt><code>static ProsePlay.loadSample(name: "homophones" | "hypothetically" | "dickinson" | "carpenter"): Promise&lt;ProsePlay&gt;</code></dt>
+          <dt><code>static ProsePlay.load(name: "homophones" | "hypothetically" | "dickinson"): ProsePlay</code></dt>
           <dd><p>Same as above, but without first creating a ProsePlay object and providing an existing HTML element. This will insert a new <code>div</code> into the body of the page.</p></dd>
         </div>
         <div>

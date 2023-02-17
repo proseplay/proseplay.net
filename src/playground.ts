@@ -3,7 +3,7 @@ import "./style.css";
 import { ProsePlay } from "proseplay";
 
 const title = document.querySelector(".title") as HTMLElement;
-(new ProsePlay(title)).parseText(title.innerText);
+(new ProsePlay(title)).parse(title.innerText);
 
 const container = document.querySelector(".text") as HTMLElement;
 const pp = new ProsePlay(container);
@@ -36,7 +36,7 @@ as (seep|sleep)`;
 
 submit.addEventListener("click", e => {
   e.preventDefault();
-  pp.parseText(input.value);
+  pp.parse(input.value);
 });
 submit.click();
 
