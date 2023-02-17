@@ -122,16 +122,16 @@ ProsePlay.parseText(poem2);
           <dd><p>Randomises choices across all windows. If any windows are linked, they will move to the same choice number together.</p></dd>
         </div>
         <div>
-          <dt><code>ProsePlay.peek(): void</code></dt>
-          <dd><p>Reveals all choices across windows. When the poem is in this state, no windows can be moved and the <code>generate()</code> function cannot be called.</p></dd>
+          <dt><code>ProsePlay.expand(): void</code></dt>
+          <dd><p>Expands all choices across windows. When the poem is in this state, no windows can be moved and the <code>generate()</code> function cannot be called.</p></dd>
         </div>
         <div>
-          <dt><code>ProsePlay.hide(): void</code></dt>
-          <dd><p>Hides all choices across windows, allowing windows to be moved and the <code>generate()</code> function to be called.</p></dd>
+          <dt><code>ProsePlay.collapse(): void</code></dt>
+          <dd><p>Collapses all choices across windows, allowing windows to be moved and the <code>generate()</code> function to be called.</p></dd>
         </div>
         <div>
-          <dt><code>ProsePlay.isPeeking(): boolean</code></dt>
-          <dd><p>Returns a boolean describing whether the choices in the poem are exposed or hidden.</p></dd>
+          <dt><code>ProsePlay.isExpanded(): boolean</code></dt>
+          <dd><p>Returns a boolean describing whether the windows are expanded or collapsed.</p></dd>
         </div>
         <div>
           <dt><code>ProsePlay.setFunction(name: string, fnc: Function): void</code></dt>

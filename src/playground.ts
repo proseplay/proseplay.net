@@ -1,6 +1,6 @@
 import "./style.css";
 
-import { ProsePlay } from "./proseplay/proseplay";
+import { ProsePlay } from "proseplay";
 
 const title = document.querySelector(".title") as HTMLElement;
 (new ProsePlay(title)).parseText(title.innerText);
@@ -12,7 +12,7 @@ pp.setFunction("turnBlue", turnBlue);
 const input = document.querySelector("#input") as HTMLTextAreaElement,
   submit = document.querySelector("#submitBtn") as HTMLElement,
   generate = document.querySelector("#generateBtn") as HTMLElement,
-  peek = document.querySelector("#peekBtn") as HTMLElement,
+  expand = document.querySelector("#expandBtn") as HTMLElement,
   snapshot = document.querySelector("#snapshotBtn") as HTMLElement;
 
 const snapshotContainer = document.querySelector(".snapshots") as HTMLElement,
@@ -42,9 +42,9 @@ submit.click();
 
 generate.addEventListener("click", () => pp.generate());
 
-peek.addEventListener("click", () => {
-  pp.isPeeking() ? pp.hide() : pp.peek();
-  peek.innerText = pp.isPeeking() ? "Hide" : "Peek";
+expand.addEventListener("click", () => {
+  pp.isExpanded() ? pp.collapse() : pp.expand();
+  expand.innerText = pp.isExpanded() ? "Hide" : "Expand";
 });
 
 snapshot.addEventListener("click", () => {

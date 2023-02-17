@@ -1,6 +1,6 @@
 import "./style.css";
 
-import { ProsePlay } from "./proseplay/proseplay";
+import { ProsePlay } from "proseplay";
 
 (document.querySelectorAll(".play") as NodeListOf<HTMLElement>).forEach(el => {
   el.classList.remove("play");
