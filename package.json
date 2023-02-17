@@ -1,17 +1,30 @@
 {
-  "name": "prose-play",
-  "private": true,
-  "version": "0.0.0",
+  "name": "proseplay",
+  "desription": "The website for ProsePlay, a tool for creating interactive sliding poems.",
+  "version": "1.0.0",
   "type": "module",
+  "private": true,
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/proseplay/proseplay.net"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/proseplay/proseplay.net/issues"
+  },
+  "homepage": "https://www.proseplay.net",
   "devDependencies": {
     "postcss": "^8.4.21",
     "postcss-nesting": "^11.1.0",
     "typescript": "^4.9.3",
     "vite": "^4.1.0"
+  },
+  "dependencies": {
+    "proseplay": "file:../proseplay"
   }
 }
