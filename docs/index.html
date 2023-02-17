@@ -57,13 +57,13 @@ pp.setFunction("turnBlue", turnBlue);</code></pre>
     <div>
       <h2>Using ProsePlay as a library</h2>
       <p>You might be interested in using ProsePlay as a library on your own site so you can host your poem, integrate it into a larger project, and/or add your own styles and scripts to it.</p>
-      <p><i>todo: separate package from website and publish on npm</i></p>
-      <p>Clone <a href="https://github.com/whykatherine/prose-play">the repo</a>, then run <code>npm install</code> and <code>npm run dev</code>.</p>
+      <p>ProsePlay is available to install from npm.</p>
+      <pre><code>npm install proseplay</code></pre>
       <p>In your project, import the library.</p>
-      <pre><code>import { ProsePlay } from "./proseplay/proseplay";</code></pre>
+      <pre><code>import { ProsePlay } from "proseplay";</code></pre>
       <p>The fastest way to see what this library does is to load up a sample text.</p>
       <pre><code>ProsePlay.loadSample("dickinson");</code></pre>
-      <p>You should be able to go to the specified server (open <code>localhost:5173</code> in a browser) and see an interactive poem.</p>
+      <p>Opening your webpage, you should be able to see an interactive poem.</p>
       <p>Let's try it with our own creations!</p>
       <p><i>Note: There are two main approaches to calling ProsePlay—the static method and the non-static method. These examples will focus on the static methods for brevity, but the non-static methods are given in comments in case you want to control where the poem goes on the page.</i></p>
       <pre><code>const poem = `this is (my|your|our)
