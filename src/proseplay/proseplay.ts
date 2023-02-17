@@ -5,7 +5,8 @@ import { Choice } from "./choice";
 
 type Token = {
   strings: string[]
-  linkIndex?: number | null
+  linkIndex?: number | null,
+  functionNames?: string[]
 };
 type TokenizedLine = Token[];
 type TokenizedText = TokenizedLine[];
@@ -30,6 +31,10 @@ class ProsePlay {
 
   private _isPeeking: boolean;
 
+  private functions: {
+    [name: string]: Function
+  };
+
   constructor(el: HTMLElement) {
     this.el = el;
     this.el.classList.add("proseplay");
@@ -43,6 +48,8 @@ class ProsePlay {
     this.draggedWindow = null;
 
     this._isPeeking = false;
+
+    this.functions = {};
 
     this.el.addEventListener("click", this.handleClick);
     this.el.addEventListener("mousedown", this.handleMouseDown);
@@ -110,6 +117,17 @@ class ProsePlay {
         } else {
           prevToken.strings = [line.slice(currIndex, index)];
           currentToken.strings = match[stringsIndex].split("|");
+          currentToken.strings.forEach((str, i) => {
+            let [s, fnc] = str.split("->");
+            if (fnc) {
+              if (!currentToken.functionNames) {
+                currentToken.functionNames = [];
+              }
+              currentToken.functionNames[i] = fnc;
+
+              currentToken.strings[i] = s;
+            }
+          });
           if (match[linkIndex]) {
             currentToken.linkIndex = parseInt(match[linkIndex]);
           }
@@ -160,6 +178,12 @@ class ProsePlay {
               this.links[token.linkIndex] = [];
             }
             this.links[token.linkIndex].push(window);
+          }
+          if (token.functionNames) {
+            window.setFunctionNames(token.functionNames);
+          }
+          for (const name in this.functions) {
+            window.setFunction(name, this.functions[name]);
           }
           this.lines[this.lines.length - 1].tokens.push(window);
           this.lines[this.lines.length - 1].windows.push(window);
@@ -357,6 +381,11 @@ class ProsePlay {
 
   isPeeking(): boolean {
     return this._isPeeking;
+  }
+
+  setFunction(name: string, fnc: Function): void {
+    this.functions[name] = fnc;
+    this.windows.forEach(window => window.setFunction(name, fnc));
   }
 }
 

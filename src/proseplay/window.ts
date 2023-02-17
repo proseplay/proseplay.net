@@ -18,6 +18,11 @@ class Window {
 
   linkIndex: number | null;
 
+  functionNames: string[];
+  functions: {
+    [name: string]: Function
+  };
+
   static {
     Window.template = document.createElement("div");
     Window.template.classList.add("proseplay-window");
@@ -45,6 +50,9 @@ class Window {
     this.isDragged = false;
 
     this.linkIndex = null;
+
+    this.functionNames = [];
+    this.functions = {};
   }
 
   addChoice(choice: Choice): void {
@@ -148,6 +156,14 @@ class Window {
     this.isHovered = false;
     this.isDragged = false;
     this.el.classList.remove("proseplay-hover");
+
+    let functionName = this.functionNames[this.currentChoiceIndex];
+    if (functionName) {
+      if (this.functions[functionName]) {
+        this.functions[functionName]();
+      }
+    }
+
     return false;
   }
 
@@ -158,6 +174,14 @@ class Window {
       this.el.insertAdjacentElement("afterend", sup);
       sup.innerText = `${linkIndex}`;
     }
+  }
+
+  setFunctionNames(functionNames: string[]): void {
+    this.functionNames = functionNames;
+  }
+
+  setFunction(name: string, fnc: Function): void {
+    this.functions[name] = fnc;
   }
 }
 
