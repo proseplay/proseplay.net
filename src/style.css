@@ -11,12 +11,14 @@ body {
   font-size: 24px;
   line-height: 1.5;
 
-  transition: 1s background-color;
-  &.grey {
-    background-color: rgb(200, 200, 200);
-  }
-  &.blue {
-    background-color: rgb(177, 193, 206);
+  &.playground {
+    transition: 1s background-color;
+    &.grey {
+      background-color: rgb(227, 227, 227);
+    }
+    &.blue {
+      background-color: rgb(222, 230, 236);
+    }
   }
 }
 
@@ -102,7 +104,23 @@ header {
 /* MAIN */
 
 main {
-  &.playground {
+  max-width: 800px;
+  width: 100%;
+  margin: auto;
+
+  & .section {
+    margin-bottom: 50px;
+  }
+}
+
+.playground {
+  & header,
+  & main,
+  & footer {
+    max-width: 80%;
+  }
+
+  & main {
     max-width: 80%;
     display: grid;
     grid-template-rows: auto 1fr;
@@ -111,16 +129,13 @@ main {
     min-height: 50vh;
     align-items: start;
   }
+}
 
-  &:not(.playground) {
-    max-width: 800px;
-    width: 100%;
-    margin: auto;
-
-    .section {
-      margin-bottom: 50px;
-    }
-  }
+.input--toolbar,
+.form-container,
+.text--toolbar,
+.text-container {
+  min-width: 250px;
 }
 
 .form-container,
