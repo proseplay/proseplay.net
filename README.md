@@ -1,10 +1,8 @@
-# ProsePlay
+# proseplay.net
 
-A tool for exploring alternate word choices, worlds, and possibilities.
+The website for ProsePlay, a tool for exploring alternate word choices, worlds, and possibilities.
 
 *under construction*
-
-*todo: separate package from website and publish on npm*
 
 ```
 npm install
