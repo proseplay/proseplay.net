@@ -1,3 +1,9 @@
+/* *,
+*::before,
+*::after {
+  box-sizing: border-box;
+} */
+
 html,
 body {
   height: 100%;
@@ -19,6 +25,12 @@ body {
     &.blue {
       background-color: rgb(222, 230, 236);
     }
+  }
+}
+@media (max-width: 800px) {
+  body {
+    font-size: 16px;
+    margin: 1em;
   }
 }
 
@@ -81,6 +93,8 @@ footer {
 header {
   display: flex;
   justify-content: space-between;
+  max-width: 800px;
+  width: 100%;
 
   & ul {
     list-style-type: none;
@@ -88,6 +102,18 @@ header {
     gap: 1em;
     padding: 0;
     margin: 0;
+  }
+}
+@media (max-width: 800px) {
+  header {
+    flex-direction: column;
+    text-align: center;
+    gap: 1em;
+
+    & ul {
+      flex-direction: column;
+      gap: 0;
+    }
   }
 }
 
@@ -123,7 +149,7 @@ main {
   & main {
     max-width: 80%;
     display: grid;
-    grid-template-rows: auto 1fr;
+    /* grid-template-rows: auto 1fr; */
     grid-template-columns: calc(30% - 33.3px) calc(45% - 33.3px) calc(25% - 33.3px);
     gap: 50px;
     min-height: 50vh;
@@ -131,11 +157,25 @@ main {
   }
 }
 
-.input--toolbar,
+@media (max-width: 800px) {
+  .playground main {
+    grid-template-columns: 100%;
+    grid-template-rows: auto auto auto;
+  }
+}
+
+/* .input--toolbar,
 .form-container,
 .text--toolbar,
 .text-container {
   min-width: 250px;
+} */
+
+.input-container,
+.output-container {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
 }
 
 .form-container,
@@ -145,7 +185,7 @@ main {
   gap: 20px;
 }
 
-.form-container {
+/* .form-container {
   grid-column: 1;
   margin-top: -12px;
 }
@@ -156,7 +196,7 @@ main {
 
 .snapshots {
   grid-column: 3;
-}
+} */
 
 form {
   width: 100%;
@@ -167,6 +207,11 @@ form {
 
   & .input-container {
     flex: 1;
+  }
+}
+@media (max-width: 800px) {
+  form {
+    height: 200px;
   }
 }
 
