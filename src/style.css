@@ -69,6 +69,7 @@ button {
 pre {
   padding: 1em 1.5em;
   background-color: #f5f5f5;
+  overflow-x: scroll;
 }
 
 code {
