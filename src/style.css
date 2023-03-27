@@ -1,8 +1,21 @@
-/* *,
-*::before,
-*::after {
-  box-sizing: border-box;
-} */
+@font-face {
+  font-family: "Crimson Pro";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/fonts/CrimsonPro-Regular.ttf");
+}
+@font-face {
+  font-family: "Crimson Pro";
+  font-style: italic;
+  font-weight: 400;
+  src: url("/fonts/CrimsonPro-Italic.ttf");
+}
+@font-face {
+  font-family: "Crimson Pro";
+  font-style: normal;
+  font-weight: 600;
+  src: url("/fonts/CrimsonPro-SemiBold.ttf");
+}
 
 html,
 body {
@@ -13,7 +26,7 @@ body {
 
 body {
   background-color: #f9f9f9;
-  font-family: "Hoefler Text", serif;
+  font-family: "Crimson Pro", serif;
   font-size: 24px;
   line-height: 1.5;
 
@@ -130,7 +143,6 @@ header .current a {
 
 .title {
   font-size: 24px;
-  font-weight: 400;
   margin: 0;
 }
 
