@@ -25,7 +25,10 @@ loadBtns.forEach(btn => {
   btn.addEventListener("click", () => {
     fetch(`/samples/${btn.value}.txt`)
       .then(r => r.text())
-      .then(text => input.value = text);
+      .then(text => {
+        input.value = text;
+        submit.click();
+      });
   });
 })
 
