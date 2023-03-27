@@ -30,7 +30,7 @@ body {
 @media (max-width: 800px) {
   body {
     font-size: 16px;
-    margin: 1em;
+    margin: 1rem;
   }
 }
 
@@ -83,6 +83,13 @@ main,
 footer {
   margin: 75px auto;
 }
+@media (max-width: 800px) {
+  header,
+  main,
+  footer {
+    margin: 1rem auto;
+  }
+}
 
 header,
 footer {
@@ -107,25 +114,24 @@ header {
 }
 @media (max-width: 800px) {
   header {
-    flex-direction: column;
-    text-align: center;
-    gap: 1em;
+    flex-direction: column-reverse;
+    gap: 2em;
 
     & ul {
-      flex-direction: column;
-      gap: 0;
+      max-width: 100%;
+      overflow-x: scroll;
     }
   }
+}
+
+header .current a {
+  border-bottom: 1px solid currentColor;
 }
 
 .title {
   font-size: 24px;
   font-weight: 400;
   margin: 0;
-
-  & a {
-    color: black;
-  }
 }
 
 /* MAIN */
@@ -134,10 +140,6 @@ main {
   max-width: 800px;
   width: 100%;
   margin: auto;
-
-  & .section {
-    margin-bottom: 50px;
-  }
 }
 
 .playground {
