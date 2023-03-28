@@ -42,8 +42,8 @@ ppSwitcher.setFunction("viewOutput", viewOutput);
 submit.addEventListener("click", e => {
   e.preventDefault();
   pp.parse(input.value);
+  ppSwitcher.slideWindow(0, 1);
   viewOutput();
-  ppSwitcher.windows[0].slideTo(-ppSwitcher.windows[0].choices[1].offsetLeft + 7.2);
 
   expand.disabled = false;
   generate.disabled = false;
