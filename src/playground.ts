@@ -7,8 +7,6 @@ const title = document.querySelector(".title") as HTMLElement;
 
 const container = document.querySelector(".text") as HTMLElement;
 const pp = new ProsePlay(container);
-pp.setFunction("turnGrey", turnGrey);
-pp.setFunction("turnBlue", turnBlue);
 const input = document.querySelector("#input") as HTMLTextAreaElement,
   submit = document.querySelector("#submitBtn") as HTMLButtonElement,
   generate = document.querySelector("#generateBtn") as HTMLButtonElement,
@@ -31,7 +29,7 @@ loadBtns.forEach(btn => {
   });
 })
 
-input.value = `in the (mist->turnGrey|missed->turnBlue) (see|sea)
+input.value = `in the (mist|missed) (see|sea)
 (prey|pray) in the (morning|mourning)
 for (words|worlds) that (exit|exist)
 as (seep|sleep)`;
@@ -54,7 +52,6 @@ submit.addEventListener("click", e => {
   snapshots.forEach(snapshot => snapshot.remove());
   snapshots = [];
 });
-// submit.click();
 
 generate.addEventListener("click", () => pp.generate());
 
@@ -84,20 +81,11 @@ snapshot.addEventListener("click", () => {
   });
 });
 
-function turnGrey() {
-  document.body.classList.remove("blue");
-  document.body.classList.add("grey");
-}
-
-function turnBlue() {
-  document.body.classList.remove("grey");
-  document.body.classList.add("blue");
-}
-
 function viewInput() {
   (document.querySelector(".viewer") as HTMLElement).classList.add("view-input");
   (document.querySelector(".viewer") as HTMLElement).classList.remove("view-output");
 }
+
 function viewOutput() {
   submit.click();
   (document.querySelector(".viewer") as HTMLElement).classList.add("view-output");
