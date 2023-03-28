@@ -10,10 +10,10 @@ const pp = new ProsePlay(container);
 pp.setFunction("turnGrey", turnGrey);
 pp.setFunction("turnBlue", turnBlue);
 const input = document.querySelector("#input") as HTMLTextAreaElement,
-  submit = document.querySelector("#submitBtn") as HTMLElement,
-  generate = document.querySelector("#generateBtn") as HTMLElement,
-  expand = document.querySelector("#expandBtn") as HTMLElement,
-  snapshot = document.querySelector("#snapshotBtn") as HTMLElement;
+  submit = document.querySelector("#submitBtn") as HTMLButtonElement,
+  generate = document.querySelector("#generateBtn") as HTMLButtonElement,
+  expand = document.querySelector("#expandBtn") as HTMLButtonElement,
+  snapshot = document.querySelector("#snapshotBtn") as HTMLButtonElement;
 
 const snapshotContainer = document.querySelector(".snapshots") as HTMLElement,
   snapshotTemplate = document.querySelector(".snapshot") as HTMLElement;
@@ -27,7 +27,6 @@ loadBtns.forEach(btn => {
       .then(r => r.text())
       .then(text => {
         input.value = text;
-        submit.click();
       });
   });
 })
@@ -37,17 +36,32 @@ input.value = `in the (mist->turnGrey|missed->turnBlue) (see|sea)
 for (words|worlds) that (exit|exist)
 as (seep|sleep)`;
 
+const ppSwitcher = new ProsePlay(document.querySelector(".switcher") as HTMLElement);
+ppSwitcher.parse((document.querySelector(".switcher") as HTMLElement).innerText);
+ppSwitcher.setFunction("viewInput", viewInput);
+ppSwitcher.setFunction("viewOutput", viewOutput);
+
 submit.addEventListener("click", e => {
   e.preventDefault();
   pp.parse(input.value);
+  viewOutput();
+  ppSwitcher.windows[0].slideTo(-ppSwitcher.windows[0].choices[1].offsetLeft + 7.2);
+
+  expand.disabled = false;
+  generate.disabled = false;
+  snapshot.disabled = false;
+
+  snapshots.forEach(snapshot => snapshot.remove());
+  snapshots = [];
 });
-submit.click();
+// submit.click();
 
 generate.addEventListener("click", () => pp.generate());
 
 expand.addEventListener("click", () => {
   pp.isExpanded() ? pp.collapse() : pp.expand();
-  expand.innerText = pp.isExpanded() ? "Hide" : "Expand";
+  expand.innerText = pp.isExpanded() ? "Collapse" : "Expand";
+  generate.disabled = pp.isExpanded();
 });
 
 snapshot.addEventListener("click", () => {
@@ -78,4 +92,14 @@ function turnGrey() {
 function turnBlue() {
   document.body.classList.remove("grey");
   document.body.classList.add("blue");
+}
+
+function viewInput() {
+  (document.querySelector(".viewer") as HTMLElement).classList.add("view-input");
+  (document.querySelector(".viewer") as HTMLElement).classList.remove("view-output");
+}
+function viewOutput() {
+  submit.click();
+  (document.querySelector(".viewer") as HTMLElement).classList.add("view-output");
+  (document.querySelector(".viewer") as HTMLElement).classList.remove("view-input");
 }

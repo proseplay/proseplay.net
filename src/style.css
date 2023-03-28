@@ -35,6 +35,7 @@ body {
   font-family: "Crimson Pro", serif;
   font-size: 24px;
   line-height: 1.5;
+  overflow-x: hidden;
 
   &.playground {
     transition: 1s background-color;
@@ -54,7 +55,6 @@ body {
 }
 
 h1 {
-  /* font-size: 48px; */
   font-size: 48px;
   line-height: 1;
 }
@@ -91,9 +91,29 @@ button {
 }
 
 button {
-  padding: 0.2em 0.5em;
+  padding: 0.5em;
   line-height: 1.5;
   cursor: pointer;
+  background-color: rgb(100, 160, 127);
+  color: white;
+  border: 0;
+  border-radius: 5px;
+  display: block;
+
+  &:hover {
+    background-color: rgb(141, 180, 158);
+  }
+
+  &:disabled {
+    background-color: rgb(182, 196, 188);
+    cursor: default;
+  }
+}
+@media (min-width: 800px) {
+  button {
+    padding: 0.5em 0.75em;
+    font-size: 16px;
+  }
 }
 
 pre {
@@ -105,6 +125,10 @@ pre {
 code {
   font-size: 16px;
   font-family: "Courier Prime", monospace;
+}
+
+.hidden {
+  display: none;
 }
 
 /* STRUCTURE */
@@ -151,7 +175,7 @@ header {
 @media (max-width: 800px) {
   header {
     flex-direction: column;
-    gap: 2em;
+    gap: 0.5em;
     align-items: flex-start;
 
     & ul {
@@ -172,13 +196,7 @@ main {
   max-width: 800px;
   width: 100%;
   margin: auto;
-}
-
-.playground {
-  & main {
-    display: grid;
-    gap: 50px;
-  }
+  overflow-x: hidden;
 }
 
 @media (min-width: 800px) {
@@ -189,19 +207,59 @@ main {
       max-width: 80%;
     }
   }
-
-  & main {
-    max-width: 80%;
-    grid-template-columns: calc(30% - 33.3px) calc(45% - 33.3px) calc(25% - 33.3px);
-    min-height: 50vh;
-    align-items: start;
-  }
 }
 
 @media (max-width: 800px) {
-  .playground main {
-    grid-template-columns: 100%;
-    grid-template-rows: auto auto auto;
+  .playground {
+    & main {
+      height: 75vh;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+
+.switcher {
+  margin: 1em 0;
+  font-size: 24px;
+
+  & .proseplay-window {
+    font-style: italic;
+  }
+}
+@media (min-width: 800px) {
+  .switcher {
+    display: none;
+  }
+}
+
+.viewer {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 50px;
+}
+@media (min-width: 1200px) {
+  .viewer {
+    grid-template-columns: 30% 1fr;
+  }
+}
+@media (max-width: 800px) {
+  .viewer {
+    width: 200vw;
+    display: flex;
+    overflow-x: hidden;
+    transition: 0.2s margin-left ease-in-out;
+    gap: 20vw;
+    flex: 1;
+
+    &.view-input {
+      margin-left: 0;
+    }
+  
+    &.view-output {
+      margin-left: -110vw;
+    }
   }
 }
 
@@ -209,14 +267,50 @@ main {
 .output-container {
   display: flex;
   flex-direction: column;
-  gap: 50px;
+  gap: 20px;
+  width: 90vw;
+  height: 100%;
+}
+@media (min-width: 800px) {
+  .input-container,
+  .output-container {
+    width: unset;
+  }
 }
 
-.form-container,
-.text-container {
+@media (min-width: 800px) {
+  .output-container {
+    display: grid;
+    grid-template-columns: 1fr 250px;
+    grid-template-rows: auto 1fr;
+    gap: 20px 50px;
+    grid-auto-flow: column;
+  }
+}
+@media (min-width: 1200px) {
+  .output-container {
+    grid-template-columns: 1fr 30%;
+  }
+}
+
+.toolbar {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
+  gap: 0.5em;
+
+  &.toolbar--full {
+    & button {
+      flex: 1;
+    }
+  }
+}
+@media (max-width: 800px) {
+  .toolbar button {
+    flex: 1;
+  }
+}
+
+.form-container {
+  flex: 1;
 }
 
 form {
@@ -232,7 +326,7 @@ form {
 }
 @media (max-width: 800px) {
   form {
-    height: 200px;
+    height: 100%;
   }
 }
 
@@ -243,11 +337,17 @@ form {
   padding: 1.5em;
   box-shadow: 1px 1px 5px 5px rgba(0,0,0,0.01);
   line-height: 1.5;
-  font-size: 12px;
   font-family: "Courier Prime", monospace;
-  /* background-color: #f9f9f9; */
   background-color: rgba(255, 255, 255, 0.1);
-  color: #777;
+}
+@media (max-width: 800px) {
+  #input {
+    flex: 1;
+  }
+}
+
+.text-container {
+  font-size: 24px;
 }
 
 .snapshots {
@@ -256,7 +356,6 @@ form {
   display: flex;
   flex-direction: column;
   gap: 1em;
-  margin-top: -1.5em;
 }
 
 .snapshot {

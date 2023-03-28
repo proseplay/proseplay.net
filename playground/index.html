@@ -20,40 +20,45 @@
     </nav>
   </header>
   <main>
-    <div class="input-container">
-      <div class="input--toolbar toolbar">
-        <button type="button" class="loadBtn" value="homophones">Sample 1</button>
-        <button type="button" class="loadBtn" value="hypothetically">Sample 2</button>
-        <button type="button" class="loadBtn" value="dickinson">Sample 3</button>
-      </div>
-      <div class="form-container">
-        <form action="">
-          <div class="input-container">
-            <textarea name="input" id="input"></textarea>
-          </div>
-          <div>
-            <button type="submit" id="submitBtn">Parse</button>
-          </div>
-        </form>
-      </div>
-    </div>
-    <div class="output-container">
-      <div class="text--toolbar toolbar">
-        <button type="button" id="expandBtn">Expand</button>
-        <button type="button" id="generateBtn">Generate</button>
-        <button type="button" id="snapshotBtn">Snapshot</button>
-      </div>
-      <div class="text-container">
-        <div class="text"></div>
-      </div>
-    </div>
-    <div class="snapshots">
-      <div class="snapshot">
-        <div class="snapshot--header">
-          <h2 class="snapshot--heading"></h2>
-          <div class="snapshot--clear"><div class="box"><div class="glyph"></div></div></div>
+    <div class="switcher">Viewing (input->viewInput|output->viewOutput)[-]</div>
+    <div class="viewer view-input">
+      <div class="input-container">
+        <div class="input--toolbar toolbar">
+          <button type="button" class="loadBtn" value="homophones">Sample 1</button>
+          <button type="button" class="loadBtn" value="hypothetically">Sample 2</button>
+          <button type="button" class="loadBtn" value="dickinson">Sample 3</button>
         </div>
-        <div class="snapshot--text"></div>
+        <div class="form-container">
+          <form action="">
+            <div class="input-container">
+              <textarea name="input" id="input"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="toolbar toolbar--full">
+          <button type="submit" id="submitBtn">Parse</button>
+        </div>
+      </div>
+      <div class="output-container">
+        <div class="text--toolbar toolbar">
+          <button type="button" id="expandBtn" disabled>Expand</button>
+          <button type="button" id="generateBtn" disabled>Generate</button>
+        </div>
+        <div class="text-container">
+          <div class="text"></div>
+        </div>
+        <div class="snapshot--toolbar toolbar toolbar--full">
+          <button type="button" id="snapshotBtn" disabled>Snapshot</button>
+        </div>
+        <div class="snapshots">
+          <div class="snapshot">
+            <div class="snapshot--header">
+              <h2 class="snapshot--heading"></h2>
+              <div class="snapshot--clear"><div class="box"><div class="glyph"></div></div></div>
+            </div>
+            <div class="snapshot--text"></div>
+          </div>
+        </div>
       </div>
     </div>
   </main>
