@@ -22,6 +22,7 @@
   <main>
     <div>
       <h2>Syntax</h2>
+      <pre><code>(choice1|choice2|choice3?)[link?-?]</code></pre>
       <h3>Basics</h3>
       <p>A window is denoted by a pair of parentheses that contains two or more choices within, delimited by a vertical bar, or pipe. In the line <code>this is (my|your|our)</code>, there are three choices: “my”, “your”, and “our”. The choices can be multi-word strings containing spaces (but not line breaks), such as <code>(Sentenced Faces|Foundering Faces)</code>, which are the two choices “Sentenced Faces” and “Foundering Faces”. You can also include an empty choice. For example: <code>my dream job is (poet|artist|astronaut| )</code>, which breaks out into “poet”, “artist”, “astronaut”, and an empty choice denoted by the space.</p>
       <p>The default choice, or the one that you see before you begin interacting with it, is the first item given in the list.</p>
@@ -32,12 +33,19 @@
 (poem|experience)[2]
 for (this moment|forever)[2]</code></pre>
       <p>In this poem, all windows tagged with <code>[1]</code> will move together, while all windows tagged with <code>[2]</code> will move together.</p>
+      <h3>Direction</h3>
+      <p>By default, windows move vertically (north–south), but you can specify a horizontal (east–west) direction by including a hyphen in square brackets.</p>
+      <p>This will move vertically:</p>
+      <pre><code>(hypothetically|hello)</code></pre>
+      <p>while this will move horizontally:</p>
+      <pre><code>(hypothetically|hello)[-]</code></pre>
+      <p>This can be combined with linking but the order matters: it’ll look for the link first, then the hyphen.</p>
+      <pre><code>(hypothetically|hello)[1-]</code></pre>
       <h3>Custom functions</h3>
-      <p>Choices can be linked to custom functions to be called when that choice is activated. The editor on this site demonstrates a small and limited example of this feature, but it is intended to be used in cases where ProsePlay is imported as a library into a custom project.</p>
+      <p>Choices can be linked to custom functions to be called when that choice is activated. In the line below, there are two choices, each linked to a different custom function.</p>
       <pre><code>in the (mist->turnGrey|missed->turnBlue)</code></pre>
-      <p>In the code for this website, there is a function named <code>turnGrey()</code>, which sets the page background to grey, and a function named <code>turnBlue()</code>. which sets the page background to blue.</p>
-      <pre><code>// in the JavaScript code for this website
-function turnGrey() {
+      <p>In your code, you might create a function named <code>turnGrey()</code>, which sets the page background to grey, and a function named <code>turnBlue()</code>. which sets the page background to blue.</p>
+      <pre><code>function turnGrey() {
   document.body.classList.remove("blue");
   document.body.classList.add("grey");
 }
@@ -46,10 +54,10 @@ function turnBlue() {
   document.body.classList.remove("grey");
   document.body.classList.add("blue");
 }</code></pre>
-      <p>The functions have been passed into the ProsePlay object using <code>setFunction()</code>.</p>
+      <p>The functions can be passed into the ProsePlay object using <code>setFunction()</code>.</p>
       <pre><code>pp.setFunction("turnGrey", turnGrey);
 pp.setFunction("turnBlue", turnBlue);</code></pre>
-      <p>With this, when <code>mist</code> is chosen, the <code>turnGrey()</code> function is automatically called, and when <code>missed</code> is chosen, the <code>turnBlue()</code> function is automatically called.</p>
+      <p>With these functions set, selecting the <code>mist</code> choice will automatically call the <code>turnGrey()</code> function, and selecting the <code>missed</code> choice will automatically call the <code>turnBlue()</code> function.</p>
       <h3>Escaping</h3>
       <p>To escape a window (i.e. to leave it as text and not make it interactive), insert a backslash before the opening parentheses. For example, to escape the window in the string <code>this is (my|your|our)</code>, write <code>this is \(my|your|our)</code>.</p>
     </div>
@@ -75,8 +83,7 @@ ProsePlay.parse(poem);
 // const pp = new ProsePlay(container);
 // pp.parse(poem);</code></pre>
       <p>Opening the page, you should see how the parentheses and vertical bars have allowed ProsePlay to transform the poem.</p>
-      <p>You can now add your own CSS styles to position and shape the container, as well as change things like font family, font size, and line height. Beyond those properties, it may take some trial and error to get the intended effects.</p>
-      <p><i>Note: the auto-reloading functionality of the framework used here means that spacing issues can sometimes be fixed if you give the page a quick reload.</i></p>
+      <p>You can now add your own CSS styles to position and shape the container, as well as change things like font family, font size, and color. Beyond those properties, it may take some trial and error to get the intended effects.</p>
       <p>You can also have multiple ProsePlay poems running on the page, like this:</p>
       <pre><code>const poem1 = `this is (my|your|our)
 (lovely|cool|weird)
@@ -102,7 +109,7 @@ ProsePlay.parse(poem2);
         </div>
         <div>
           <dt><code>ProsePlay.parse(str: string): ProsePlay</code></dt>
-          <dd><p>Parses the given string and create the interactive components.</p></dd>
+          <dd><p>Parses the given string and creates the interactive components.</p></dd>
         </div>
         <div>
           <dt><code>static ProsePlay.parse(str: string): ProsePlay</code></dt>
@@ -110,7 +117,7 @@ ProsePlay.parse(poem2);
         </div>
         <div>
           <dt><code>ProsePlay.load(name: "homophones" | "hypothetically" | "dickinson"): ProsePlay</code></dt>
-          <dd><p>Loads one of the three available samples and create the interactive components.</p></dd>
+          <dd><p>Loads one of the three available samples and creates the interactive components.</p></dd>
         </div>
         <div>
           <dt><code>static ProsePlay.load(name: "homophones" | "hypothetically" | "dickinson"): ProsePlay</code></dt>
@@ -134,7 +141,7 @@ ProsePlay.parse(poem2);
         </div>
         <div>
           <dt><code>ProsePlay.setFunction(name: string, fnc: Function): void</code></dt>
-          <dd><p>Attaches a custom function to the ProsePlay object. If the poem has the syntax <code>(choice1->myFunc|choice2)</code> and <code>myFunc()</code> is a custom function that exists in the code, the function can be passed into the ProsePlay object using <code>setFunction("myFunc", myFunc)</code>. With this, each time <code>choice1</code> is activated, <code>myFunc()</code> will be called.</p></dd>
+          <dd><p>Attaches a custom function to the ProsePlay object. If the poem has the syntax <code>(choice1->myFunc|choice2)</code> and <code>myFunc()</code> is a custom function that exists in the code, the function can be passed into the ProsePlay object using <code>setFunction("myFunc", myFunc)</code>. After the function is set, <code>myFunc()</code> will be called each time <code>choice1</code> is activated.</p></dd>
         </div>
       </dl>
     </div>
