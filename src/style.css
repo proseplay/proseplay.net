@@ -36,16 +36,6 @@ body {
   font-size: 24px;
   line-height: 1.5;
   overflow-x: hidden;
-
-  &.playground {
-    transition: 1s background-color;
-    &.grey {
-      background-color: rgb(227, 227, 227);
-    }
-    &.blue {
-      background-color: rgb(222, 230, 236);
-    }
-  }
 }
 @media (max-width: 800px) {
   body {
