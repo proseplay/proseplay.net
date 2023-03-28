@@ -95,6 +95,7 @@ a {
     display: flex;
     align-items: center;
     gap: 0.1em;
+    width: max-content;
 
     & .glyph {
       -webkit-mask: url("/icons/ne-arrow.svg");
@@ -216,7 +217,6 @@ main {
   max-width: 800px;
   width: 100%;
   margin: auto;
-  overflow-x: hidden;
 }
 
 @media (min-width: 800px) {
@@ -235,6 +235,7 @@ main {
       height: 75vh;
       display: flex;
       flex-direction: column;
+      overflow-x: hidden;
     }
   }
 }
