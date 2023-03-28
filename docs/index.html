@@ -144,6 +144,18 @@ ProsePlay.parse(poem2);
           <dt><code>ProsePlay.setFunction(name: string, fnc: Function): void</code></dt>
           <dd><p>Attaches a custom function to the ProsePlay object. If the poem has the syntax <code>(choice1->myFunc|choice2)</code> and <code>myFunc()</code> is a custom function that exists in the code, the function can be passed into the ProsePlay object using <code>setFunction("myFunc", myFunc)</code>. After the function is set, <code>myFunc()</code> will be called each time <code>choice1</code> is activated.</p></dd>
         </div>
+        <div>
+          <dt><code>ProsePlay.slideWindow(windowIndex: number, choiceIndex: number): void</code></dt>
+          <dd><p>Slide a specified window to a specified choice.</p></dd>
+        </div>
+        <div>
+          <dt><code>ProsePlay.choices: string[][]</code></dt>
+          <dd><p>Return a nested list of choices in each window.</p></dd>
+        </div>
+        <div>
+          <dt><code>ProsePlay.currentIndexes: number[]</code></dt>
+          <dd><p>Return a list of indexes to which each window is currently set.</p></dd>
+        </div>
       </dl>
     </div>
   </main>
