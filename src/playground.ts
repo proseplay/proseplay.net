@@ -78,6 +78,9 @@ snapshot.addEventListener("click", () => {
     snapshotHtml.remove();
     let index = snapshots.indexOf(snapshotHtml);
     snapshots.splice(index, 1);
+    snapshots.forEach((otherSnap, i) => {
+      (otherSnap.querySelector(".snapshot--heading") as HTMLElement).innerText = `Snapshot ${i + 1}`;
+    });
   });
 });
 
