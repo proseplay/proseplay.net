@@ -27,11 +27,11 @@
       <dl>
         <div>
           <dt><code>ProsePlay(el: HTMLElement): ProsePlay</code></dt>
-          <dd><p>Creates a new ProsePlay object which will operate in the given HTML element.</p></dd>
+          <dd><p>Create a new ProsePlay object which will operate in the given HTML element.</p></dd>
         </div>
         <div>
           <dt><code>ProsePlay.parse(str: string): ProsePlay</code></dt>
-          <dd><p>Parses the given string and creates the interactive components.</p></dd>
+          <dd><p>Parse the given string and creates the interactive components.</p></dd>
         </div>
         <div>
           <dt><code>static ProsePlay.parse(str: string): ProsePlay</code></dt>
@@ -39,7 +39,7 @@
         </div>
         <div>
           <dt><code>ProsePlay.load(name: "homophones" | "hypothetically" | "dickinson"): ProsePlay</code></dt>
-          <dd><p>Loads one of the three available samples and creates the interactive components.</p></dd>
+          <dd><p>Load one of the three available samples and creates the interactive components.</p></dd>
         </div>
         <div>
           <dt><code>static ProsePlay.load(name: "homophones" | "hypothetically" | "dickinson"): ProsePlay</code></dt>
@@ -47,23 +47,23 @@
         </div>
         <div>
           <dt><code>ProsePlay.generate(): void</code></dt>
-          <dd><p>Randomises choices across all windows. If any windows are linked, they will move to the same choice number together.</p></dd>
+          <dd><p>Randomise choices across all windows. If any windows are linked, they will move to the same choice number together.</p></dd>
         </div>
         <div>
           <dt><code>ProsePlay.expand(): void</code></dt>
-          <dd><p>Expands all choices across windows. When the poem is in this state, no windows can be moved and the <code>generate()</code> function cannot be called.</p></dd>
+          <dd><p>Expand all choices across windows. When the poem is in this state, no windows can be moved and the <code>generate()</code> function cannot be called.</p></dd>
         </div>
         <div>
           <dt><code>ProsePlay.collapse(): void</code></dt>
-          <dd><p>Collapses all choices across windows, allowing windows to be moved and the <code>generate()</code> function to be called.</p></dd>
+          <dd><p>Collapse all choices across windows, allowing windows to be moved and the <code>generate()</code> function to be called.</p></dd>
         </div>
         <div>
           <dt><code>ProsePlay.isExpanded(): boolean</code></dt>
-          <dd><p>Returns a boolean describing whether the windows are expanded or collapsed.</p></dd>
+          <dd><p>Return a boolean describing whether the windows are expanded or collapsed.</p></dd>
         </div>
         <div>
           <dt><code>ProsePlay.setFunction(name: string, fnc: Function): void</code></dt>
-          <dd><p>Attaches a custom function to the ProsePlay object. If the poem has the syntax <code>(choice1->myFunc|choice2)</code> and <code>myFunc()</code> is a custom function that exists in the code, the function can be passed into the ProsePlay object using <code>setFunction("myFunc", myFunc)</code>. After the function is set, <code>myFunc()</code> will be called each time <code>choice1</code> is activated.</p></dd>
+          <dd><p>Attach a custom function to the ProsePlay object. If the poem has the syntax <code>(choice1->myFunc|choice2)</code> and <code>myFunc()</code> is a custom function that exists in the code, the function can be passed into the ProsePlay object using <code>setFunction("myFunc", myFunc)</code>. After the function is set, <code>myFunc()</code> will be called each time <code>choice1</code> is activated.</p></dd>
         </div>
         <div>
           <dt><code>ProsePlay.slideWindow(windowIndex: number, choiceIndex: number): void</code></dt>
