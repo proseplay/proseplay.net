@@ -27,15 +27,16 @@
       <dl>
         <div>
           <dt><code>ProsePlay(el: HTMLElement): ProsePlay</code></dt>
-          <dd><p>Create a new ProsePlay object which will operate in the given HTML element.</p></dd>
+          <dd><p>Create a new ProsePlay instance, which will operate in the given HTML element.</p></dd>
         </div>
+        <hr>
         <div>
           <dt><code>ProsePlay.parse(str: string): ProsePlay</code></dt>
           <dd><p>Parse the given string and creates the interactive components.</p></dd>
         </div>
         <div>
           <dt><code>static ProsePlay.parse(str: string): ProsePlay</code></dt>
-          <dd><p>Same as above, but without first creating a ProsePlay object and providing an existing HTML element. This will insert a new <code>div</code> into the body of the page.</p></dd>
+          <dd><p>Same as above, but without first creating a ProsePlay instance and providing an existing HTML element. This will insert a new <code>div</code> into the body of the page.</p></dd>
         </div>
         <div>
           <dt><code>ProsePlay.load(name: "homophones" | "hypothetically" | "dickinson"): ProsePlay</code></dt>
@@ -43,28 +44,18 @@
         </div>
         <div>
           <dt><code>static ProsePlay.load(name: "homophones" | "hypothetically" | "dickinson"): ProsePlay</code></dt>
-          <dd><p>Same as above, but without first creating a ProsePlay object and providing an existing HTML element. This will insert a new <code>div</code> into the body of the page.</p></dd>
+          <dd><p>Same as above, but without first creating a ProsePlay instance and providing an existing HTML element. This will insert a new <code>div</code> into the body of the page.</p></dd>
+        </div>
+        <hr>
+        <div>
+          <dt><code>ProsePlay.randomise(windowIndexes?: number[]): void</code></dt>
+          <dd><p>Slide each window to a random choice. If windows are linked, they will move to the same choice index together. If no <code>windowIndexes</code> is specified, all windows will be randomised.</p></dd>
         </div>
         <div>
-          <dt><code>ProsePlay.generate(): void</code></dt>
-          <dd><p>Randomise choices across all windows. If any windows are linked, they will move to the same choice number together.</p></dd>
+          <dt><code>ProsePlay.randomize(windowIndexes?: number[]): void</code></dt>
+          <dd><p>Alias for <code>randomise()</code>.</p></dd>
         </div>
-        <div>
-          <dt><code>ProsePlay.expand(): void</code></dt>
-          <dd><p>Expand all choices across windows. When the poem is in this state, no windows can be moved and the <code>generate()</code> function cannot be called.</p></dd>
-        </div>
-        <div>
-          <dt><code>ProsePlay.collapse(): void</code></dt>
-          <dd><p>Collapse all choices across windows, allowing windows to be moved and the <code>generate()</code> function to be called.</p></dd>
-        </div>
-        <div>
-          <dt><code>ProsePlay.isExpanded(): boolean</code></dt>
-          <dd><p>Return a boolean describing whether the windows are expanded or collapsed.</p></dd>
-        </div>
-        <div>
-          <dt><code>ProsePlay.setFunction(name: string, fnc: Function): void</code></dt>
-          <dd><p>Attach a custom function to the ProsePlay object. If the poem has the syntax <code>(choice1->myFunc|choice2)</code> and <code>myFunc()</code> is a custom function that exists in the code, the function can be passed into the ProsePlay object using <code>setFunction("myFunc", myFunc)</code>. After the function is set, <code>myFunc()</code> will be called each time <code>choice1</code> is activated.</p></dd>
-        </div>
+        <hr>
         <div>
           <dt><code>ProsePlay.slideWindow(windowIndex: number, choiceIndex: number): void</code></dt>
           <dd><p>Slide a specified window to a specified choice index.</p></dd>
@@ -76,6 +67,23 @@
         <div>
           <dt><code>ProsePlay.currentIndexes: number[]</code></dt>
           <dd><p>Return a list consisting of, for each window, the current choice index.</p></dd>
+        </div>
+        <div>
+          <dt><code>ProsePlay.setFunction(name: string, fnc: Function): void</code></dt>
+          <dd><p>Attach a custom function to the ProsePlay instance. If the poem has the syntax <code>(choice1->myFunc|choice2)</code> and <code>myFunc()</code> is a custom function that exists in the code, the function can be passed into the ProsePlay instance using <code>setFunction("myFunc", myFunc)</code>. After the function is set, <code>myFunc()</code> will be called each time <code>choice1</code> is activated.</p></dd>
+        </div>
+        <hr>
+        <div>
+          <dt><code>ProsePlay.expand(): void</code></dt>
+          <dd><p>Expand all choices across windows. When the poem is in this state, no windows can be moved and the <code>randomise()</code> function cannot be called.</p></dd>
+        </div>
+        <div>
+          <dt><code>ProsePlay.collapse(): void</code></dt>
+          <dd><p>Collapse all choices across windows, allowing windows to be moved and the <code>randomise()</code> function to be called.</p></dd>
+        </div>
+        <div>
+          <dt><code>ProsePlay.isExpanded: boolean</code></dt>
+          <dd><p>Return a boolean describing whether the windows are expanded (<code>true</code>) or collapsed (<code>false</code>).</p></dd>
         </div>
       </dl>
     </div>
