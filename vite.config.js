@@ -16,7 +16,7 @@ export default defineConfig({
         main: resolve(__dirname, "index.html"),
         playground: resolve(__dirname, "playground/index.html"),
         learn: resolve(__dirname, "learn/index.html"),
-        api: resolve(__dirname, "api/index.html")
+        reference: resolve(__dirname, "reference/index.html")
       }
     },
     sourcemap: true
