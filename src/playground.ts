@@ -9,7 +9,7 @@ const container = document.querySelector(".text") as HTMLElement;
 const pp = new ProsePlay(container);
 const input = document.querySelector("#input") as HTMLTextAreaElement,
   submit = document.querySelector("#submitBtn") as HTMLButtonElement,
-  generate = document.querySelector("#generateBtn") as HTMLButtonElement,
+  randomise = document.querySelector("#randomiseBtn") as HTMLButtonElement,
   expand = document.querySelector("#expandBtn") as HTMLButtonElement,
   snapshot = document.querySelector("#snapshotBtn") as HTMLButtonElement;
 
@@ -46,19 +46,19 @@ submit.addEventListener("click", e => {
   viewOutput();
 
   expand.disabled = false;
-  generate.disabled = false;
+  randomise.disabled = false;
   snapshot.disabled = false;
 
   snapshots.forEach(snapshot => snapshot.remove());
   snapshots = [];
 });
 
-generate.addEventListener("click", () => pp.generate());
+randomise.addEventListener("click", () => pp.randomise());
 
 expand.addEventListener("click", () => {
-  pp.isExpanded() ? pp.collapse() : pp.expand();
-  expand.innerText = pp.isExpanded() ? "Collapse" : "Expand";
-  generate.disabled = pp.isExpanded();
+  pp.isExpanded ? pp.collapse() : pp.expand();
+  expand.innerText = pp.isExpanded ? "Collapse" : "Expand";
+  randomise.disabled = pp.isExpanded;
 });
 
 snapshot.addEventListener("click", () => {
