@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API | ProsePlay</title>
+  <meta name="description" content="A tool for exploring alternate wor(l)d choices and possibilities.">
+</head>
+<body>
+  <header>
+    <div>
+      <h1 class="title play">(Prose|Puzzle)(Play|Poetry)</h1>
+    </div>
+    <nav class="nav">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/playground/">Playground</a></li>
+        <li><a href="/learn/">Learn</a></li>
+        <li class="current"><a href="/api/">API</a></li>
+        <li><a href="https://github.com/proseplay/proseplay/" target="_blank" rel="noopener">GitHub <div class="box"><div class="glyph"></div></div></a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <div>
+      <h2>API</h2>
+      <dl>
+        <div>
+          <dt><code>ProsePlay(el: HTMLElement): ProsePlay</code></dt>
+          <dd><p>Creates a new ProsePlay object which will operate in the given HTML element.</p></dd>
+        </div>
+        <div>
+          <dt><code>ProsePlay.parse(str: string): ProsePlay</code></dt>
+          <dd><p>Parses the given string and creates the interactive components.</p></dd>
+        </div>
+        <div>
+          <dt><code>static ProsePlay.parse(str: string): ProsePlay</code></dt>
+          <dd><p>Same as above, but without first creating a ProsePlay object and providing an existing HTML element. This will insert a new <code>div</code> into the body of the page.</p></dd>
+        </div>
+        <div>
+          <dt><code>ProsePlay.load(name: "homophones" | "hypothetically" | "dickinson"): ProsePlay</code></dt>
+          <dd><p>Loads one of the three available samples and creates the interactive components.</p></dd>
+        </div>
+        <div>
+          <dt><code>static ProsePlay.load(name: "homophones" | "hypothetically" | "dickinson"): ProsePlay</code></dt>
+          <dd><p>Same as above, but without first creating a ProsePlay object and providing an existing HTML element. This will insert a new <code>div</code> into the body of the page.</p></dd>
+        </div>
+        <div>
+          <dt><code>ProsePlay.generate(): void</code></dt>
+          <dd><p>Randomises choices across all windows. If any windows are linked, they will move to the same choice number together.</p></dd>
+        </div>
+        <div>
+          <dt><code>ProsePlay.expand(): void</code></dt>
+          <dd><p>Expands all choices across windows. When the poem is in this state, no windows can be moved and the <code>generate()</code> function cannot be called.</p></dd>
+        </div>
+        <div>
+          <dt><code>ProsePlay.collapse(): void</code></dt>
+          <dd><p>Collapses all choices across windows, allowing windows to be moved and the <code>generate()</code> function to be called.</p></dd>
+        </div>
+        <div>
+          <dt><code>ProsePlay.isExpanded(): boolean</code></dt>
+          <dd><p>Returns a boolean describing whether the windows are expanded or collapsed.</p></dd>
+        </div>
+        <div>
+          <dt><code>ProsePlay.setFunction(name: string, fnc: Function): void</code></dt>
+          <dd><p>Attaches a custom function to the ProsePlay object. If the poem has the syntax <code>(choice1->myFunc|choice2)</code> and <code>myFunc()</code> is a custom function that exists in the code, the function can be passed into the ProsePlay object using <code>setFunction("myFunc", myFunc)</code>. After the function is set, <code>myFunc()</code> will be called each time <code>choice1</code> is activated.</p></dd>
+        </div>
+        <div>
+          <dt><code>ProsePlay.slideWindow(windowIndex: number, choiceIndex: number): void</code></dt>
+          <dd><p>Slide a specified window to a specified choice index.</p></dd>
+        </div>
+        <div>
+          <dt><code>ProsePlay.choices: string[][]</code></dt>
+          <dd><p>Return a nested list consisting of, for each window, the list of choices in that window.</p></dd>
+        </div>
+        <div>
+          <dt><code>ProsePlay.currentIndexes: number[]</code></dt>
+          <dd><p>Return a list consisting of, for each window, the current choice index.</p></dd>
+        </div>
+      </dl>
+    </div>
+  </main>
+  <footer>
+    <a href="https://whykatherine.github.io"><img src="/logo.svg" alt="Logo" class="logo" width="20" height="20"></a>
+  </footer>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
