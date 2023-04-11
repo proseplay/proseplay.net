@@ -7,7 +7,7 @@
   <meta name="description" content="A tool for exploring alternate wor(l)d choices and possibilities.">
 </head>
 <body class="playground">
-  <header>
+  <header class="hidable">
     <div>
       <h1 class="title play">(Prose|Puzzle)(Play|Poetry)</h1>
     </div>
@@ -22,9 +22,10 @@
     </nav>
   </header>
   <main>
-    <div class="switcher">Viewing (input->viewInput|output->viewOutput)[-]</div>
+    <div class="focus-note invisible">Press <kbd>esc</kbd> or reload to exit focus mode.</div>
+    <div class="switcher hidable">Viewing (input->viewInput|output->viewOutput)[-]</div>
     <div class="viewer view-input">
-      <div class="input-container">
+      <div class="input-container hidable">
         <div class="input--toolbar toolbar">
           <button type="button" class="loadBtn" value="homophones">1</button>
           <button type="button" class="loadBtn" value="hypothetically">2</button>
@@ -43,17 +44,18 @@
         </div>
       </div>
       <div class="output-container">
-        <div class="text--toolbar toolbar">
-          <button type="button" id="expandBtn" disabled>Expand</button>
-          <button type="button" id="randomiseBtn" disabled>Randomise</button>
+        <div class="text--toolbar toolbar hidable">
+          <button type="button" id="expandBtn" disabled autocomplete="false">Expand</button>
+          <button type="button" id="randomiseBtn" disabled autocomplete="false">Randomise</button>
+          <button type="button" id="focusBtn" disabled autocomplete="false">Enter focus mode</button>
         </div>
         <div class="text-container">
           <div class="text"></div>
         </div>
-        <div class="snapshot--toolbar toolbar toolbar--full">
+        <div class="snapshot--toolbar toolbar toolbar--full hidable">
           <button type="button" id="snapshotBtn" disabled>Snapshot</button>
         </div>
-        <div class="snapshots">
+        <div class="snapshots hidable">
           <div class="snapshot">
             <div class="snapshot--header">
               <h2 class="snapshot--heading"></h2>
@@ -65,7 +67,7 @@
       </div>
     </div>
   </main>
-  <footer>
+  <footer class="hidable">
     <a href="https://whykatherine.github.io"><img src="/logo.svg" alt="Logo" class="logo" width="20" height="20"></a>
   </footer>
 

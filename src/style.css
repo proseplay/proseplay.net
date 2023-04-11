@@ -157,12 +157,17 @@ pre {
   overflow-x: scroll;
 }
 
-code {
+code,
+kbd {
   font-family: "Courier Prime", monospace;
 }
 
 .hidden {
   display: none;
+}
+
+.invisible {
+  visibility: hidden;
 }
 
 hr {
@@ -277,6 +282,30 @@ main {
       flex: 1;
     }
   }
+}
+
+.playground {
+  & .hidable,
+  & .focus-note {
+    transition: 0.5s ease-in-out opacity;
+  }
+  
+  &.focus {
+    & .hidable {
+      opacity: 0;
+    }
+  }
+}
+
+.focus-note {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 1em;
+  padding: 0.2em 0.5em;
+  border-radius: 5px;
+  text-align: center;
+  opacity: 0;
 }
 
 .switcher {
