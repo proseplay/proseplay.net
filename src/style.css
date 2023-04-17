@@ -134,10 +134,16 @@ button {
   color: white;
   border: 0;
   border-radius: 5px;
+  margin: 1px;
   display: block;
 
   &:hover {
     background-color: rgb(141, 180, 158);
+  }
+
+  &:focus {
+    outline: 2px solid rgb(100, 160, 127);
+    border: 1px solid white;
   }
 
   &:disabled {
@@ -162,6 +168,19 @@ kbd {
   font-family: "Courier Prime", monospace;
 }
 
+kbd {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 0 .3rem;
+  margin: 0 .2rem;
+  font-size: 0.7rem;
+  background-color: rgba(0,0,0,.01);
+  border-radius: 5px;
+  /* box-shadow: 1px 1px 2px rgba(0,0,0,.2), inset 1px 1px 2px rgba(0,0,0,.05); */
+  border: 2px solid #dadada;
+  box-shadow: inset 0 -1px 0 0 #dadada;
+}
+
 .hidden {
   display: none;
 }
@@ -173,6 +192,43 @@ kbd {
 hr {
   border: 1px solid rgb(220, 220, 220);
   margin-bottom: 1em;
+}
+
+.modal {
+  background-color: #fff;
+  padding: 1em 1.5em 1.5em 1.5em;
+  border-radius: 5px;
+  width: 300px;
+  border: none;
+  height: fit-content;
+  box-shadow: 1px 1px 20px 20px rgba(0,0,0,0.01);
+
+  & .close-button {
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    line-height: 1;
+    cursor: pointer;
+    background: none;
+
+    & .glyph {
+      -webkit-mask: url("/icons/remove.svg");
+      mask: url("/icons/remove.svg");
+      background-color: #999;
+      transform: 0.5s background-color;
+
+      &:hover {
+        background-color: #777;
+      }
+    }
+  }
+
+  & h2 {
+    margin-top: 0;
+  }
 }
 
 /* STRUCTURE */

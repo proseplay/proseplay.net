@@ -27,6 +27,10 @@ const ppTitle = new ProsePlay(title),
   pp = new ProsePlay(container),
   ppSwitcher = new ProsePlay(switcher);
 
+const shortcutsModal = document.querySelector(".shortcuts") as HTMLDialogElement;
+const modalClose = document.querySelector(".close-button") as HTMLButtonElement;
+modalClose.addEventListener("click", () => shortcutsModal.close());
+
 document.addEventListener("DOMContentLoaded", () => {
   ppTitle.parse(title.innerText);
 
@@ -55,8 +59,47 @@ as (seep|sleep)`;
   focusBtn.addEventListener("click", focus);
   
   window.addEventListener("keydown", e => {
-    if (e.key === "Escape" && document.body.classList.contains("focus")) {
-      unfocus();
+    if (e.key === "Enter" && e.metaKey) {
+      e.preventDefault();
+      input.blur();
+      submit();
+    } else {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        if (shortcutsModal.open) {
+          shortcutsModal.close();
+        } else if (input === document.activeElement) {
+          input.blur();
+        } else if (document.body.classList.contains("focus")) {
+          unfocus();
+        }
+      }
+
+      if (input === document.activeElement) return;
+
+      if (e.key === "?") {
+        e.preventDefault();
+        shortcutsModal.showModal();
+      }
+
+      if (shortcutsModal.open) return;
+      
+      else if (e.key === "r") {
+        e.preventDefault();
+        randomiseBtn.click();
+      } else if (e.key === "e") {
+        e.preventDefault();
+        toggleExpand();
+      } else if (e.key === "s") {
+        e.preventDefault();
+        snapshot();
+      } else if (e.key === "f") {
+        e.preventDefault();
+        focus();
+      } else if (e.key === "i") {
+        e.preventDefault();
+        input.focus();
+      }
     }
   });
 });
