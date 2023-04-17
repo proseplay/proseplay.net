@@ -43,10 +43,12 @@ document.addEventListener("DOMContentLoaded", () => {
     btn.addEventListener("click", load);
   });
   
-  input.value = `in the (mist|missed) (see|sea)
+  if (input.value === "") {
+    input.value = `in the (mist|missed) (see|sea)
 (prey|pray) in the (morning|mourning)
 for (words|worlds) that (exit|exist)
 as (seep|sleep)`;
+  }
   
   submitBtn.addEventListener("click", submit);
   
