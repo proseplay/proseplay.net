@@ -85,8 +85,9 @@ as (seep|sleep)`;
       }
 
       if (shortcutsModal.open) return;
+      if (e.metaKey || e.shiftKey || e.ctrlKey || e.altKey) return;
       
-      else if (e.key === "r") {
+      if (e.key === "r") {
         e.preventDefault();
         randomiseBtn.click();
       } else if (e.key === "e") {

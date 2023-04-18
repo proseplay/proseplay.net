@@ -17,14 +17,16 @@
         <li class="current"><a href="/playground/">Playground</a></li>
         <li><a href="/learn/">Learn</a></li>
         <li><a href="/reference/">Reference</a></li>
-        <li><a href="https://github.com/proseplay/proseplay/" target="_blank" rel="noopener">GitHub <div class="box"><div class="glyph"></div></div></a></li>
+        <li><a href="https://github.com/proseplay/proseplay/" target="_blank" rel="noopener">GitHub <div class="box"><div class="glyph" aria-label="External link"></div></div></a></li>
       </ul>
     </nav>
   </header>
   <main>
     <div class="focus-note invisible">Press <kbd>esc</kbd> or reload to exit focus mode.</div>
     <dialog class="shortcuts modal">
-      <button class="close-button box"><div class="glyph" aria-label="Close dialog"></div></button>
+      <form method="dialog">
+        <button class="close-button box"><div class="glyph" aria-label="Close dialog"></div></button>
+      </form>
       <h2>Shortcuts</h2>
       <div><kbd>i</kbd>: Focus text area</div>
       <div><kbd>Cmd</kbd> + <kbd>Enter</kbd>: Parse</div>
@@ -44,7 +46,7 @@
           <button type="button" class="loadBtn" value="curtains" aria-label="Load sample 4">4</button>
         </div>
         <div class="form-container">
-          <form action="">
+          <form action="" class="input-form">
             <div class="input-container">
               <textarea name="input" id="input"></textarea>
             </div>
@@ -70,7 +72,7 @@
           <div class="snapshot">
             <div class="snapshot--header">
               <h2 class="snapshot--heading"></h2>
-              <div class="snapshot--clear"><div class="box"><div class="glyph"></div></div></div>
+              <div class="snapshot--clear"><div class="box"><div class="glyph" aria-label="Clear snapshot"></div></div></div>
             </div>
             <div class="snapshot--text"></div>
           </div>
