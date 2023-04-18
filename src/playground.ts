@@ -28,8 +28,11 @@ const ppTitle = new ProsePlay(title),
   ppSwitcher = new ProsePlay(switcher);
 
 const shortcutsModal = document.querySelector(".shortcuts") as HTMLDialogElement;
-const modalClose = document.querySelector(".close-button") as HTMLButtonElement;
-modalClose.addEventListener("click", () => shortcutsModal.close());
+shortcutsModal.addEventListener("click", e => {
+  if (e.target === shortcutsModal) {
+    shortcutsModal.close();
+  }
+});
 
 document.addEventListener("DOMContentLoaded", () => {
   ppTitle.parse(title.innerText);
