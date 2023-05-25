@@ -29,14 +29,14 @@
   src: url("/fonts/CourierPrime-Regular.ttf");
 }
 
-:root {
+/* :root {
   font-size: 16px;
 }
 @media (min-width: 800px) {
   :root {
     font-size: 24px;
   }
-}
+} */
 
 html,
 body {
