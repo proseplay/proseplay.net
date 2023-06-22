@@ -62,6 +62,9 @@ as (seep|sleep)`;
   snapshotBtn.addEventListener("click", snapshot);
   
   focusBtn.addEventListener("click", focus);
+
+  const wrapTextInput = document.querySelector("#wrapText") as HTMLInputElement;
+  wrapTextInput.addEventListener("change", toggleWrapText);
   
   window.addEventListener("keydown", e => {
     if (e.key === "Enter" && e.metaKey) {
@@ -195,4 +198,8 @@ function viewOutput() {
   submitBtn.click();
   viewer.classList.add("view-output");
   viewer.classList.remove("view-input");
+}
+
+function toggleWrapText() {
+  input.classList.toggle("wrap");
 }

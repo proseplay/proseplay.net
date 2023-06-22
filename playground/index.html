@@ -9,7 +9,7 @@
 <body class="playground">
   <header class="hidable">
     <div>
-      <h1 class="title play">(Prose|Puzzle)(Play|Poetry)</h1>
+      <h1 class="title play">(Prose|Puzzle|Plentiful) (Play|Poetry|Possibilities)</h1>
     </div>
     <nav class="nav">
       <ul>
@@ -46,9 +46,15 @@
           <button type="button" class="loadBtn" value="curtains" aria-label="Load sample 4">4</button>
         </div>
         <div class="form-container">
+          <div class="input--toolbar toolbar">
+            <div>
+              <input type="checkbox" name="wrapText" id="wrapText" autocomplete="false">
+              <label for="wrapText">Wrap text</label>
+            </div>
+          </div>
           <form action="" class="input-form">
             <div class="input-container">
-              <textarea name="input" id="input"></textarea>
+              <textarea name="input" id="input" cols="40"></textarea>
             </div>
           </form>
         </div>
@@ -58,9 +64,9 @@
       </div>
       <div class="output-container">
         <div class="text--toolbar toolbar hidable">
-          <button type="button" id="expandBtn" disabled autocomplete="false">Expand</button>
-          <button type="button" id="randomiseBtn" disabled autocomplete="false">Randomise</button>
-          <button type="button" id="focusBtn" disabled autocomplete="false">Focus</button>
+          <button type="button" id="expandBtn" disabled autocomplete="false"><div class="box"><div class="glyph"></div></div> Expand</button>
+          <button type="button" id="randomiseBtn" disabled autocomplete="false"><div class="box"><div class="glyph"></div></div>Randomise</button>
+          <button type="button" id="focusBtn" disabled autocomplete="false"><div class="box"><div class="glyph"></div></div>Focus</button>
         </div>
         <div class="text-container">
           <div class="text"></div>
