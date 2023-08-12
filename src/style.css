@@ -482,6 +482,10 @@ main {
   }
 }
 
+.checkbox-container {
+  margin-bottom: 1rem;
+}
+
 .icon-button {
   background: none;
   color: #000;
