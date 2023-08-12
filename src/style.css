@@ -145,19 +145,15 @@ button {
   line-height: 1.5;
   cursor: pointer;
   /* background-color: rgb(100, 160, 127); */
-  background: none;
+  /* background: none; */
+  background-color: seagreen;
+  color: white;
   /* color: white; */
   border: 0;
   border-radius: 5px;
   margin: 1px;
   display: block;
   font-size: 1em;
-
-  &:not(:disabled):hover {
-    /* background-color: rgb(141, 180, 158);
-    color: white; */
-    color: seagreen;
-  }
 
   /* &:focus {
     outline: 2px solid rgb(100, 160, 127);
@@ -168,20 +164,8 @@ button {
   &:disabled {
     /* background-color: rgb(182, 196, 188); */
     color: #999;
+    background-color: #eee;
     cursor: default;
-  }
-
-  & .glyph {
-    background-color: #000;
-  }
-
-  &:disabled .glyph {
-    background-color: #999;
-  }
-
-  &:not(:disabled):hover .glyph {
-    /* background-color: white; */
-    background-color: seagreen;
   }
 }
 @media (min-width: 800px) {
@@ -482,8 +466,6 @@ main {
     & button {
       flex: 1;
       padding: 0.5em 0.75em;
-      background-color: seagreen;
-      color: white;
     }
   }
 
@@ -492,35 +474,60 @@ main {
     gap: 0.5em;
     align-items: center;
     justify-content: center;
-
-    & .box {
-      width: 1.2em;
-      height: 1.2em;
-    }
-  }
-
-  #detailBtn {
-    &.expand .glyph {
-      mask: url("/icons/expand.svg");
-    }
-    &.collapse .glyph {
-      mask: url("/icons/collapse.svg");
-    }
-  }
-  #randomiseBtn {
-    & .glyph {
-      mask: url("/icons/randomise.svg");
-    }
-  }
-  #focusBtn {
-    & .glyph {
-      mask: url("/icons/focus.svg");
-    }
   }
 }
 @media (max-width: 800px) {
   .toolbar button {
     flex: 1;
+  }
+}
+
+.icon-button {
+  background: none;
+  color: #000;
+
+  &:disabled {
+    background: none;
+  }
+
+  & .box {
+    width: 1.2em;
+    height: 1.2em;
+  }
+
+  & .glyph {
+    background-color: #000;
+  }
+
+  &:disabled .glyph {
+    background-color: #999;
+  }
+
+  &:not(:disabled):hover {
+    color: seagreen;
+
+    & .glyph {
+      background-color: seagreen;
+    }
+  }
+}
+
+#detailBtn {
+  &.expand .glyph {
+    mask: url("/icons/expand.svg");
+  }
+  &.collapse .glyph {
+    mask: url("/icons/collapse.svg");
+  }
+}
+#randomiseBtn {
+  & .glyph {
+    mask: url("/icons/randomise.svg");
+  }
+}
+#focusBtn {
+  & .glyph {
+    mask: url("/icons/focus.svg");
   }
 }
 
