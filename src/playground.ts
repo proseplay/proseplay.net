@@ -9,7 +9,7 @@ const container = document.querySelector(".text") as HTMLElement,
   submitBtn = document.querySelector("#submitBtn") as HTMLButtonElement;
 
 const randomiseBtn = document.querySelector("#randomiseBtn") as HTMLButtonElement,
-  expandBtn = document.querySelector("#expandBtn") as HTMLButtonElement;
+  detailBtn = document.querySelector("#detailBtn") as HTMLButtonElement;
 
 const focusBtn = document.querySelector("#focusBtn") as HTMLButtonElement,
   focusNote = document.querySelector(".focus-note") as HTMLElement;
@@ -57,7 +57,7 @@ as (seep|sleep)`;
   
   randomiseBtn.addEventListener("click", () => pp.randomise());
   
-  expandBtn.addEventListener("click", toggleExpand);
+  detailBtn.addEventListener("click", toggleExpand);
   
   snapshotBtn.addEventListener("click", snapshot);
   
@@ -128,7 +128,7 @@ function submit(e?: Event) {
   ppSwitcher.slideWindow(0, 1);
   viewOutput();
 
-  expandBtn.disabled = false;
+  detailBtn.disabled = false;
   randomiseBtn.disabled = false;
   snapshotBtn.disabled = false;
   focusBtn.disabled = false;
@@ -139,7 +139,9 @@ function submit(e?: Event) {
 
 function toggleExpand() {
   pp.isExpanded ? pp.collapse() : pp.expand();
-  expandBtn.innerText = pp.isExpanded ? "Collapse" : "Expand";
+  (detailBtn.querySelector("span") as HTMLElement).innerText = pp.isExpanded ? "Collapse" : "Expand";
+  detailBtn.classList.toggle("expand");
+  detailBtn.classList.toggle("collapse");
   randomiseBtn.disabled = pp.isExpanded;
 }
 
