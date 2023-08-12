@@ -184,6 +184,7 @@ code,
 kbd {
   /* font-family: "Courier Prime", monospace; */
   font-family: "Select Mono", monospace;
+  margin: 0 0.25em;
 }
 
 kbd {
