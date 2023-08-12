@@ -41,10 +41,12 @@ for (this moment|forever)[2]</code></pre>
       <pre><code>(hypothetically|hello)</code></pre>
       <p>while this will move horizontally:</p>
       <pre><code>(hypothetically|hello)[-]</code></pre>
-      <p>This can be combined with linking but the order matters: it’ll look for the link first, then the hyphen.</p>
+      <p>This can be combined with linking, but the order matters: it’ll look for the link first, then the hyphen. This will incorporate nicely:</p>
       <pre><code>(hypothetically|hello)[1-]</code></pre>
+      <p>while this will not:</p>
+      <pre><code>(hypothetically|hello)[-1]</code></pre>
       <h3>Custom functions</h3>
-      <p>Choices can be linked to custom functions to be called when that choice is activated. In the line below, there are two choices, each linked to a different custom function.</p>
+      <p>Choices can be linked to custom functions (defined by you) to be called when that choice is activated. In the line below, there are two choices, each linked to a different custom function.</p>
       <pre><code>in the (mist->turnGrey|missed->turnBlue)</code></pre>
       <p>In your code, you might create a function named <code>turnGrey()</code>, which sets the page background to grey, and a function named <code>turnBlue()</code>. which sets the page background to blue.</p>
       <pre><code>function turnGrey() {
@@ -84,7 +86,7 @@ ProsePlay.parse(poem);
 // const container = document.querySelector(".text");
 // const pp = new ProsePlay(container);
 // pp.parse(poem);</code></pre>
-      <p>Opening the page, you should see how the parentheses and vertical bars have allowed ProsePlay to transform the poem.</p>
+      <p>Opening the page, you should see the result of ProsePlay parsing the string.</p>
       <p>You can now add your own CSS styles to position and shape the container, as well as change things like font family, font size, and color. Beyond those properties, it may take some trial and error to get the intended effects.</p>
       <p>You can also have multiple ProsePlay poems running on the page, like this:</p>
       <pre><code>const poem1 = `this is (my|your|our)
