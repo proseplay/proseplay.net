@@ -167,6 +167,7 @@ button {
 
   &:disabled {
     /* background-color: rgb(182, 196, 188); */
+    color: #999;
     cursor: default;
   }
 
@@ -178,7 +179,7 @@ button {
     background-color: #999;
   }
 
-  &:hover .glyph {
+  &:not(:disabled):hover .glyph {
     /* background-color: white; */
     background-color: seagreen;
   }
@@ -498,9 +499,12 @@ main {
     }
   }
 
-  #expandBtn {
-    & .glyph {
+  #detailBtn {
+    &.expand .glyph {
       mask: url("/icons/expand.svg");
+    }
+    &.collapse .glyph {
+      mask: url("/icons/collapse.svg");
     }
   }
   #randomiseBtn {
