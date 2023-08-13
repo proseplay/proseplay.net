@@ -133,6 +133,12 @@ a {
   }
 }
 
+.sample-list {
+  display: flex;
+  gap: 0.25em;
+  overflow: auto;
+}
+
 input {
   accent-color: seagreen;
   color: white;

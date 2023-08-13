@@ -41,10 +41,12 @@
       <div class="input-container hidable">
         <div class="input--toolbar">
           <h2 class="small-heading">Samples</h2>
-          <button type="button" class="loadBtn" value="homophones"><span class="file-name">homophones<span class="file-ext">.txt</span></span></button>
-          <button type="button" class="loadBtn" value="hypothetically"><span class="file-name">hypothetically<span class="file-ext">.txt</span></span></button>
-          <button type="button" class="loadBtn" value="dickinson"><span class="file-name">dickinson<span class="file-ext">.txt</span></span></button>
-          <button type="button" class="loadBtn" value="curtains"><span class="file-name">curtains<span class="file-ext">.txt</span></span></button>
+          <div class="sample-list">
+            <button type="button" class="loadBtn" value="homophones"><span class="file-name">homophones<span class="file-ext">.txt</span></span></button>
+            <button type="button" class="loadBtn" value="hypothetically"><span class="file-name">hypothetically<span class="file-ext">.txt</span></span></button>
+            <button type="button" class="loadBtn" value="dickinson"><span class="file-name">dickinson<span class="file-ext">.txt</span></span></button>
+            <button type="button" class="loadBtn" value="curtains"><span class="file-name">curtains<span class="file-ext">.txt</span></span></button>
+          </div>
         </div>
         <div class="form-container">
           <div class="input--toolbar toolbar">
@@ -82,12 +84,12 @@
           <div class="text"></div>
         </div>
       </div>
-      <div class="snapshots-container">
-        <div class="snapshots--toolbar toolbar hidable">
+      <div class="snapshots-container hidable">
+        <div class="snapshots--toolbar toolbar">
           <button type="button" id="snapshotBtn" class="button-with-icon" disabled autocomplete="off"><div class="box"><div class="glyph"></div></div>Snapshot</button>
           <button type="button" id="clearSnapshotsBtn" class="button-with-icon" disabled autocomplete="off"><div class="box"><div class="glyph"></div></div>Clear snapshots</button>
         </div>
-        <div class="snapshots hidable">
+        <div class="snapshots">
           <div class="snapshot">
             <div class="snapshot--header">
               <h2 class="snapshot--heading"></h2>
