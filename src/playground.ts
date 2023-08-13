@@ -8,6 +8,8 @@ const container = document.querySelector(".text") as HTMLElement,
   input = document.querySelector("#input") as HTMLTextAreaElement,
   submitBtn = document.querySelector("#submitBtn") as HTMLButtonElement;
 
+const textContainer = document.querySelector(".text-container") as HTMLElement;
+
 const randomiseBtn = document.querySelector("#randomiseBtn") as HTMLButtonElement,
   detailBtn = document.querySelector("#detailBtn") as HTMLButtonElement,
   clearBtn = document.querySelector("#clearBtn") as HTMLButtonElement;
@@ -20,7 +22,7 @@ const viewer = document.querySelector(".viewer") as HTMLElement;
   
 const snapshotBtn = document.querySelector("#snapshotBtn") as HTMLButtonElement,
   clearSnapshotsBtn = document.querySelector("#clearSnapshotsBtn") as HTMLButtonElement,
-  snapshotContainer = document.querySelector(".snapshots") as HTMLElement,
+  snapshotsContainer = document.querySelector(".snapshots") as HTMLElement,
   snapshotTemplate = document.querySelector(".snapshot") as HTMLElement;
 snapshotTemplate.remove();
 let snapshots: HTMLElement[] = [];
@@ -137,6 +139,8 @@ function submit(e?: Event) {
   ppSwitcher.slideWindow(0, 1);
   viewOutput();
 
+  textContainer.classList.remove("empty");
+
   detailBtn.disabled = false;
   randomiseBtn.disabled = false;
   clearBtn.disabled = false;
@@ -157,15 +161,19 @@ function toggleExpand() {
 
 function clear() {
   pp.parse("");
+
+  textContainer.classList.add("empty");
+
   clearBtn.disabled = true;
   detailBtn.disabled = true;
   randomiseBtn.disabled = true;
   focusBtn.disabled = true;
+  snapshotBtn.disabled = true;
 }
 
 function snapshot() {
   const snapshotHtml = snapshotTemplate.cloneNode(true) as HTMLElement;
-  snapshotContainer.appendChild(snapshotHtml);
+  snapshotsContainer.appendChild(snapshotHtml);
   snapshots.push(snapshotHtml);
 
   const snapshotHeading = snapshotHtml.querySelector(".snapshot--heading") as HTMLElement;
@@ -185,14 +193,18 @@ function snapshot() {
     });
     if (snapshots.length === 0) {
       clearSnapshotsBtn.disabled = true;
+      snapshotsContainer.classList.add("empty");
     }
   });
+
+  snapshotsContainer.classList.remove("empty");
 
   clearSnapshotsBtn.disabled = false;
 }
 
 function clearSnapshots() {
-  snapshotContainer.innerHTML = "";
+  snapshots.forEach(el => el.remove());
+  snapshotsContainer.classList.add("empty");
   clearSnapshotsBtn.disabled = true;
 }
 
