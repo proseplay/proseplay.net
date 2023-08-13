@@ -236,14 +236,17 @@ hr {
 
   & .close-button {
     position: absolute;
-    right: 30px;
-    top: 30px;
-    width: 40px;
-    height: 40px;
+    right: 1.5em;
+    top: 1.5em;
     padding: 0;
     line-height: 1;
     cursor: pointer;
     background: none;
+
+    & .box {
+      width: 1.2em;
+      height: 1.2em;
+    }
 
     & .glyph {
       -webkit-mask: url("/icons/remove.svg");
@@ -418,7 +421,7 @@ main {
 @media (min-width: 1200px) {
   .viewer {
     /* grid-template-columns: 30% 1fr; */
-    grid-template-columns: auto 1fr;
+    grid-template-columns: 1fr 2fr 1fr;
   }
 }
 @media (max-width: 800px) {
@@ -482,13 +485,6 @@ main {
       padding: 0.5em 0.75em;
     }
   }
-
-  & button {
-    display: inline-flex;
-    gap: 0.5em;
-    align-items: center;
-    justify-content: center;
-  }
 }
 @media (max-width: 800px) {
   .toolbar button {
@@ -512,6 +508,10 @@ main {
 }
 
 .button-with-icon {
+  display: inline-flex;
+  gap: 0.5em;
+  align-items: center;
+  justify-content: center;
   background: none;
   color: #000;
 
@@ -561,6 +561,12 @@ main {
   & .glyph {
     -webkit-mask: url("/icons/focus.svg");
     mask: url("/icons/focus.svg");
+  }
+}
+#helpBtn {
+  & .glyph {
+    -webkit-mask: url("/icons/help.svg");
+    mask: url("/icons/help.svg");
   }
 }
 
@@ -654,6 +660,13 @@ main {
   & .glyph {
     -webkit-mask: url("/icons/snapshot.svg");
     mask: url("/icons/snapshot.svg");
+  }
+}
+
+#clearSnapshotsBtn {
+  & .glyph {
+    -webkit-mask: url("/icons/remove.svg");
+    mask: url("/icons/remove.svg");
   }
 }
 

@@ -23,6 +23,8 @@ const snapshotBtn = document.querySelector("#snapshotBtn") as HTMLButtonElement,
 snapshotTemplate.remove();
 let snapshots: HTMLElement[] = [];
 
+const helpBtn = document.querySelector("#helpBtn") as HTMLButtonElement;
+
 const ppTitle = new ProsePlay(title),
   pp = new ProsePlay(container),
   ppSwitcher = new ProsePlay(switcher);
@@ -65,6 +67,8 @@ as (seep|sleep)`;
 
   const wrapTextInput = document.querySelector("#wrapText") as HTMLInputElement;
   wrapTextInput.addEventListener("change", toggleWrapText);
+
+  helpBtn.addEventListener("click", () => shortcutsModal.showModal());
   
   window.addEventListener("keydown", e => {
     if (e.key === "Enter" && e.metaKey) {

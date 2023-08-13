@@ -25,7 +25,7 @@
     <div class="focus-note invisible">Press <kbd>esc</kbd> or reload to exit focus mode.</div>
     <dialog class="shortcuts modal">
       <form method="dialog">
-        <button class="close-button box"><div class="glyph" aria-label="Close dialog"></div></button>
+        <button class="close-button"><div class="box"><div class="glyph" aria-label="Close dialog"></div></div></button>
       </form>
       <h2>Shortcuts</h2>
       <div><kbd>i</kbd>: Focus text area</div>
@@ -76,12 +76,18 @@
           <div class="toolbar-section">
             <button type="button" id="focusBtn" class="button-with-icon" disabled autocomplete="off"><div class="box"><div class="glyph"></div></div> Focus</button>
           </div>
+          <div class="toolbar-section">
+            <button type="button" id="helpBtn" class="button-with-icon" autocomplete="off"><div class="box"><div class="glyph"></div></div> Help</button>
+          </div>
         </div>
         <div class="text-container">
           <div class="text"></div>
         </div>
       </div>
       <div class="snapshots-container">
+        <div class="snapshots--toolbar toolbar hidable">
+          <button type="button" id="clearSnapshotsBtn" class="button-with-icon" autocomplete="off"><div class="box"><div class="glyph"></div></div>Clear snapshots</button>
+        </div>
         <div class="snapshots hidable">
           <div class="snapshot">
             <div class="snapshot--header">
