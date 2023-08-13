@@ -533,19 +533,23 @@ main {
 
 #detailBtn {
   &.expand .glyph {
+    -webkit-mask: url("/icons/expand.svg");
     mask: url("/icons/expand.svg");
   }
   &.collapse .glyph {
+    -webkit-mask: url("/icons/collapse.svg");
     mask: url("/icons/collapse.svg");
   }
 }
 #randomiseBtn {
   & .glyph {
+    -webkit-mask: url("/icons/randomise.svg");
     mask: url("/icons/randomise.svg");
   }
 }
 #focusBtn {
   & .glyph {
+    -webkit-mask: url("/icons/focus.svg");
     mask: url("/icons/focus.svg");
   }
 }
