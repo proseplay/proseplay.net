@@ -559,6 +559,12 @@ main {
     mask: url("/icons/randomise.svg");
   }
 }
+#clearBtn {
+  & .glyph {
+    -webkit-mask: url("/icons/remove.svg");
+    mask: url("/icons/remove.svg");
+  }
+}
 #focusBtn {
   & .glyph {
     -webkit-mask: url("/icons/focus.svg");

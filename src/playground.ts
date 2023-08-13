@@ -9,7 +9,8 @@ const container = document.querySelector(".text") as HTMLElement,
   submitBtn = document.querySelector("#submitBtn") as HTMLButtonElement;
 
 const randomiseBtn = document.querySelector("#randomiseBtn") as HTMLButtonElement,
-  detailBtn = document.querySelector("#detailBtn") as HTMLButtonElement;
+  detailBtn = document.querySelector("#detailBtn") as HTMLButtonElement,
+  clearBtn = document.querySelector("#clearBtn") as HTMLButtonElement;
 
 const focusBtn = document.querySelector("#focusBtn") as HTMLButtonElement,
   focusNote = document.querySelector(".focus-note") as HTMLElement;
@@ -61,6 +62,8 @@ as (seep|sleep)`;
   randomiseBtn.addEventListener("click", () => pp.randomise());
   
   detailBtn.addEventListener("click", toggleExpand);
+
+  clearBtn.addEventListener("click", clear);
   
   snapshotBtn.addEventListener("click", snapshot);
   clearSnapshotsBtn.addEventListener("click", clearSnapshots);
@@ -136,6 +139,7 @@ function submit(e?: Event) {
 
   detailBtn.disabled = false;
   randomiseBtn.disabled = false;
+  clearBtn.disabled = false;
   snapshotBtn.disabled = false;
   focusBtn.disabled = false;
 
@@ -149,6 +153,14 @@ function toggleExpand() {
   detailBtn.classList.toggle("expand");
   detailBtn.classList.toggle("collapse");
   randomiseBtn.disabled = pp.isExpanded;
+}
+
+function clear() {
+  pp.parse("");
+  clearBtn.disabled = true;
+  detailBtn.disabled = true;
+  randomiseBtn.disabled = true;
+  focusBtn.disabled = true;
 }
 
 function snapshot() {
