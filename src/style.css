@@ -665,8 +665,8 @@ main {
 
 #clearSnapshotsBtn {
   & .glyph {
-    -webkit-mask: url("/icons/remove.svg");
-    mask: url("/icons/remove.svg");
+    -webkit-mask: url("/icons/clear-snapshots.svg");
+    mask: url("/icons/clear-snapshots.svg");
   }
 }
 
