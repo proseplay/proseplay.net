@@ -667,6 +667,7 @@ main {
 
 .snapshot--clear {
   cursor: pointer;
+  background: none;
 
   & .box {
     width: 24px;
@@ -677,6 +678,12 @@ main {
     -webkit-mask: url("/icons/remove.svg");
     mask: url("/icons/remove.svg");
     background-color: #999;
+  }
+
+  &:hover {
+    & .glyph {
+      background-color: #777;
+    }
   }
 }
 
