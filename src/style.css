@@ -638,8 +638,10 @@ main {
 .snapshots {
   font-size: 16px;
   color: #999;
+  max-height: 65vh;
   display: flex;
   flex-direction: column;
+  overflow: auto;
   gap: 1em;
 }
 
