@@ -148,7 +148,7 @@ textarea {
   white-space: pre;
 
   &.wrap {
-    white-space: unset;
+    white-space: pre-line;
   }
 }
 
