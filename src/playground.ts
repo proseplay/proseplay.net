@@ -18,6 +18,7 @@ const switcher = document.querySelector(".switcher") as HTMLElement;
 const viewer = document.querySelector(".viewer") as HTMLElement;
   
 const snapshotBtn = document.querySelector("#snapshotBtn") as HTMLButtonElement,
+  clearSnapshotsBtn = document.querySelector("#clearSnapshotsBtn") as HTMLButtonElement,
   snapshotContainer = document.querySelector(".snapshots") as HTMLElement,
   snapshotTemplate = document.querySelector(".snapshot") as HTMLElement;
 snapshotTemplate.remove();
@@ -62,6 +63,7 @@ as (seep|sleep)`;
   detailBtn.addEventListener("click", toggleExpand);
   
   snapshotBtn.addEventListener("click", snapshot);
+  clearSnapshotsBtn.addEventListener("click", clearSnapshots);
   
   focusBtn.addEventListener("click", focus);
 
@@ -169,7 +171,17 @@ function snapshot() {
     snapshots.forEach((otherSnap, i) => {
       (otherSnap.querySelector(".snapshot--heading") as HTMLElement).innerText = `Snapshot ${i + 1}`;
     });
+    if (snapshots.length === 0) {
+      clearSnapshotsBtn.disabled = true;
+    }
   });
+
+  clearSnapshotsBtn.disabled = false;
+}
+
+function clearSnapshots() {
+  snapshotContainer.innerHTML = "";
+  clearSnapshotsBtn.disabled = true;
 }
 
 function focus() {
