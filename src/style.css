@@ -459,15 +459,16 @@ main {
 @media (min-width: 800px) {
   .output-container {
     display: grid;
-    grid-template-columns: 1fr 30%;
+    /* grid-template-columns: 1fr 30%; */
     grid-template-rows: auto 1fr;
     gap: 50px;
-    grid-auto-flow: column;
+    /* grid-auto-flow: column; */
   }
 }
 @media (min-width: 1200px) {
   .output-container {
-    grid-template-columns: 1fr 30%;
+    /* grid-template-columns: 1fr 30%; */
+    grid-template-rows: auto 1fr;
   }
 }
 
@@ -582,6 +583,7 @@ main {
   letter-spacing: -0.025em;
   border-bottom: 0.5px solid currentColor;
   padding-bottom: 0.25em;
+  margin-top: 0;
   margin-bottom: 0;
   width: fit-content;
   color: #777;
@@ -637,6 +639,13 @@ main {
 
 .text-container {
   font-size: 24px;
+}
+
+#snapshotBtn {
+  & .glyph {
+    -webkit-mask: url("/icons/snapshot.svg");
+    mask: url("/icons/snapshot.svg");
+  }
 }
 
 .snapshots {
