@@ -10,6 +10,9 @@ const container = document.querySelector(".text") as HTMLElement,
 
 const textContainer = document.querySelector(".text-container") as HTMLElement;
 
+const uploadBtn = document.querySelector("#uploadBtn") as HTMLButtonElement,
+  saveBtn = document.querySelector("#saveBtn") as HTMLButtonElement;
+
 const randomiseBtn = document.querySelector("#randomiseBtn") as HTMLButtonElement,
   detailBtn = document.querySelector("#detailBtn") as HTMLButtonElement,
   clearBtn = document.querySelector("#clearBtn") as HTMLButtonElement;
@@ -58,6 +61,9 @@ document.addEventListener("DOMContentLoaded", () => {
 for (words|worlds) that (exit|exist)
 as (seep|sleep)`;
   }
+
+  uploadBtn.addEventListener("click", upload);
+  saveBtn.addEventListener("click", save);
   
   submitBtn.addEventListener("click", submit);
   
@@ -131,6 +137,39 @@ function load(e: Event) {
     .then(text => {
       input.value = text;
     });
+}
+
+function upload() {
+  const fileInput = document.createElement("input");
+  fileInput.type = "file";
+  fileInput.accept = ".txt,text/plain";
+  fileInput.addEventListener("input", () => {
+    if (fileInput.files) {
+      const file = fileInput.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.addEventListener("load", () => {
+          const result = reader.result;
+          if (result !== null) {
+            input.value = result as string;
+          }
+        }, false);
+        reader.readAsText(file, "UTF-8");
+      }
+    }
+  });
+  fileInput.click();
+}
+
+function save() {
+  const text = input.value;
+  const blob = new Blob([text], { type: "text/plain;charset=UTF-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  const title = "proseplay";
+  a.download = `${title}.txt`;
+  a.click();
 }
 
 function submit(e?: Event) {

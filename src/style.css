@@ -511,8 +511,20 @@ main {
   }
 }
 
+#uploadBtn {
+  & .glyph {
+    -webkit-mask: url("/icons/upload.svg");
+    mask: url("/icons/upload.svg");
+  }
+}
+#saveBtn {
+  & .glyph {
+    -webkit-mask: url("/icons/save.svg");
+    mask: url("/icons/save.svg");
+  }
+}
+
 .checkbox-container {
-  margin-bottom: 1rem;
   -webkit-user-select: none;
   user-select: none;
 }
@@ -598,7 +610,7 @@ main {
     flex-direction: column;
     gap: 20px;
   
-    & .input-container {
+    & .textarea-container {
       flex: 1;
     }
   }
