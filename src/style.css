@@ -503,10 +503,10 @@ main {
 }
 .toolbar-section {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.25rem;
 
   & + .toolbar-section {
-    padding-left: 0.5em;
+    padding-left: 0.5rem;
     border-left: 0.5px solid #999;
   }
 }
@@ -531,7 +531,7 @@ main {
 
 .button-with-icon {
   display: inline-flex;
-  gap: 0.5em;
+  gap: 0.25em;
   align-items: center;
   justify-content: center;
   background: none;
