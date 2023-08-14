@@ -49,6 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ppSwitcher.parse(switcher.innerText);
   ppSwitcher.setFunction("viewInput", viewInput);
   ppSwitcher.setFunction("viewOutput", viewOutput);
+  ppSwitcher.setFunction("viewSnapshots", viewSnapshots);
 
   const loadBtns = document.querySelectorAll(".loadBtn") as NodeListOf<HTMLButtonElement>;
   loadBtns.forEach(btn => {
@@ -133,14 +134,22 @@ as (seep|sleep)`;
 });
 
 function viewInput() {
-  viewer.classList.add("view-input");
-  viewer.classList.remove("view-output");
+  viewer.classList.add("view--input");
+  viewer.classList.remove("view--output");
+  viewer.classList.remove("view--snapshots");
 }
 
 function viewOutput() {
   submitBtn.click();
-  viewer.classList.add("view-output");
-  viewer.classList.remove("view-input");
+  viewer.classList.remove("view--input");
+  viewer.classList.add("view--output");
+  viewer.classList.remove("view--snapshots");
+}
+
+function viewSnapshots() {
+  viewer.classList.remove("view--input");
+  viewer.classList.remove("view--output");
+  viewer.classList.add("view--snapshots");
 }
 
 function loadSample(e: Event) {
