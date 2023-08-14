@@ -125,8 +125,8 @@ a {
     width: max-content;
 
     & .glyph {
-      -webkit-mask: url("/icons/ne-arrow.svg");
-      mask: url("/icons/ne-arrow.svg");
+      -webkit-mask: url("/icons/ne-arrow.svg") center no-repeat;
+      mask: url("/icons/ne-arrow.svg") center no-repeat;
       mask-repeat: no-repeat;
       background-color: currentColor;
     }
@@ -255,8 +255,8 @@ hr {
     }
 
     & .glyph {
-      -webkit-mask: url("/icons/remove.svg");
-      mask: url("/icons/remove.svg");
+      -webkit-mask: url("/icons/remove.svg") center no-repeat;
+      mask: url("/icons/remove.svg") center no-repeat;
       background-color: #999;
       transform: 0.5s background-color;
 
@@ -514,14 +514,14 @@ main {
 
 #uploadBtn {
   & .glyph {
-    -webkit-mask: url("/icons/upload.svg");
-    mask: url("/icons/upload.svg");
+    -webkit-mask: url("/icons/upload.svg") center no-repeat;
+    mask: url("/icons/upload.svg") center no-repeat;
   }
 }
 #saveBtn {
   & .glyph {
-    -webkit-mask: url("/icons/save.svg");
-    mask: url("/icons/save.svg");
+    -webkit-mask: url("/icons/save.svg") center no-repeat;
+    mask: url("/icons/save.svg") center no-repeat;
   }
 }
 
@@ -538,6 +538,7 @@ main {
   background: none;
   color: #000;
   line-height: 1;
+  white-space: pre;
 
   &:disabled {
     background: none;
@@ -567,36 +568,36 @@ main {
 
 #detailBtn {
   &.expand .glyph {
-    -webkit-mask: url("/icons/expand.svg");
-    mask: url("/icons/expand.svg");
+    -webkit-mask: url("/icons/expand.svg") center no-repeat;
+    mask: url("/icons/expand.svg") center no-repeat;
   }
   &.collapse .glyph {
-    -webkit-mask: url("/icons/collapse.svg");
-    mask: url("/icons/collapse.svg");
+    -webkit-mask: url("/icons/collapse.svg") center no-repeat;
+    mask: url("/icons/collapse.svg") center no-repeat;
   }
 }
 #randomiseBtn {
   & .glyph {
-    -webkit-mask: url("/icons/randomise.svg");
-    mask: url("/icons/randomise.svg");
+    -webkit-mask: url("/icons/randomise.svg") center no-repeat;
+    mask: url("/icons/randomise.svg") center no-repeat;
   }
 }
 #clearBtn {
   & .glyph {
-    -webkit-mask: url("/icons/remove.svg");
-    mask: url("/icons/remove.svg");
+    -webkit-mask: url("/icons/remove.svg") center no-repeat;
+    mask: url("/icons/remove.svg") center no-repeat;
   }
 }
 #focusBtn {
   & .glyph {
-    -webkit-mask: url("/icons/focus.svg");
-    mask: url("/icons/focus.svg");
+    -webkit-mask: url("/icons/focus.svg") center no-repeat;
+    mask: url("/icons/focus.svg") center no-repeat;
   }
 }
 #helpBtn {
   & .glyph {
-    -webkit-mask: url("/icons/help.svg");
-    mask: url("/icons/help.svg");
+    -webkit-mask: url("/icons/help.svg") center no-repeat;
+    mask: url("/icons/help.svg") center no-repeat;
   }
 }
 
@@ -718,15 +719,15 @@ main {
 
 #snapshotBtn {
   & .glyph {
-    -webkit-mask: url("/icons/snapshot.svg");
-    mask: url("/icons/snapshot.svg");
+    -webkit-mask: url("/icons/snapshot.svg") center no-repeat;
+    mask: url("/icons/snapshot.svg") center no-repeat;
   }
 }
 
 #clearSnapshotsBtn {
   & .glyph {
-    -webkit-mask: url("/icons/clear-snapshots.svg");
-    mask: url("/icons/clear-snapshots.svg");
+    -webkit-mask: url("/icons/clear-snapshots.svg") center no-repeat;
+    mask: url("/icons/clear-snapshots.svg") center no-repeat;
   }
 }
 
@@ -775,8 +776,8 @@ main {
   }
   
   & .glyph {
-    -webkit-mask: url("/icons/remove.svg");
-    mask: url("/icons/remove.svg");
+    -webkit-mask: url("/icons/remove.svg") center no-repeat;
+    mask: url("/icons/remove.svg") center no-repeat;
     background-color: #999;
   }
 
