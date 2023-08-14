@@ -666,7 +666,25 @@ main {
 }
 
 .empty-text {
+  display: none;
   max-width: 30ch;
+  font-size: 1rem;
+}
+
+.empty {
+  width: calc(100% - 2rem);
+  height: calc(100% - 2rem);
+  background-color: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  color: #999;
+  text-align: center;
+
+  & .empty-text {
+    display: block;
+  }
 }
 
 .text--toolbar {
@@ -676,27 +694,6 @@ main {
 .text-container {
   font-size: 24px;
   padding-top: 2rem;
-
-  & .empty-text {
-    display: none;
-  }
-
-  &.empty {
-    width: calc(100% - 2rem);
-    height: calc(100% - 2rem);
-    background-color: #eee;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-    font-size: 1rem;
-    color: #999;
-    text-align: center;
-
-    & .empty-text {
-      display: block;
-    }
-  }
 }
 
 .snapshots-column {
@@ -732,26 +729,6 @@ main {
   flex-direction: column;
   overflow: auto;
   gap: 1rem;
-
-  & .empty-text {
-    display: none;
-  }
-
-  &.empty {
-    width: calc(100% - 2rem);
-    height: calc(100% - 2rem);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    background-color: #eee;
-    font-size: 1rem;
-    text-align: center;
-
-    & .empty-text {
-      display: block;
-    }
-  }
 }
 
 .snapshot {
