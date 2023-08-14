@@ -424,7 +424,7 @@ main {
   display: grid;
   gap: 3rem;
   overflow: hidden;
-  transition: 0.25s;
+  transition: grid-template-columns 0.5s ease-in-out;
 
   &.focus--input {
     grid-template-columns: 2fr 1fr 1fr;
