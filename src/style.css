@@ -422,17 +422,18 @@ main {
   width: 100%;
   height: 80vh;
   display: grid;
-  /* grid-template-columns: 30% 70%; */
-  grid-template-columns: 1fr 2fr 1fr;
-  /* display: flex; */
   gap: 3rem;
   overflow: hidden;
-}
-/* @media (min-width: 1200px) {
-  .viewer {
+  transition: 0.25s;
+
+  &.focus--input {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+
+  &.focus--output {
     grid-template-columns: 1fr 2fr 1fr;
   }
-} */
+}
 @media (max-width: 800px) {
   .viewer {
     width: 200vw;

@@ -61,6 +61,10 @@ document.addEventListener("DOMContentLoaded", () => {
 for (words|worlds) that (exit|exist)
 as (seep|sleep)`;
   }
+  input.addEventListener("focus", () => {
+    viewer.classList.add("focus--input");
+    viewer.classList.remove("focus--output");
+  });
 
   uploadBtn.addEventListener("click", upload);
   saveBtn.addEventListener("click", save);
@@ -193,6 +197,9 @@ function submit(e?: Event) {
 
   textContainer.classList.remove("empty");
 
+  viewer.classList.remove("focus--input");
+  viewer.classList.add("focus--output");
+  
   detailBtn.disabled = false;
   randomiseBtn.disabled = false;
   clearBtn.disabled = false;
@@ -215,6 +222,9 @@ function clear() {
   pp.parse("");
 
   textContainer.classList.add("empty");
+
+  viewer.classList.remove("focus--output");
+  viewer.classList.add("focus--input");
 
   clearBtn.disabled = true;
   detailBtn.disabled = true;
