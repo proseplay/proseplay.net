@@ -4,14 +4,15 @@ import { ProsePlay } from "proseplay";
 
 const title = document.querySelector(".title") as HTMLElement;
 
-const container = document.querySelector(".text") as HTMLElement,
-  input = document.querySelector("#input") as HTMLTextAreaElement,
-  submitBtn = document.querySelector("#submitBtn") as HTMLButtonElement;
-
-const textContainer = document.querySelector(".text-container") as HTMLElement;
+const switcher = document.querySelector(".switcher") as HTMLElement;
+const viewer = document.querySelector(".viewer") as HTMLElement;
 
 const uploadBtn = document.querySelector("#uploadBtn") as HTMLButtonElement,
   saveBtn = document.querySelector("#saveBtn") as HTMLButtonElement;
+
+const container = document.querySelector(".text") as HTMLElement,
+  input = document.querySelector("#input") as HTMLTextAreaElement,
+  submitBtn = document.querySelector("#submitBtn") as HTMLButtonElement;
 
 const randomiseBtn = document.querySelector("#randomiseBtn") as HTMLButtonElement,
   detailBtn = document.querySelector("#detailBtn") as HTMLButtonElement,
@@ -20,17 +21,16 @@ const randomiseBtn = document.querySelector("#randomiseBtn") as HTMLButtonElemen
 const focusBtn = document.querySelector("#focusBtn") as HTMLButtonElement,
   focusNote = document.querySelector(".focus-note") as HTMLElement;
   
-const switcher = document.querySelector(".switcher") as HTMLElement;
-const viewer = document.querySelector(".viewer") as HTMLElement;
-  
+const helpBtn = document.querySelector("#helpBtn") as HTMLButtonElement;
+
+const textContainer = document.querySelector(".text-container") as HTMLElement;
+
 const snapshotBtn = document.querySelector("#snapshotBtn") as HTMLButtonElement,
   clearSnapshotsBtn = document.querySelector("#clearSnapshotsBtn") as HTMLButtonElement,
   snapshotsContainer = document.querySelector(".snapshots") as HTMLElement,
   snapshotTemplate = document.querySelector(".snapshot") as HTMLElement;
 snapshotTemplate.remove();
 let snapshots: HTMLElement[] = [];
-
-const helpBtn = document.querySelector("#helpBtn") as HTMLButtonElement;
 
 const ppTitle = new ProsePlay(title),
   pp = new ProsePlay(container),
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const loadBtns = document.querySelectorAll(".loadBtn") as NodeListOf<HTMLButtonElement>;
   loadBtns.forEach(btn => {
-    btn.addEventListener("click", load);
+    btn.addEventListener("click", loadSample);
   });
   
   if (input.value === "") {
@@ -64,24 +64,22 @@ as (seep|sleep)`;
 
   uploadBtn.addEventListener("click", upload);
   saveBtn.addEventListener("click", save);
-  
-  submitBtn.addEventListener("click", submit);
-  
-  randomiseBtn.addEventListener("click", () => pp.randomise());
-  
-  detailBtn.addEventListener("click", toggleExpand);
-
-  clearBtn.addEventListener("click", clear);
-  
-  snapshotBtn.addEventListener("click", snapshot);
-  clearSnapshotsBtn.addEventListener("click", clearSnapshots);
-  
-  focusBtn.addEventListener("click", focus);
 
   const wrapTextInput = document.querySelector("#wrapText") as HTMLInputElement;
   wrapTextInput.addEventListener("change", toggleWrapText);
+  
+  submitBtn.addEventListener("click", submit);
+  
+  detailBtn.addEventListener("click", toggleExpand);
+  randomiseBtn.addEventListener("click", () => pp.randomise());
+  clearBtn.addEventListener("click", clear);
+  
+  focusBtn.addEventListener("click", focus);
 
   helpBtn.addEventListener("click", () => shortcutsModal.showModal());
+
+  snapshotBtn.addEventListener("click", snapshot);
+  clearSnapshotsBtn.addEventListener("click", clearSnapshots);
   
   window.addEventListener("keydown", e => {
     if (e.key === "Enter" && e.metaKey) {
@@ -130,7 +128,18 @@ as (seep|sleep)`;
   });
 });
 
-function load(e: Event) {
+function viewInput() {
+  viewer.classList.add("view-input");
+  viewer.classList.remove("view-output");
+}
+
+function viewOutput() {
+  submitBtn.click();
+  viewer.classList.add("view-output");
+  viewer.classList.remove("view-input");
+}
+
+function loadSample(e: Event) {
   const btn = e.currentTarget as HTMLButtonElement;
   fetch(`/samples/${btn.value}.txt`)
     .then(r => r.text())
@@ -172,6 +181,10 @@ function save() {
   a.click();
 }
 
+function toggleWrapText() {
+  input.classList.toggle("wrap");
+}
+
 function submit(e?: Event) {
   e?.preventDefault();
   pp.parse(input.value);
@@ -210,6 +223,29 @@ function clear() {
   snapshotBtn.disabled = true;
 }
 
+function focus() {
+  document.body.classList.add("focus");
+  setTimeout(() => {
+    document.querySelectorAll(".hidable").forEach(el => el.classList.add("invisible"));
+  }, 500);
+
+  focusNote.classList.remove("invisible");
+  focusNote.style.opacity = "1";
+  setTimeout(() => {
+    setTimeout(() => {
+      focusNote.style.opacity = "0";
+      setTimeout(() => {
+        focusNote.classList.add("invisible");
+      }, 500);
+    }, 1000);
+  }, 1000);
+}
+
+function unfocus() {
+  document.body.classList.remove("focus");
+  document.querySelectorAll(".hidable").forEach(el => el.classList.remove("invisible"));
+}
+
 function snapshot() {
   const snapshotHtml = snapshotTemplate.cloneNode(true) as HTMLElement;
   snapshotsContainer.appendChild(snapshotHtml);
@@ -245,42 +281,4 @@ function clearSnapshots() {
   snapshots.forEach(el => el.remove());
   snapshotsContainer.classList.add("empty");
   clearSnapshotsBtn.disabled = true;
-}
-
-function focus() {
-  document.body.classList.add("focus");
-  setTimeout(() => {
-    document.querySelectorAll(".hidable").forEach(el => el.classList.add("invisible"));
-  }, 500);
-
-  focusNote.classList.remove("invisible");
-  focusNote.style.opacity = "1";
-  setTimeout(() => {
-    setTimeout(() => {
-      focusNote.style.opacity = "0";
-      setTimeout(() => {
-        focusNote.classList.add("invisible");
-      }, 500);
-    }, 1000);
-  }, 1000);
-}
-
-function unfocus() {
-  document.body.classList.remove("focus");
-  document.querySelectorAll(".hidable").forEach(el => el.classList.remove("invisible"));
-}
-
-function viewInput() {
-  viewer.classList.add("view-input");
-  viewer.classList.remove("view-output");
-}
-
-function viewOutput() {
-  submitBtn.click();
-  viewer.classList.add("view-output");
-  viewer.classList.remove("view-input");
-}
-
-function toggleWrapText() {
-  input.classList.toggle("wrap");
 }
