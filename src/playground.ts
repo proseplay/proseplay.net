@@ -30,7 +30,7 @@ const snapshotBtn = document.querySelector("#snapshotBtn") as HTMLButtonElement,
   snapshotsContainer = document.querySelector(".snapshots") as HTMLElement,
   snapshotTemplate = document.querySelector(".snapshot") as HTMLElement;
 snapshotTemplate.remove();
-let snapshots: HTMLElement[] = [];
+const snapshots: HTMLElement[] = [];
 
 const ppTitle = new ProsePlay(title),
   pp = new ProsePlay(container),
@@ -216,7 +216,7 @@ function submit(e?: Event) {
   focusBtn.disabled = false;
 
   snapshots.forEach(snapshot => snapshot.remove());
-  snapshots = [];
+  snapshots.length = 0;
 }
 
 function toggleExpand() {
@@ -300,4 +300,5 @@ function clearSnapshots() {
   snapshots.forEach(el => el.remove());
   snapshotsContainer.classList.add("empty");
   clearSnapshotsBtn.disabled = true;
+  snapshots.length = 0;
 }
