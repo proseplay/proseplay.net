@@ -427,22 +427,18 @@ main {
   display: grid;
   gap: 3rem;
   overflow: hidden;
-  transition: grid-template-columns 0.5s ease-in-out;
-
-  &.focus--input {
-    grid-template-columns: 2fr 1fr 1fr;
-  }
-
-  &.focus--output {
-    grid-template-columns: 1fr 2fr 1fr;
-  }
+  grid-template-columns: 1fr 1fr 1fr;
 }
-@media (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: no-preference) {
   .viewer {
-    &.focus--input,
+    transition: grid-template-columns 0.5s ease-in-out;
+
+    &.focus--input {
+      grid-template-columns: 2fr 1fr 1fr;
+    }
+
     &.focus--output {
-      grid-template-columns: 1fr 1fr 1fr;
-      transition: none;
+      grid-template-columns: 1fr 2fr 1fr;
     }
   }
 }
@@ -451,7 +447,6 @@ main {
     width: 310vw;
     display: flex;
     overflow-x: hidden;
-    transition: 0.2s margin-left ease-in-out;
     gap: 20vw;
     flex: 1;
 
@@ -468,9 +463,9 @@ main {
     }
   }
 }
-@media (max-width: 800px) and (prefers-reduced-motion: reduce) {
+@media (max-width: 800px) and (prefers-reduced-motion: no-preference) {
   .viewer {
-    transition: none;
+    transition: 0.2s margin-left ease-in-out;
   }
 }
 
@@ -603,6 +598,21 @@ main {
   & .glyph {
     -webkit-mask: url("/icons/randomise.svg") center no-repeat;
     mask: url("/icons/randomise.svg") center no-repeat;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  /* https://stackoverflow.com/questions/21919044/css3-transform-on-click-using-pure-css */
+  #randomiseBtn {
+    & .box {
+      transform: rotate(360deg);
+      transition: 0.15s;
+    }
+    &.clicked {
+      & .box {
+        transform: rotate(0deg);
+        transition: 0s;
+      }
+    }
   }
 }
 #clearBtn {

@@ -76,6 +76,8 @@ as (seep|sleep)`;
   submitBtn.addEventListener("click", submit);
   
   randomiseBtn.addEventListener("click", () => pp.randomise());
+  randomiseBtn.addEventListener("pointerdown", () => randomiseBtn.classList.add("clicked"));
+  randomiseBtn.addEventListener("pointerup", () => randomiseBtn.classList.remove("clicked"));
   detailBtn.addEventListener("click", toggleExpand);
   clearBtn.addEventListener("click", clear);
   
