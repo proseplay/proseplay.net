@@ -437,6 +437,15 @@ main {
     grid-template-columns: 1fr 2fr 1fr;
   }
 }
+@media (prefers-reduced-motion: reduce) {
+  .viewer {
+    &.focus--input,
+    &.focus--output {
+      grid-template-columns: 1fr 1fr 1fr;
+      transition: none;
+    }
+  }
+}
 @media (max-width: 800px) {
   .viewer {
     width: 310vw;
@@ -457,6 +466,11 @@ main {
     &.view--snapshots {
       margin-left: -220vw;
     }
+  }
+}
+@media (max-width: 800px) and (prefers-reduced-motion: reduce) {
+  .viewer {
+    transition: none;
   }
 }
 
