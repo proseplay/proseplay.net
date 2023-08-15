@@ -75,8 +75,8 @@ as (seep|sleep)`;
   
   submitBtn.addEventListener("click", submit);
   
-  detailBtn.addEventListener("click", toggleExpand);
   randomiseBtn.addEventListener("click", () => pp.randomise());
+  detailBtn.addEventListener("click", toggleExpand);
   clearBtn.addEventListener("click", clear);
   
   focusBtn.addEventListener("click", focus);
