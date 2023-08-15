@@ -248,6 +248,8 @@ function focus() {
     document.querySelectorAll(".hidable").forEach(el => el.classList.add("invisible"));
   }, 500);
 
+  viewer.classList.add("focusing");
+
   focusNote.classList.remove("invisible");
   focusNote.style.opacity = "1";
   setTimeout(() => {
@@ -262,6 +264,7 @@ function focus() {
 
 function unfocus() {
   document.body.classList.remove("focus");
+  viewer.classList.remove("focusing");
   document.querySelectorAll(".hidable").forEach(el => el.classList.remove("invisible"));
 }
 

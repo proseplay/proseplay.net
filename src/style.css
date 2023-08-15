@@ -436,6 +436,10 @@ main {
   &.focus--output {
     grid-template-columns: 1fr 2fr 1fr;
   }
+
+  &.focusing {
+    grid-template-columns: 0fr 1fr 0fr;
+  }
 }
 @media (max-width: 800px) {
   .viewer {
@@ -475,6 +479,10 @@ main {
   .snapshots-column {
     width: unset;
   }
+}
+
+.input-column {
+  overflow: hidden;
 }
 
 @media (min-width: 800px) {
