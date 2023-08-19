@@ -19,7 +19,8 @@ const randomiseBtn = document.querySelector("#randomiseBtn") as HTMLButtonElemen
   clearBtn = document.querySelector("#clearBtn") as HTMLButtonElement;
 
 const focusBtn = document.querySelector("#focusBtn") as HTMLButtonElement,
-  focusNote = document.querySelector(".focus-note") as HTMLElement;
+  focusNote = document.querySelector(".focus-note") as HTMLElement,
+  exitFocusBtn = document.querySelector("#exitFocusBtn") as HTMLButtonElement;
   
 const helpBtn = document.querySelector("#helpBtn") as HTMLButtonElement;
 
@@ -80,6 +81,7 @@ as (seep|sleep)`;
   clearBtn.addEventListener("click", clear);
   
   focusBtn.addEventListener("click", focus);
+  exitFocusBtn.addEventListener("click", unfocus);
 
   helpBtn.addEventListener("click", () => shortcutsModal.showModal());
 
@@ -252,6 +254,8 @@ function focus() {
 
   focusNote.classList.remove("invisible");
   focusNote.style.opacity = "1";
+  exitFocusBtn.classList.remove("invisible");
+  exitFocusBtn.style.opacity = "1";
   setTimeout(() => {
     setTimeout(() => {
       focusNote.style.opacity = "0";
@@ -266,6 +270,7 @@ function unfocus() {
   document.body.classList.remove("focus");
   viewer.classList.remove("focusing");
   document.querySelectorAll(".hidable").forEach(el => el.classList.remove("invisible"));
+  exitFocusBtn.classList.add("invisible");
 }
 
 function snapshot() {

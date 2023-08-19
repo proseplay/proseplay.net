@@ -385,7 +385,8 @@ main {
 
 .playground {
   & .hidable,
-  & .focus-note {
+  & .focus-note,
+  & .exitFocusBtn {
     transition: 0.5s ease-in-out opacity;
   }
   
@@ -405,6 +406,19 @@ main {
   border-radius: 5px;
   text-align: center;
   opacity: 0;
+}
+
+#exitFocusBtn {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  opacity: 0;
+  background: none;
+  color: #999;
+
+  &:hover {
+    color: seagreen;
+  }
 }
 
 .switcher {
