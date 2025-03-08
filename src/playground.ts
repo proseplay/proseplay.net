@@ -1,6 +1,7 @@
 import "./style.css";
 
 import { ProsePlay } from "proseplay";
+import LZString from 'lz-string';
 
 const title = document.querySelector(".title") as HTMLElement;
 
@@ -58,14 +59,20 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   
   if (input.value === "") {
-    input.value = `in the (mist|missed) (see|sea)
+    const text = `in the (mist|missed) (see|sea)
 (prey|pray) in the (morning|mourning)
 for (words|worlds) that (exit|exist)
 as (seep|sleep)`;
+    setTextarea(text);
+    setHash(text);
   }
   input.addEventListener("focus", () => {
     viewer.classList.add("focus--input");
     viewer.classList.remove("focus--output");
+  });
+
+  input.addEventListener("change", () => {
+    setHash(input.value);
   });
 
   uploadBtn.addEventListener("click", upload);
@@ -135,6 +142,10 @@ as (seep|sleep)`;
       }
     }
   });
+
+  window.addEventListener("hashchange", () => {
+    readFromHash();
+  });
 });
 
 function viewInput() {
@@ -161,7 +172,8 @@ function loadSample(e: Event) {
   fetch(`/samples/${btn.value}.txt`)
     .then(r => r.text())
     .then(text => {
-      input.value = text;
+      setTextarea(text);
+      setHash(text);
     });
 }
 
@@ -177,7 +189,9 @@ function upload() {
         reader.addEventListener("load", () => {
           const result = reader.result;
           if (result !== null) {
-            input.value = result as string;
+            const text = result as string;
+            setTextarea(text);
+            setHash(text);
           }
         }, false);
         reader.readAsText(file, "UTF-8");
@@ -311,4 +325,19 @@ function clearSnapshots() {
   snapshotsContainer.classList.add("empty");
   clearSnapshotsBtn.disabled = true;
   snapshots.length = 0;
+}
+
+function setTextarea(value: string) {
+  input.value = value;
+}
+
+function setHash(value: string) {
+  const compressed = LZString.compressToEncodedURIComponent(value);
+  window.location.hash = compressed;
+}
+
+function readFromHash() {
+  const hash = window.location.hash.replace("#", "");
+  const decompressed = LZString.decompressFromEncodedURIComponent(hash);
+  setTextarea(decompressed);
 }
