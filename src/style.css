@@ -692,6 +692,26 @@ main {
   }
 }
 
+.status {
+  .not-saved {
+    display: initial;
+  }
+
+  .saved {
+    display: none;
+  }
+
+  &.saved {
+    .not-saved {
+      display: none;
+    }
+
+    .saved {
+      display: initial;
+    }
+  }
+}
+
 .form-container {
   flex: 1;
   display: flex;

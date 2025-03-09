@@ -71,6 +71,10 @@ as (seep|sleep)`;
     viewer.classList.remove("focus--output");
   });
 
+  input.addEventListener("input", () => {
+    setSaved(false);
+  });
+
   input.addEventListener("change", () => {
     setHash(input.value);
   });
@@ -334,10 +338,16 @@ function setTextarea(value: string) {
 function setHash(value: string) {
   const compressed = LZString.compressToEncodedURIComponent(value);
   window.location.hash = compressed;
+  setSaved(true);
 }
 
 function readFromHash() {
   const hash = window.location.hash.replace("#", "");
   const decompressed = LZString.decompressFromEncodedURIComponent(hash);
   setTextarea(decompressed);
+}
+
+function setSaved(saved: boolean) {
+  const statusElement = document.querySelector(".status") as HTMLElement;
+  statusElement.classList.toggle("saved", saved);
 }
