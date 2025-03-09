@@ -1,117 +1,10 @@
-:root {
-  --font-mono: "Courier", "Courier Prime", monospace;
-}
-
-*,
-*::before
-*::after {
-  box-sizing: border-box;
-}
-
-@font-face {
-  font-family: "Crimson Pro";
-  font-style: normal;
-  font-weight: 400;
-  src: url("/fonts/CrimsonPro-Regular.ttf");
-}
-@font-face {
-  font-family: "Crimson Pro";
-  font-style: italic;
-  font-weight: 400;
-  src: url("/fonts/CrimsonPro-Italic.ttf");
-}
-@font-face {
-  font-family: "Crimson Pro";
-  font-style: normal;
-  font-weight: 600;
-  src: url("/fonts/CrimsonPro-SemiBold.ttf");
-}
-@font-face {
-  font-family: "Courier Prime";
-  font-style: normal;
-  font-weight: 400;
-  src: url("/fonts/CourierPrime-Regular.ttf");
-}
-
-/* :root {
-  font-size: 16px;
-}
-@media (min-width: 800px) {
-  :root {
-    font-size: 24px;
-  }
-} */
-
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
-}
-
-html,
-body {
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  height: 100%;
-}
+@import url("reset.css");
+@import url("typography.css");
+@import url("defaults.css");
+@import url("utility.css");
 
 body {
-  background-color: #f9f9f9;
-  font-family: "Crimson Pro", serif;
-  line-height: 1.5;
   overflow-x: hidden;
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
-  gap: 2rem;
-}
-
-h1 {
-  font-size: 2rem;
-  line-height: 1;
-}
-
-h2 {
-  font-size: 1.625rem;
-  line-height: 1.2;
-}
-
-h3 {
-  font-size: 1.29rem;
-  line-height: 1.3;
-}
-
-h4,
-h5,
-h6 {
-  font-size: 1.04rem;
-  line-height: 1.4;
-}
-
-.box {
-  width: 1em;
-  height: 1em;
-  position: relative;
-}
-
-.glyph {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
-  mask-repeat: no-repeat;
-  -webkit-mask-repeat: no-repeat;
 }
 
 a {
@@ -141,16 +34,6 @@ a {
   display: flex;
   gap: 0 0.25em;
   flex-wrap: wrap;
-}
-
-input {
-  accent-color: seagreen;
-  color: white;
-}
-
-textarea,
-button {
-  font-family: "Crimson Pro", serif;
 }
 
 textarea {
@@ -199,7 +82,7 @@ button {
 pre {
   padding: 1em 1.5em;
   background-color: #f5f5f5;
-  overflow-x: scroll;
+  overflow-x: auto;
 }
 
 pre code {
@@ -223,19 +106,6 @@ kbd {
   /* box-shadow: 1px 1px 2px rgba(0,0,0,.2), inset 1px 1px 2px rgba(0,0,0,.05); */
   border: 2px solid #dadada;
   box-shadow: inset 0 -1px 0 0 #dadada;
-}
-
-.hidden {
-  display: none;
-}
-
-.invisible {
-  visibility: hidden;
-}
-
-hr {
-  border: 1px solid rgb(220, 220, 220);
-  margin-bottom: 1em;
 }
 
 .modal {
@@ -899,8 +769,5 @@ main {
 footer {
   font-size: small;
   display: flex;
-}
-
-footer {
   justify-content: center;
 }

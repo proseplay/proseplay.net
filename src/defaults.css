@@ -1,0 +1,19 @@
+body {
+  background-color: #f9f9f9;
+  font-family: var(--font-body);
+  line-height: 1.5;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+input {
+  accent-color: seagreen;
+  color: white;
+}
+
+hr {
+  border: 1px solid rgb(220, 220, 220);
+  margin-bottom: 1em;
+}

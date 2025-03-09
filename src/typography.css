@@ -1,0 +1,46 @@
+@font-face {
+  font-family: "Crimson Pro";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/fonts/CrimsonPro-Regular.ttf");
+}
+@font-face {
+  font-family: "Crimson Pro";
+  font-style: italic;
+  font-weight: 400;
+  src: url("/fonts/CrimsonPro-Italic.ttf");
+}
+@font-face {
+  font-family: "Crimson Pro";
+  font-style: normal;
+  font-weight: 600;
+  src: url("/fonts/CrimsonPro-SemiBold.ttf");
+}
+@font-face {
+  font-family: "Courier Prime";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/fonts/CourierPrime-Regular.ttf");
+}
+
+h1 {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+h2 {
+  font-size: 1.625rem;
+  line-height: 1.2;
+}
+
+h3 {
+  font-size: 1.29rem;
+  line-height: 1.3;
+}
+
+h4,
+h5,
+h6 {
+  font-size: 1.04rem;
+  line-height: 1.4;
+}

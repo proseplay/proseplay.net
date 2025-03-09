@@ -2,6 +2,7 @@ import "./style.css";
 
 import { ProsePlay } from "proseplay";
 import LZString from 'lz-string';
+import { getTextFromHash } from "./common";
 
 const title = document.querySelector(".title") as HTMLElement;
 
@@ -342,9 +343,8 @@ function setHash(value: string) {
 }
 
 function readFromHash() {
-  const hash = window.location.hash.replace("#", "");
-  const decompressed = LZString.decompressFromEncodedURIComponent(hash);
-  setTextarea(decompressed);
+  const text = getTextFromHash();
+  setTextarea(text);
 }
 
 function setSaved(saved: boolean) {
