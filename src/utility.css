@@ -23,8 +23,9 @@
   transform: translate(-50%, -50%);
   width: 100%;
   height: 100%;
-  mask-repeat: no-repeat;
-  -webkit-mask-repeat: no-repeat;
+  -webkit-mask: var(--icon) center no-repeat;
+  mask: var(--icon) center no-repeat;
+  background-color: currentColor;
 }
 
 .hidden {
