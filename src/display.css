@@ -1,6 +1,7 @@
 @import url("reset.css");
 @import url("typography.css");
 @import url("defaults.css");
+@import url("common.css");
 @import url("utility.css");
 
 header,
@@ -28,9 +29,7 @@ footer {
   }
 }
 
-h1,
 footer {
-  font-size: 1rem;
   color: #737373;
 
   a {
@@ -39,6 +38,12 @@ footer {
     &:hover {
       color: #444;
     }
+  }
+
+  > * + * {
+    border-left: 1px solid currentColor;
+    padding-left: calc(0.5rem + 0.1rem);
+    margin-left: 0.5rem;
   }
 }
 
@@ -52,10 +57,4 @@ main {
 .text {
   margin-block: 2rem;
   font-size: 2rem;
-}
-
-footer > * + * {
-  border-left: 1px solid currentColor;
-  padding-left: calc(0.5rem + 0.1rem);
-  margin-left: 0.5rem;
 }

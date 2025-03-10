@@ -1,6 +1,7 @@
 @import url("reset.css");
 @import url("typography.css");
 @import url("defaults.css");
+@import url("common.css");
 @import url("utility.css");
 
 body {
@@ -43,37 +44,9 @@ textarea {
 }
 
 button {
-  /* padding: 0.5em; */
-  line-height: 1.5;
-  cursor: pointer;
-  /* background-color: rgb(100, 160, 127); */
-  /* background: none; */
   background-color: var(--color-accent);
   color: white;
-  /* color: white; */
-  border: 0;
-  border-radius: 5px;
   margin: 1px;
-  display: block;
-  font-size: 1em;
-
-  /* &:focus {
-    outline: 2px solid rgb(100, 160, 127);
-    border: 1px solid white;
-    color: white;
-  } */
-
-  &:disabled {
-    /* background-color: rgb(182, 196, 188); */
-    color: #999;
-    background-color: #eee;
-    cursor: default;
-  }
-}
-@media (min-width: 800px) {
-  button {
-    /* padding: 0.5em 0.75em; */
-  }
 }
 
 pre {
@@ -470,42 +443,6 @@ main {
   user-select: none;
 }
 
-.button-with-icon {
-  display: inline-flex;
-  gap: 0.25em;
-  align-items: center;
-  justify-content: center;
-  background: none;
-  color: #000;
-  line-height: 1;
-  white-space: pre;
-
-  &:disabled {
-    background: none;
-  }
-
-  & .box {
-    width: 1.2em;
-    height: 1.2em;
-  }
-
-  & .glyph {
-    background-color: #000;
-  }
-
-  &:disabled .glyph {
-    background-color: #999;
-  }
-
-  &:not(:disabled):hover {
-    color: var(--color-accent);
-
-    & .glyph {
-      background-color: var(--color-accent);
-    }
-  }
-}
-
 #detailBtn {
   &.expand .glyph {
     --icon: url("/icons/expand.svg");
@@ -517,21 +454,6 @@ main {
 #randomiseBtn {
   & .glyph {
     --icon: url("/icons/randomise.svg");
-  }
-}
-@media (prefers-reduced-motion: no-preference) {
-  /* https://stackoverflow.com/questions/21919044/css3-transform-on-click-using-pure-css */
-  #randomiseBtn {
-    & .box {
-      transform: rotate(360deg);
-      transition: 0.15s;
-    }
-    &.clicked {
-      & .box {
-        transform: rotate(0deg);
-        transition: 0s;
-      }
-    }
   }
 }
 #clearBtn {
@@ -666,10 +588,6 @@ main {
   & .empty-text {
     display: block;
   }
-}
-
-.text--toolbar {
-  flex-wrap: wrap;
 }
 
 .text-container {

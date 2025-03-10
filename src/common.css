@@ -1,0 +1,91 @@
+.toolbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+
+  &.toolbar--full {
+    & button {
+      flex: 1;
+      padding: 0.5em 0.75em;
+    }
+  }
+}
+
+.text--toolbar {
+  flex-wrap: wrap;
+}
+
+.toolbar-section {
+  display: flex;
+  gap: 0.25rem;
+
+  & + .toolbar-section {
+    padding-left: 0.5rem;
+    border-left: 0.5px solid #999;
+  }
+}
+
+.button-with-icon {
+  display: inline-flex;
+  gap: 0.25em;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  color: #000;
+  line-height: 1;
+  white-space: pre;
+
+  &:disabled {
+    background: none;
+  }
+
+  & .box {
+    width: 1.2em;
+    height: 1.2em;
+  }
+
+  & .glyph {
+    background-color: #000;
+  }
+
+  &:disabled .glyph {
+    background-color: #999;
+  }
+
+  &:not(:disabled):hover {
+    color: var(--color-accent);
+
+    & .glyph {
+      background-color: var(--color-accent);
+    }
+  }
+}
+
+#detailBtn {
+  &.expand .glyph {
+    --icon: url("/icons/expand.svg");
+  }
+  &.collapse .glyph {
+    --icon: url("/icons/collapse.svg")
+  }
+}
+#randomiseBtn {
+  & .glyph {
+    --icon: url("/icons/randomise.svg");
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    /* https://stackoverflow.com/questions/21919044/css3-transform-on-click-using-pure-css */
+    & .box {
+      transform: rotate(360deg);
+      transition: 0.15s;
+    }
+    &.clicked {
+      & .box {
+        transform: rotate(0deg);
+        transition: 0s;
+      }
+    }
+  }
+}
