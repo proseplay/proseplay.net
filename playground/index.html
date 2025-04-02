@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Playground | ProsePlay</title>
   <meta name="description" content="A tool for exploring alternate wor(l)d choices and possibilities.">
+  <link rel="stylesheet" href="/src/style.css">
 </head>
 <body class="playground">
   <header class="hidable">
@@ -23,8 +24,6 @@
     </nav>
   </header>
   <main id="main" tabindex="-1">
-    <div class="focus-note invisible">Press <kbd>esc</kbd> or reload to exit focus mode.</div>
-    <button type="button" id="exitFocusBtn" class="invisible">Exit focus mode</button>
     <dialog class="shortcuts modal">
       <form method="dialog">
         <button class="close-button" aria-label="Close dialog"><div class="box"><div class="glyph"></div></div></button>
@@ -35,8 +34,6 @@
       <div><kbd>r</kbd>: Randomise</div>
       <div><kbd>e</kbd>: Expand or collapse</div>
       <div><kbd>s</kbd>: Snapshot</div>
-      <div><kbd>f</kbd>: Enter focus mode</div>
-      <div><kbd>Esc</kbd>: Escape focus mode</div>
     </dialog>
     <div class="switcher hidable">Viewing (input->viewInput|output->viewOutput|snapshots->viewSnapshots)[-]</div>
     <div class="viewer view--input focus--input">
@@ -52,12 +49,18 @@
         <div class="input--toolbar toolbar">
           <div class="toolbar-section">
             <button type="button" id="uploadBtn" class="button-with-icon"><div class="box"><div class="glyph"></div></div>Upload</button>
-            <button type="button" id="saveBtn" class="button-with-icon"><div class="box"><div class="glyph"></div></div>Save</button>
+            <button type="button" id="saveBtn" class="button-with-icon"><div class="box"><div class="glyph"></div></div>Export</button>
           </div>
           <div class="toolbar-section">
             <div class="checkbox-container">
               <input type="checkbox" name="wrapText" id="wrapText" autocomplete="off">
               <label for="wrapText">Wrap text</label>
+            </div>
+          </div>
+          <div class="toolbar-section">
+            <div class="status saved">
+              <span class="not-saved">Not saved</span>
+              <a href="#" class="saved">Saved to URL</a>
             </div>
           </div>
         </div>
@@ -79,9 +82,6 @@
             <button type="button" id="randomiseBtn" class="button-with-icon" disabled autocomplete="off"><div class="box"><div class="glyph"></div></div>Randomise</button>
             <button type="button" id="detailBtn" class="button-with-icon expand" disabled autocomplete="off"><div class="box"><div class="glyph"></div></div><span>Expand</span></button>
             <button type="button" id="clearBtn" class="button-with-icon" disabled autocomplete="off"><div class="box"><div class="glyph"></div></div>Clear</button>
-          </div>
-          <div class="toolbar-section">
-            <button type="button" id="focusBtn" class="button-with-icon" disabled autocomplete="off"><div class="box"><div class="glyph"></div></div>Focus</button>
           </div>
           <div class="toolbar-section">
             <button type="button" id="helpBtn" class="button-with-icon" autocomplete="off"><div class="box"><div class="glyph"></div></div>Shortcuts</button>

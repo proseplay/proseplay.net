@@ -1,6 +1,8 @@
 import "./style.css";
 
 import { ProsePlay } from "proseplay";
+import LZString from 'lz-string';
+import { getTextFromHash } from "./common";
 
 const title = document.querySelector(".title") as HTMLElement;
 
@@ -18,10 +20,6 @@ const randomiseBtn = document.querySelector("#randomiseBtn") as HTMLButtonElemen
   detailBtn = document.querySelector("#detailBtn") as HTMLButtonElement,
   clearBtn = document.querySelector("#clearBtn") as HTMLButtonElement;
 
-const focusBtn = document.querySelector("#focusBtn") as HTMLButtonElement,
-  focusNote = document.querySelector(".focus-note") as HTMLElement,
-  exitFocusBtn = document.querySelector("#exitFocusBtn") as HTMLButtonElement;
-  
 const helpBtn = document.querySelector("#helpBtn") as HTMLButtonElement;
 
 const textContainer = document.querySelector(".text-container") as HTMLElement;
@@ -58,14 +56,26 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   
   if (input.value === "") {
-    input.value = `in the (mist|missed) (see|sea)
+    const text = `in the (mist|missed) (see|sea)
 (prey|pray) in the (morning|mourning)
 for (words|worlds) that (exit|exist)
 as (seep|sleep)`;
+    setTextarea(text);
+    setHash(text);
+    setDisplayLink();
   }
   input.addEventListener("focus", () => {
     viewer.classList.add("focus--input");
     viewer.classList.remove("focus--output");
+  });
+
+  input.addEventListener("input", () => {
+    setSaved(false);
+  });
+
+  input.addEventListener("change", () => {
+    setHash(input.value);
+    setDisplayLink();
   });
 
   uploadBtn.addEventListener("click", upload);
@@ -82,9 +92,6 @@ as (seep|sleep)`;
   detailBtn.addEventListener("click", toggleExpand);
   clearBtn.addEventListener("click", clear);
   
-  focusBtn.addEventListener("click", focus);
-  exitFocusBtn.addEventListener("click", unfocus);
-
   helpBtn.addEventListener("click", () => shortcutsModal.showModal());
 
   snapshotBtn.addEventListener("click", snapshot);
@@ -102,8 +109,6 @@ as (seep|sleep)`;
           shortcutsModal.close();
         } else if (input === document.activeElement) {
           input.blur();
-        } else if (document.body.classList.contains("focus")) {
-          unfocus();
         }
       }
 
@@ -126,14 +131,15 @@ as (seep|sleep)`;
       } else if (e.key === "s") {
         e.preventDefault();
         snapshot();
-      } else if (e.key === "f") {
-        e.preventDefault();
-        focus();
       } else if (e.key === "i") {
         e.preventDefault();
         input.focus();
       }
     }
+  });
+
+  window.addEventListener("hashchange", () => {
+    readFromHash();
   });
 });
 
@@ -161,7 +167,9 @@ function loadSample(e: Event) {
   fetch(`/samples/${btn.value}.txt`)
     .then(r => r.text())
     .then(text => {
-      input.value = text;
+      setTextarea(text);
+      setHash(text);
+      setDisplayLink();
     });
 }
 
@@ -177,7 +185,10 @@ function upload() {
         reader.addEventListener("load", () => {
           const result = reader.result;
           if (result !== null) {
-            input.value = result as string;
+            const text = result as string;
+            setTextarea(text);
+            setHash(text);
+            setDisplayLink();
           }
         }, false);
         reader.readAsText(file, "UTF-8");
@@ -217,7 +228,6 @@ function submit(e?: Event) {
   randomiseBtn.disabled = false;
   clearBtn.disabled = false;
   snapshotBtn.disabled = false;
-  focusBtn.disabled = false;
 
   snapshots.forEach(snapshot => snapshot.remove());
   snapshots.length = 0;
@@ -242,37 +252,7 @@ function clear() {
   clearBtn.disabled = true;
   detailBtn.disabled = true;
   randomiseBtn.disabled = true;
-  focusBtn.disabled = true;
   snapshotBtn.disabled = true;
-}
-
-function focus() {
-  document.body.classList.add("focus");
-  setTimeout(() => {
-    document.querySelectorAll(".hidable").forEach(el => el.classList.add("invisible"));
-  }, 500);
-
-  viewer.classList.add("focusing");
-
-  focusNote.classList.remove("invisible");
-  focusNote.style.opacity = "1";
-  exitFocusBtn.classList.remove("invisible");
-  exitFocusBtn.style.opacity = "1";
-  setTimeout(() => {
-    setTimeout(() => {
-      focusNote.style.opacity = "0";
-      setTimeout(() => {
-        focusNote.classList.add("invisible");
-      }, 500);
-    }, 1000);
-  }, 1000);
-}
-
-function unfocus() {
-  document.body.classList.remove("focus");
-  viewer.classList.remove("focusing");
-  document.querySelectorAll(".hidable").forEach(el => el.classList.remove("invisible"));
-  exitFocusBtn.classList.add("invisible");
 }
 
 function snapshot() {
@@ -311,4 +291,31 @@ function clearSnapshots() {
   snapshotsContainer.classList.add("empty");
   clearSnapshotsBtn.disabled = true;
   snapshots.length = 0;
+}
+
+function setTextarea(value: string) {
+  input.value = value;
+}
+
+function setHash(value: string) {
+  const compressed = LZString.compressToEncodedURIComponent(value);
+  window.location.hash = compressed;
+  setSaved(true);
+}
+
+function setDisplayLink() {
+  const url = new URL(window.location.href);
+  url.pathname = "/display/";
+  const link = document.querySelector(".status .saved") as HTMLAnchorElement;
+  link.href = url.href;
+}
+
+function readFromHash() {
+  const text = getTextFromHash();
+  setTextarea(text);
+}
+
+function setSaved(saved: boolean) {
+  const statusElement = document.querySelector(".status") as HTMLElement;
+  statusElement.classList.toggle("saved", saved);
 }

@@ -1,117 +1,11 @@
-:root {
-  --font-mono: "Courier", "Courier Prime", monospace;
-}
-
-*,
-*::before
-*::after {
-  box-sizing: border-box;
-}
-
-@font-face {
-  font-family: "Crimson Pro";
-  font-style: normal;
-  font-weight: 400;
-  src: url("/fonts/CrimsonPro-Regular.ttf");
-}
-@font-face {
-  font-family: "Crimson Pro";
-  font-style: italic;
-  font-weight: 400;
-  src: url("/fonts/CrimsonPro-Italic.ttf");
-}
-@font-face {
-  font-family: "Crimson Pro";
-  font-style: normal;
-  font-weight: 600;
-  src: url("/fonts/CrimsonPro-SemiBold.ttf");
-}
-@font-face {
-  font-family: "Courier Prime";
-  font-style: normal;
-  font-weight: 400;
-  src: url("/fonts/CourierPrime-Regular.ttf");
-}
-
-/* :root {
-  font-size: 16px;
-}
-@media (min-width: 800px) {
-  :root {
-    font-size: 24px;
-  }
-} */
-
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
-}
-
-html,
-body {
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  height: 100%;
-}
+@import url("reset.css");
+@import url("typography.css");
+@import url("defaults.css");
+@import url("common.css");
+@import url("utility.css");
 
 body {
-  background-color: #f9f9f9;
-  font-family: "Crimson Pro", serif;
-  line-height: 1.5;
   overflow-x: hidden;
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
-  gap: 2rem;
-}
-
-h1 {
-  font-size: 2rem;
-  line-height: 1;
-}
-
-h2 {
-  font-size: 1.625rem;
-  line-height: 1.2;
-}
-
-h3 {
-  font-size: 1.29rem;
-  line-height: 1.3;
-}
-
-h4,
-h5,
-h6 {
-  font-size: 1.04rem;
-  line-height: 1.4;
-}
-
-.box {
-  width: 1em;
-  height: 1em;
-  position: relative;
-}
-
-.glyph {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
-  mask-repeat: no-repeat;
-  -webkit-mask-repeat: no-repeat;
 }
 
 a {
@@ -129,10 +23,7 @@ a {
     width: max-content;
 
     & .glyph {
-      -webkit-mask: url("/icons/ne-arrow.svg") center no-repeat;
-      mask: url("/icons/ne-arrow.svg") center no-repeat;
-      mask-repeat: no-repeat;
-      background-color: currentColor;
+      --icon: url("/icons/ne-arrow.svg");
     }
   }
 }
@@ -141,16 +32,6 @@ a {
   display: flex;
   gap: 0 0.25em;
   flex-wrap: wrap;
-}
-
-input {
-  accent-color: seagreen;
-  color: white;
-}
-
-textarea,
-button {
-  font-family: "Crimson Pro", serif;
 }
 
 textarea {
@@ -163,43 +44,15 @@ textarea {
 }
 
 button {
-  /* padding: 0.5em; */
-  line-height: 1.5;
-  cursor: pointer;
-  /* background-color: rgb(100, 160, 127); */
-  /* background: none; */
-  background-color: seagreen;
+  background-color: var(--color-accent);
   color: white;
-  /* color: white; */
-  border: 0;
-  border-radius: 5px;
   margin: 1px;
-  display: block;
-  font-size: 1em;
-
-  /* &:focus {
-    outline: 2px solid rgb(100, 160, 127);
-    border: 1px solid white;
-    color: white;
-  } */
-
-  &:disabled {
-    /* background-color: rgb(182, 196, 188); */
-    color: #999;
-    background-color: #eee;
-    cursor: default;
-  }
-}
-@media (min-width: 800px) {
-  button {
-    /* padding: 0.5em 0.75em; */
-  }
 }
 
 pre {
   padding: 1em 1.5em;
   background-color: #f5f5f5;
-  overflow-x: scroll;
+  overflow-x: auto;
 }
 
 pre code {
@@ -223,19 +76,6 @@ kbd {
   /* box-shadow: 1px 1px 2px rgba(0,0,0,.2), inset 1px 1px 2px rgba(0,0,0,.05); */
   border: 2px solid #dadada;
   box-shadow: inset 0 -1px 0 0 #dadada;
-}
-
-.hidden {
-  display: none;
-}
-
-.invisible {
-  visibility: hidden;
-}
-
-hr {
-  border: 1px solid rgb(220, 220, 220);
-  margin-bottom: 1em;
 }
 
 .modal {
@@ -262,10 +102,9 @@ hr {
     }
 
     & .glyph {
-      -webkit-mask: url("/icons/remove.svg") center no-repeat;
-      mask: url("/icons/remove.svg") center no-repeat;
+      --icon: url("/icons/remove.svg");
       background-color: #999;
-      transform: 0.5s background-color;
+      transition: 0.5s background-color;
 
       &:hover {
         background-color: #777;
@@ -419,44 +258,6 @@ main {
   }
 }
 
-.playground {
-  & .hidable,
-  & .focus-note,
-  & .exitFocusBtn {
-    transition: 0.5s ease-in-out opacity;
-  }
-  
-  &.focus {
-    & .hidable {
-      opacity: 0;
-    }
-  }
-}
-
-.focus-note {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 1em;
-  padding: 0.2em 0.5em;
-  border-radius: 5px;
-  text-align: center;
-  opacity: 0;
-}
-
-#exitFocusBtn {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  opacity: 0;
-  background: none;
-  color: #999;
-
-  &:hover {
-    color: seagreen;
-  }
-}
-
 .switcher {
   margin-bottom: 1em;
   font-size: 24px;
@@ -490,10 +291,6 @@ main {
     &.focus--output {
       grid-template-columns: 2fr 2fr 1fr;
     }
-  }
-
-  &.focusing {
-    grid-template-columns: 0fr 1fr 0fr;
   }
 }
 @media (max-width: 800px) {
@@ -590,14 +387,12 @@ main {
 
 #uploadBtn {
   & .glyph {
-    -webkit-mask: url("/icons/upload.svg") center no-repeat;
-    mask: url("/icons/upload.svg") center no-repeat;
+    --icon: url("/icons/upload.svg");
   }
 }
 #saveBtn {
   & .glyph {
-    -webkit-mask: url("/icons/save.svg") center no-repeat;
-    mask: url("/icons/save.svg") center no-repeat;
+    --icon: url("/icons/save.svg");
   }
 }
 
@@ -606,89 +401,47 @@ main {
   user-select: none;
 }
 
-.button-with-icon {
-  display: inline-flex;
-  gap: 0.25em;
-  align-items: center;
-  justify-content: center;
-  background: none;
-  color: #000;
-  line-height: 1;
-  white-space: pre;
-
-  &:disabled {
-    background: none;
-  }
-
-  & .box {
-    width: 1.2em;
-    height: 1.2em;
-  }
-
-  & .glyph {
-    background-color: #000;
-  }
-
-  &:disabled .glyph {
-    background-color: #999;
-  }
-
-  &:not(:disabled):hover {
-    color: seagreen;
-
-    & .glyph {
-      background-color: seagreen;
-    }
-  }
-}
-
 #detailBtn {
   &.expand .glyph {
-    -webkit-mask: url("/icons/expand.svg") center no-repeat;
-    mask: url("/icons/expand.svg") center no-repeat;
+    --icon: url("/icons/expand.svg");
   }
   &.collapse .glyph {
-    -webkit-mask: url("/icons/collapse.svg") center no-repeat;
-    mask: url("/icons/collapse.svg") center no-repeat;
+    --icon: url("/icons/collapse.svg")
   }
 }
 #randomiseBtn {
   & .glyph {
-    -webkit-mask: url("/icons/randomise.svg") center no-repeat;
-    mask: url("/icons/randomise.svg") center no-repeat;
-  }
-}
-@media (prefers-reduced-motion: no-preference) {
-  /* https://stackoverflow.com/questions/21919044/css3-transform-on-click-using-pure-css */
-  #randomiseBtn {
-    & .box {
-      transform: rotate(360deg);
-      transition: 0.15s;
-    }
-    &.clicked {
-      & .box {
-        transform: rotate(0deg);
-        transition: 0s;
-      }
-    }
+    --icon: url("/icons/randomise.svg");
   }
 }
 #clearBtn {
   & .glyph {
-    -webkit-mask: url("/icons/remove.svg") center no-repeat;
-    mask: url("/icons/remove.svg") center no-repeat;
-  }
-}
-#focusBtn {
-  & .glyph {
-    -webkit-mask: url("/icons/focus.svg") center no-repeat;
-    mask: url("/icons/focus.svg") center no-repeat;
+    --icon: url("/icons/remove.svg");
   }
 }
 #helpBtn {
   & .glyph {
-    -webkit-mask: url("/icons/help.svg") center no-repeat;
-    mask: url("/icons/help.svg") center no-repeat;
+    --icon: url("/icons/help.svg");
+  }
+}
+
+.status {
+  .not-saved {
+    display: initial;
+  }
+
+  .saved {
+    display: none;
+  }
+
+  &.saved {
+    .not-saved {
+      display: none;
+    }
+
+    .saved {
+      display: initial;
+    }
   }
 }
 
@@ -790,10 +543,6 @@ main {
   }
 }
 
-.text--toolbar {
-  flex-wrap: wrap;
-}
-
 .text-container {
   font-size: 24px;
   padding-top: 2rem;
@@ -805,15 +554,13 @@ main {
 
 #snapshotBtn {
   & .glyph {
-    -webkit-mask: url("/icons/snapshot.svg") center no-repeat;
-    mask: url("/icons/snapshot.svg") center no-repeat;
+    --icon: url("/icons/snapshot.svg");
   }
 }
 
 #clearSnapshotsBtn {
   & .glyph {
-    -webkit-mask: url("/icons/clear-snapshots.svg") center no-repeat;
-    mask: url("/icons/clear-snapshots.svg") center no-repeat;
+    --icon: url("/icons/clear-snapshots.svg");
   }
 }
 
@@ -862,8 +609,7 @@ main {
   }
   
   & .glyph {
-    -webkit-mask: url("/icons/remove.svg") center no-repeat;
-    mask: url("/icons/remove.svg") center no-repeat;
+    --icon: url("/icons/remove.svg");
     background-color: #999;
   }
 
@@ -879,8 +625,5 @@ main {
 footer {
   font-size: small;
   display: flex;
-}
-
-footer {
   justify-content: center;
 }
