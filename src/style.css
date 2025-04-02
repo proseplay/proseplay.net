@@ -258,44 +258,6 @@ main {
   }
 }
 
-.playground {
-  & .hidable,
-  & .focus-note,
-  & .exitFocusBtn {
-    transition: 0.5s ease-in-out opacity;
-  }
-  
-  &.focus {
-    & .hidable {
-      opacity: 0;
-    }
-  }
-}
-
-.focus-note {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 1em;
-  padding: 0.2em 0.5em;
-  border-radius: 5px;
-  text-align: center;
-  opacity: 0;
-}
-
-#exitFocusBtn {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  opacity: 0;
-  background: none;
-  color: #999;
-
-  &:hover {
-    color: var(--color-accent);
-  }
-}
-
 .switcher {
   margin-bottom: 1em;
   font-size: 24px;
@@ -329,10 +291,6 @@ main {
     &.focus--output {
       grid-template-columns: 2fr 2fr 1fr;
     }
-  }
-
-  &.focusing {
-    grid-template-columns: 0fr 1fr 0fr;
   }
 }
 @media (max-width: 800px) {
@@ -459,11 +417,6 @@ main {
 #clearBtn {
   & .glyph {
     --icon: url("/icons/remove.svg");
-  }
-}
-#focusBtn {
-  & .glyph {
-    --icon: url("/icons/focus.svg");
   }
 }
 #helpBtn {

@@ -20,10 +20,6 @@ const randomiseBtn = document.querySelector("#randomiseBtn") as HTMLButtonElemen
   detailBtn = document.querySelector("#detailBtn") as HTMLButtonElement,
   clearBtn = document.querySelector("#clearBtn") as HTMLButtonElement;
 
-const focusBtn = document.querySelector("#focusBtn") as HTMLButtonElement,
-  focusNote = document.querySelector(".focus-note") as HTMLElement,
-  exitFocusBtn = document.querySelector("#exitFocusBtn") as HTMLButtonElement;
-  
 const helpBtn = document.querySelector("#helpBtn") as HTMLButtonElement;
 
 const textContainer = document.querySelector(".text-container") as HTMLElement;
@@ -66,6 +62,7 @@ for (words|worlds) that (exit|exist)
 as (seep|sleep)`;
     setTextarea(text);
     setHash(text);
+    setDisplayLink();
   }
   input.addEventListener("focus", () => {
     viewer.classList.add("focus--input");
@@ -78,6 +75,7 @@ as (seep|sleep)`;
 
   input.addEventListener("change", () => {
     setHash(input.value);
+    setDisplayLink();
   });
 
   uploadBtn.addEventListener("click", upload);
@@ -94,9 +92,6 @@ as (seep|sleep)`;
   detailBtn.addEventListener("click", toggleExpand);
   clearBtn.addEventListener("click", clear);
   
-  focusBtn.addEventListener("click", focus);
-  exitFocusBtn.addEventListener("click", unfocus);
-
   helpBtn.addEventListener("click", () => shortcutsModal.showModal());
 
   snapshotBtn.addEventListener("click", snapshot);
@@ -114,8 +109,6 @@ as (seep|sleep)`;
           shortcutsModal.close();
         } else if (input === document.activeElement) {
           input.blur();
-        } else if (document.body.classList.contains("focus")) {
-          unfocus();
         }
       }
 
@@ -138,9 +131,6 @@ as (seep|sleep)`;
       } else if (e.key === "s") {
         e.preventDefault();
         snapshot();
-      } else if (e.key === "f") {
-        e.preventDefault();
-        focus();
       } else if (e.key === "i") {
         e.preventDefault();
         input.focus();
@@ -179,6 +169,7 @@ function loadSample(e: Event) {
     .then(text => {
       setTextarea(text);
       setHash(text);
+      setDisplayLink();
     });
 }
 
@@ -197,6 +188,7 @@ function upload() {
             const text = result as string;
             setTextarea(text);
             setHash(text);
+            setDisplayLink();
           }
         }, false);
         reader.readAsText(file, "UTF-8");
@@ -236,7 +228,6 @@ function submit(e?: Event) {
   randomiseBtn.disabled = false;
   clearBtn.disabled = false;
   snapshotBtn.disabled = false;
-  focusBtn.disabled = false;
 
   snapshots.forEach(snapshot => snapshot.remove());
   snapshots.length = 0;
@@ -261,37 +252,7 @@ function clear() {
   clearBtn.disabled = true;
   detailBtn.disabled = true;
   randomiseBtn.disabled = true;
-  focusBtn.disabled = true;
   snapshotBtn.disabled = true;
-}
-
-function focus() {
-  document.body.classList.add("focus");
-  setTimeout(() => {
-    document.querySelectorAll(".hidable").forEach(el => el.classList.add("invisible"));
-  }, 500);
-
-  viewer.classList.add("focusing");
-
-  focusNote.classList.remove("invisible");
-  focusNote.style.opacity = "1";
-  exitFocusBtn.classList.remove("invisible");
-  exitFocusBtn.style.opacity = "1";
-  setTimeout(() => {
-    setTimeout(() => {
-      focusNote.style.opacity = "0";
-      setTimeout(() => {
-        focusNote.classList.add("invisible");
-      }, 500);
-    }, 1000);
-  }, 1000);
-}
-
-function unfocus() {
-  document.body.classList.remove("focus");
-  viewer.classList.remove("focusing");
-  document.querySelectorAll(".hidable").forEach(el => el.classList.remove("invisible"));
-  exitFocusBtn.classList.add("invisible");
 }
 
 function snapshot() {
@@ -340,6 +301,13 @@ function setHash(value: string) {
   const compressed = LZString.compressToEncodedURIComponent(value);
   window.location.hash = compressed;
   setSaved(true);
+}
+
+function setDisplayLink() {
+  const url = new URL(window.location.href);
+  url.pathname = "/display/";
+  const link = document.querySelector(".status .saved") as HTMLAnchorElement;
+  link.href = url.href;
 }
 
 function readFromHash() {
