@@ -28,5 +28,8 @@
   "dependencies": {
     "lz-string": "^1.5.0",
     "proseplay": "^1.3.2"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.9.5"
   }
 }
