@@ -32,7 +32,7 @@ footer {
 footer {
   color: #737373;
 
-  a {
+  & a {
     color: inherit;
 
     &:hover {
