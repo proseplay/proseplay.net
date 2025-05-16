@@ -15,6 +15,7 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, "index.html"),
         playground: resolve(__dirname, "playground/index.html"),
+        display: resolve(__dirname, "display/index.html"),
         learn: resolve(__dirname, "learn/index.html"),
         reference: resolve(__dirname, "reference/index.html")
       }
